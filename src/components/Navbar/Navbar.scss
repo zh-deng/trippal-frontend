@@ -1,0 +1,14 @@
+.navbar {
+  border-bottom: 1px solid red;
+  
+  padding: 0 1rem;
+
+  &-content {
+    display: flex;
+    align-items: center;
+    border: 1px solid blue;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0.5rem 0;
+  }
+}
