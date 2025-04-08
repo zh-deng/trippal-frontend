@@ -3,12 +3,22 @@
   
   padding: 0 1rem;
 
-  &-content {
+  &__content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border: 1px solid blue;
     max-width: 60rem;
     margin: 0 auto;
     padding: 0.5rem 0;
+
+    &--left {
+      display: flex;
+      align-items: center;
+    }
+
+    &--right {
+      display: flex;
+    }
   }
 }
