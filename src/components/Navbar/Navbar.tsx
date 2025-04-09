@@ -9,7 +9,9 @@ const Navbar = () => {
 			<div className="navbar__content">
 				<div className="navbar__content--left">
 					<div className="navbar__logo">
-						<img src="../" />
+						<Link to="/">
+							<img src="../" />
+						</Link>
 					</div>
 					<Link to="/">Home</Link>
 					<Link to="demo">Demo</Link>
