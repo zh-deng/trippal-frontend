@@ -10,8 +10,8 @@ function LanguageSwitcher() {
 
   return (
     <div className="language-switcher">
-      <button onClick={() => changeLanguage('en')}>English</button>
-      <button onClick={() => changeLanguage('de')}>Deutsch</button>
+      <button onClick={() => changeLanguage('en')}>EN</button>
+      <button onClick={() => changeLanguage('de')}>DE</button>
     </div>
   );
 }
