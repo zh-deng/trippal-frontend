@@ -14,10 +14,10 @@ const Navbar = () => {
 							<img src={logo} />
 						</Link>
 					</div>
-					<Link to="/">Home</Link>
-					<Link to="demo">Demo</Link>
-					<Link to="dashboard">Dashboard</Link>
-					<Link to="community">Community</Link>
+					<Link to="/"><Text content="navbar.home" /></Link>
+					<Link to="demo"><Text content="navbar.demo" /></Link>
+					<Link to="dashboard"><Text content="navbar.dashboard" /></Link>
+					<Link to="community"><Text content="navbar.community" /></Link>
 				</div>
 				<div className="navbar-content-right">
 					<LanguageSwitcher />

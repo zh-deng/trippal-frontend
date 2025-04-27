@@ -1,0 +1,19 @@
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-left {
+    width: 25rem;
+  }
+
+  &-main {
+    border: 1px solid green;
+    width: 60rem;
+    padding: 1rem;
+  }
+
+  &-right {
+    width: 25rem;
+  }
+}

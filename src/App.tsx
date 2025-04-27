@@ -4,6 +4,9 @@ import { Home } from "./pages/Home/Home";
 import { Registration } from "./pages/Registration/Registration";
 import { NotFound } from "./pages/NotFound/NotFound";
 import { Demo } from "./pages/Demo/Demo";
+import { Dashboard } from "./pages/Dashboard/Dashboard";
+import { Community } from "./pages/Community/Community";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
 	return (
@@ -13,10 +16,13 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="demo" element={<Demo />} />
+					<Route path="dashboard" element={<Dashboard />} />
+					<Route path="community" element={<Community />} />
 					<Route path="registration" element={<Registration />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>
+			<Footer />
 		</div>
 	);
 }
