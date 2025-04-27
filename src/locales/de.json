@@ -1,5 +1,9 @@
 {
   "navbar": {
+    "home": "Startseite",
+    "demo": "Demo",
+    "dashboard": "Meine Reisen",
+    "community": "Gemeinschaft",
     "registration": "Registrieren"
   },
   "welcome": "Willkommen",

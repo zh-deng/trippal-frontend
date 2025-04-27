@@ -1,5 +1,9 @@
 {
   "navbar": {
+    "home": "Home",
+    "demo": "Demo",
+    "dashboard": "My Trips",
+    "community": "Community",
     "registration": "Registration"
   },
   "welcome": "Welcome",
