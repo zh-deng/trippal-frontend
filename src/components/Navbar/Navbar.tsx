@@ -2,21 +2,22 @@ import { Link } from "react-router";
 import "./Navbar.scss";
 import Text from "../Text/Text";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
 	return (
 		<nav className="navbar">
-			<div className="navbar__content">
-				<div className="navbar__content--left">
-					<div className="navbar__logo">
+			<div className="navbar-content">
+				<div className="navbar-content-left">
+					<div className="navbar-logo">
 						<Link to="/">
-							<img src="../" />
+							<img src={logo} />
 						</Link>
 					</div>
 					<Link to="/">Home</Link>
 					<Link to="demo">Demo</Link>
 				</div>
-				<div className="navbar__content--right">
+				<div className="navbar-content-right">
 					<LanguageSwitcher />
 					<Link to="registration">
 						<Text content="navbar.registration" />
