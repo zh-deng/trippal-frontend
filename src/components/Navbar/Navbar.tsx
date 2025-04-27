@@ -16,6 +16,8 @@ const Navbar = () => {
 					</div>
 					<Link to="/">Home</Link>
 					<Link to="demo">Demo</Link>
+					<Link to="dashboard">Dashboard</Link>
+					<Link to="community">Community</Link>
 				</div>
 				<div className="navbar-content-right">
 					<LanguageSwitcher />

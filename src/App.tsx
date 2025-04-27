@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar/Navbar";
-import Home from "./pages/Home/Home";
-import Registration from "./pages/Registration/Registration";
-import NotFound from "./pages/NotFound/NotFound";
-import Demo from "./pages/Demo/Demo";
+import { Home } from "./pages/Home/Home";
+import { Registration } from "./pages/Registration/Registration";
+import { NotFound } from "./pages/NotFound/NotFound";
+import { Demo } from "./pages/Demo/Demo";
 
 function App() {
 	return (

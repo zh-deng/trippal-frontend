@@ -10,11 +10,12 @@
     max-width: 60rem;
     margin: 0 auto;
     padding: 0.5rem 0;
+    font-weight: bold;
 
     &-left {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 2rem;
 
       .navbar-logo {
         max-width: 3rem;
@@ -24,7 +25,7 @@
     &-right {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 1rem;
     }
   }
 }

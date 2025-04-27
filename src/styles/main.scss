@@ -3,7 +3,7 @@
 @use './mixins';
 
 .app {
-  border: 8px solid green;
+  background-color: lightblue;
   height: 100vh;
 
   &__pages {
