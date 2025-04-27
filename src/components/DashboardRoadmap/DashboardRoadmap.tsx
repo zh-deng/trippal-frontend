@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { RoadmapItem } from "../../types/Roadmap";
 import "./DashboardRoadmap.scss";
+import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { RoadMapItem } from "./RoadMapItem/RoadMapItem";
 
 export const DashboardRoadmap = () => {
   const mockItems: RoadmapItem[] = [
@@ -21,10 +25,30 @@ export const DashboardRoadmap = () => {
     }
   ]
 
+  const [items, setItems] = useState<string[]>(['Video 1', 'Video 2', 'Video 3', 'Video 4']);
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
+
 
 	return (
     <div className="dashboard-roadmap">
-      DashboardRoadmap
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        {items.map((id) => (
+          <RoadMapItem key={id} id={id} />
+        ))}
+      </SortableContext>
+    </DndContext>
     </div>
   );
 };
