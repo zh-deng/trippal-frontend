@@ -1,8 +1,12 @@
 .language-switcher {
   display: flex;
-  border: 1px solid black;
 
   Button {
     cursor: pointer;
+  }
+
+  .language-active {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid black;
   }
 }
