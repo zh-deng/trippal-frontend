@@ -1,27 +1,33 @@
 import { useSortable } from "@dnd-kit/sortable";
 import "./RoadMapItem.scss";
-import { CSS } from '@dnd-kit/utilities';
+import { CSS } from "@dnd-kit/utilities";
+import { HiBars2 } from "react-icons/hi2";
 
 type RoadMapItemProps = {
-  id: string;
-}
+	id: string;
+};
 
 export const RoadMapItem = ({ id }: RoadMapItemProps) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+	const { attributes, listeners, setNodeRef, transform, transition } =
+		useSortable({ id });
 
-  const style: React.CSSProperties = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    padding: '8px',
-    border: '1px solid #ccc',
-    marginBottom: '4px',
-    background: 'white',
-    cursor: 'grab'
-  };
+	const style: React.CSSProperties = {
+		transform: CSS.Transform.toString(transform),
+		transition,
+	};
 
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {id}
-    </div>
-  );
+	return (
+		<div
+			className="roadmap-item"
+			ref={setNodeRef}
+			style={style}
+			{...attributes}
+			{...listeners}
+		>
+			<div className="roadmap-item-icon">
+				<HiBars2 size={32} />
+			</div>
+			<div className="roadmap-item-content">{id}</div>
+		</div>
+	);
 };

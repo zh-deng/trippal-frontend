@@ -1,21 +1,29 @@
 .dashboard {
-  display: flex;
-  justify-content: center;
   height: 100%;
-
-  &-left {
-    flex: 1;
-    max-width: 30rem;
-  }
+  display: flex;
+  flex-direction: column;
 
   &-main {
-    border: 1px solid green;
-    width: 60rem;
-    padding: 1rem;
-  }
-
-  &-right {
-    flex: 1;
-    max-width: 30rem;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border: 1px solid blue;
+  
+    &-left {
+      flex: 1;
+      max-width: 30rem;
+    }
+  
+    &-center {
+      border: 1px solid green;
+      width: 60rem;
+      padding: 1rem;
+    }
+  
+    &-right {
+      flex: 1;
+      max-width: 30rem;
+    }
   }
 }

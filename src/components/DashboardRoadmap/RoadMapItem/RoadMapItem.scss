@@ -1,0 +1,16 @@
+.roadmap-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  background-color: orange;
+
+  &-icon {
+  }
+
+  &-content {
+    width: 100%;
+    cursor: grab;
+  }
+}
