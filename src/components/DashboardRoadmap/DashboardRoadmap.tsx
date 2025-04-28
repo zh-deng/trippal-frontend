@@ -42,13 +42,18 @@ export const DashboardRoadmap = () => {
 
 	return (
     <div className="dashboard-roadmap">
-      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        {items.map((id) => (
-          <RoadMapItem key={id} id={id} />
-        ))}
-      </SortableContext>
-    </DndContext>
+      <div className="roadmap-header">
+        TEST
+      </div>
+      <div className="roadmap-content">
+        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          {items.map((id) => (
+            <RoadMapItem key={id} id={id} />
+          ))}
+        </SortableContext>
+            </DndContext>
+      </div>
     </div>
   );
 };
