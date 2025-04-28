@@ -7,6 +7,7 @@ import { Demo } from "./pages/Demo/Demo";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Community } from "./pages/Community/Community";
 import { Footer } from "./components/Footer/Footer";
+import "leaflet/dist/leaflet.css";
 
 function App() {
 	return (
