@@ -1,22 +1,22 @@
 import React, { JSX } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import "./Text.scss"
 
 type TextProps = {
   content: string;
   values?: { [key: string]: any };
   components?: { [key: string]: JSX.Element };
+  isBold?: boolean;
 }
 
-const Text: React.FC<TextProps> = ({ content, values, components }) => {
+export const Text: React.FC<TextProps> = ({ content, values, components, isBold }) => {
   const { t } = useTranslation();
 
   if (components) {
     return (
-      <Trans i18nKey={content} components={components} values={values} />
+      <Trans className={isBold ? "text-bold" : ""} i18nKey={content} components={components} values={values} />
     );
   }
 
-  return <>{t(content, values)}</>;
+  return <span className={isBold ? "text-bold" : ""}>{t(content, values)}</span>;
 };
-
-export default Text;
