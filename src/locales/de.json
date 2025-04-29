@@ -6,6 +6,9 @@
     "community": "Gemeinschaft",
     "registration": "Registrieren"
   },
-  "welcome": "Willkommen",
-  "description": "Dies ist eine Beispielbeschreibung."
+  "dashboard": {
+    "left": {
+      "header-text": "Reiseroute:"
+    }
+  }
 }

@@ -6,6 +6,9 @@
     "community": "Community",
     "registration": "Registration"
   },
-  "welcome": "Welcome",
-  "description": "This is a sample description."
+  "dashboard": {
+    "left": {
+      "header-text": "Itenary:"
+    }
+  }
 }
