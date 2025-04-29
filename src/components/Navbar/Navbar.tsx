@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import "./Navbar.scss";
-import Text from "../Text/Text";
+import {Text} from "../Text/Text";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import logo from "../../assets/logo.png";
 

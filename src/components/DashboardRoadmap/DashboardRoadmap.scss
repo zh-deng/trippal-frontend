@@ -3,10 +3,19 @@
   height: 100%;
   border: 1px solid red;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 
   .roadmap-header {
     border: 1px solid black;
     margin-bottom: 1rem;
     padding: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .roadmap-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
