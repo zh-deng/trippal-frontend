@@ -5,14 +5,21 @@ import { DashboardTabMenu } from "../../components/DashboardTabMenu/DashboardTab
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import "./dashboard.scss";
 import { Country, fetchCountries } from "../../services/countryService";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { useDispatch } from "react-redux";
+import { updateCurrentCountry } from "../../state/dashboard/dashboardSlice";
 
 export const Dashboard = () => {
 	const [countries, setCountries] = useState<Country[]>([]);
-	const [currentCountry, setCurrentCountry] = useState<Country>();
+	const currentCountry = useSelector(
+		(state: RootState) => state.dashboard.currentCountry
+	);
+	const dispatch = useDispatch();
 
 	const handleChosenCountry = (option: Country) => {
 		console.log(option);
-		setCurrentCountry(option);
+		dispatch(updateCurrentCountry(option));
 	};
 
 	useEffect(() => {

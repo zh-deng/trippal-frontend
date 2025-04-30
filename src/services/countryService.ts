@@ -1,8 +1,8 @@
-export type Coordinates = [number, number]
+import { LatLngExpression } from "leaflet";
 
 export type Country = {
   name: string;
-  coordinates: Coordinates;
+  coordinates: LatLngExpression;
 }
 
 export const fetchCountries = async (): Promise<Country[]> => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -9,6 +9,8 @@ import {
 } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
 import "./MapComponent.scss"
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../state/store';
 
 const locations: Record<string, LatLngExpression> = {
   'New York': [40.7128, -74.006],
@@ -39,11 +41,18 @@ const LocationSelector: React.FC<{ onSelect: (position: LatLngExpression) => voi
 export const MapComponent: React.FC = () => {
   const [markers, setMarkers] = useState<LatLngExpression[]>([]);
   const [polyline, setPolyline] = useState<LatLngExpression[]>([]);
+  const currentCountry = useSelector(
+		(state: RootState) => state.dashboard.currentCountry
+	);
 
   const handleAddMarker = (mapCenter: LatLngExpression) => {
     setMarkers((prev) => [...prev, mapCenter]);
     setPolyline((prev) => [...prev, mapCenter]);
   };
+
+  useEffect(() => {
+    console.log("map", currentCountry)
+  }, [currentCountry])
 
   const MapControls: React.FC = () => {
     const map = useMap();
