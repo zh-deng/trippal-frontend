@@ -24,12 +24,11 @@ export const Dashboard = () => {
 	const dispatch = useDispatch();
 
 	const handleChosenCountry = (option: Country) => {
-		console.log(option);
+		dispatch(updateCurrentCity(null))
 		dispatch(updateCurrentCountry(option));
 	};
 
 	const handleChosenCity = (option: City) => {
-		console.log(option);
 		dispatch(updateCurrentCity(option));
 	};
 
@@ -41,11 +40,11 @@ export const Dashboard = () => {
 
 	useEffect(() => {
 		if(currentCountry) {
+			setCities([]);
 			fetchCitiesByCountry(currentCountry?.countryCode)
 			.then(setCities)
 			.catch((error) => console.error("Failed to load cities:", error));
 		}
-		console.log("city", cities)
 	}, [currentCountry]);
 
 	return (

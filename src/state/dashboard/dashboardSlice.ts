@@ -18,7 +18,7 @@ const dashboardSlice = createSlice({
     updateCurrentCountry: (state, action: PayloadAction<Country>) => {
       state.currentCountry = action.payload;
     },
-		updateCurrentCity: (state, action: PayloadAction<City>) => {
+		updateCurrentCity: (state, action: PayloadAction<City | null>) => {
       state.currentCity = action.payload;
     }
   },

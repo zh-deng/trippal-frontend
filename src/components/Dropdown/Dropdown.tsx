@@ -39,6 +39,10 @@ export const Dropdown = ({
 		};
 	}, [isExpanded]);
 
+	useEffect(() => {
+		setSelectedOption(defaultValue);
+	}, [defaultValue, options]);
+
 	const handleOptionSelect = (option: string) => {
 		setSelectedOption(option);
 		setIsExpanded(false);
@@ -48,7 +52,9 @@ export const Dropdown = ({
 	return (
 		<div className="dropdown" ref={dropdownRef}>
 			<div className="dropdown-current">
-				<button onClick={toggleExpansion}>{selectedOption.name ?? defaultValue}</button>
+				<button onClick={toggleExpansion}>
+					{selectedOption.name ?? defaultValue}
+				</button>
 			</div>
 			<div
 				className={`dropdown-option-container ${
