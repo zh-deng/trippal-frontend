@@ -5,16 +5,19 @@ import { DashboardTabMenu } from "../../components/DashboardTabMenu/DashboardTab
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import "./dashboard.scss";
 import {
+	City,
 	Country,
+	fetchCitiesByCountry,
 	fetchCountries,
 } from "../../services/countryService";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useDispatch } from "react-redux";
-import { updateCurrentCountry } from "../../state/dashboard/dashboardSlice";
+import { updateCurrentCity, updateCurrentCountry } from "../../state/dashboard/dashboardSlice";
 
 export const Dashboard = () => {
 	const [countries, setCountries] = useState<Country[]>([]);
+	const [cities, setCities] = useState<any[]>([])
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
 	);
@@ -25,11 +28,25 @@ export const Dashboard = () => {
 		dispatch(updateCurrentCountry(option));
 	};
 
+	const handleChosenCity = (option: City) => {
+		console.log(option);
+		dispatch(updateCurrentCity(option));
+	};
+
 	useEffect(() => {
 		fetchCountries()
 			.then(setCountries)
 			.catch((error) => console.error("Failed to load countries:", error));
 	}, []);
+
+	useEffect(() => {
+		if(currentCountry) {
+			fetchCitiesByCountry(currentCountry?.countryCode)
+			.then(setCities)
+			.catch((error) => console.error("Failed to load cities:", error));
+		}
+		console.log("city", cities)
+	}, [currentCountry]);
 
 	return (
 		<div className="dashboard">
@@ -49,8 +66,9 @@ export const Dashboard = () => {
 						/>
 						{currentCountry && (
 							<Dropdown
-								options={[]}
+								options={cities}
 								defaultValue={"City"}
+								onChange={handleChosenCity}
 							/>
 						)}
 					</div>

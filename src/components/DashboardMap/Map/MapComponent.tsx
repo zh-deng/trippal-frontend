@@ -53,6 +53,9 @@ export const MapComponent: React.FC = () => {
 		const currentCountry = useSelector(
 			(state: RootState) => state.dashboard.currentCountry
 		);
+		const currentCity = useSelector(
+			(state: RootState) => state.dashboard.currentCity
+		);
 		const map = useMap();
 
 		// const handleLocationSelect = (position: LatLngExpression) => {
@@ -71,6 +74,12 @@ export const MapComponent: React.FC = () => {
 				map.flyTo(currentCountry.coordinates, 6, { duration: 1.5 });
 			}
 		}, [currentCountry]);
+
+		useEffect(() => {
+			if (currentCity) {
+				map.flyTo(currentCity.coordinates, 11, { duration: 1.5 });
+			}
+		}, [currentCity]);
 
 		return null;
 

@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Country } from "../../services/countryService";
+import { City, Country } from "../../services/countryService";
 
 interface DashboardState {
 	currentCountry: Country | null;
+	currentCity: City | null;
 }
 
 const initialState: DashboardState = {
 	currentCountry: null,
+	currentCity: null
 };
 
 const dashboardSlice = createSlice({
@@ -15,9 +17,12 @@ const dashboardSlice = createSlice({
 	reducers: {
     updateCurrentCountry: (state, action: PayloadAction<Country>) => {
       state.currentCountry = action.payload;
+    },
+		updateCurrentCity: (state, action: PayloadAction<City>) => {
+      state.currentCity = action.payload;
     }
   },
 });
 
-export const { updateCurrentCountry } = dashboardSlice.actions;
+export const { updateCurrentCountry, updateCurrentCity } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
