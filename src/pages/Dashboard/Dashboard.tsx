@@ -4,7 +4,10 @@ import { DashboardRoadmap } from "../../components/DashboardRoadmap/DashboardRoa
 import { DashboardTabMenu } from "../../components/DashboardTabMenu/DashboardTabMenu";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import "./dashboard.scss";
-import { Country, fetchCountries } from "../../services/countryService";
+import {
+	Country,
+	fetchCountries,
+} from "../../services/countryService";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useDispatch } from "react-redux";
@@ -48,7 +51,6 @@ export const Dashboard = () => {
 							<Dropdown
 								options={[]}
 								defaultValue={"City"}
-								onChange={handleChosenCountry}
 							/>
 						)}
 					</div>
