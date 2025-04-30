@@ -12,8 +12,8 @@ import "./MapComponent.scss"
 
 const locations: Record<string, LatLngExpression> = {
   'New York': [40.7128, -74.006],
-  London: [51.5074, -0.1278],
-  Tokyo: [35.6895, 139.6917],
+  "London": [51.5074, -0.1278],
+  "Tokyo": [35.6895, 139.6917],
 };
 
 const LocationSelector: React.FC<{ onSelect: (position: LatLngExpression) => void }> = ({ onSelect }) => {
@@ -49,7 +49,9 @@ export const MapComponent: React.FC = () => {
     const map = useMap();
 
     const handleLocationSelect = (position: LatLngExpression) => {
-      map.setView(position, 10);
+      map.flyTo(position, 10, {
+        duration: 1.5
+      });
     };
 
     const handleAddPin = () => {

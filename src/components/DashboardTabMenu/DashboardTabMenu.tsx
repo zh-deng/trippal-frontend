@@ -7,8 +7,8 @@ export const DashboardTabMenu = () => {
 
 	return (
 		<div className="dashboard-tabmenu">
-			{items.map((item) => (
-				<div className="tabmenu-item">
+			{items.map((item: string) => (
+				<div className="tabmenu-item" key={item}>
 					<div className="tabmenu-item-name">{item}</div>
 					<div className="tabmenu-item-options">
 						<SlOptionsVertical size={16} />
