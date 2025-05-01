@@ -1,0 +1,23 @@
+.image-gallery {
+
+  &-container {
+    border: 1px solid black;
+    background-color: white;
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+
+    .image-gallery-item {
+      flex: 0 0 auto;
+      border: 1px solid green;
+  
+      img {
+        height: 10rem;
+        width: 10rem;
+        object-fit: cover
+      }
+    }
+  }
+  
+
+}
