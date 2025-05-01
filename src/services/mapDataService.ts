@@ -1,4 +1,4 @@
-import { LatLngExpression, LatLngTuple } from "leaflet";
+import { LatLngExpression } from "leaflet";
 
 export type Country = {
 	name: string;
@@ -7,6 +7,11 @@ export type Country = {
 };
 
 export type City = {
+	name: string;
+	coordinates: LatLngExpression;
+};
+
+export type Attraction = {
 	name: string;
 	coordinates: LatLngExpression;
 };
@@ -46,9 +51,36 @@ export const fetchCitiesByCountry = async (
 	if (!data.geonames) return [];
 
 	return data.geonames
-    .map((city: any) => ({
-      name: city.name,
-      coordinates: [parseFloat(city.lat), parseFloat(city.lng)] as [number, number],
-    }))
-    .sort((a: City, b: City) => a.name.localeCompare(b.name));
+		.map((city: any) => ({
+			name: city.name,
+			coordinates: [parseFloat(city.lat), parseFloat(city.lng)] as [
+				number,
+				number
+			],
+		}))
+		.sort((a: City, b: City) => a.name.localeCompare(b.name));
+};
+
+export const fetchAttractionsByCity = async (cityName: string): Promise<
+	{ name: string; coordinates: [number, number] }[]
+> => {
+	const res = await fetch(
+		`http://api.geonames.org/searchJSON?q=${cityName}&featureClass=S&featureCode=MUS&featureCode=MNMT&featureCode=CSTL&featureCode=CH&maxRows=${
+			import.meta.env.VITE_ATTRACTIONS_MAX_ROWS
+		}&username=${import.meta.env.VITE_GEONAMES_USERNAME}`
+	);
+
+	const data = await res.json();
+
+	if (!data.geonames) return [];
+
+	return data.geonames
+		.map((attraction: any) => ({
+			name: attraction.name,
+			coordinates: [parseFloat(attraction.lat), parseFloat(attraction.lng)] as [
+				number,
+				number
+			],
+		}))
+		.sort((a: Attraction, b: Attraction) => a.name.localeCompare(b.name));
 };
