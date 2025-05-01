@@ -3,16 +3,17 @@ import "./Dropdown.scss";
 
 type DropdownProps = {
 	defaultValue?: any;
+	value?: any;
 	options: any[];
 	onChange?: (selectedOption: any) => void;
 };
 
 export const Dropdown = ({
 	defaultValue = "Default",
+	value,
 	options = [],
 	onChange,
 }: DropdownProps) => {
-	const [selectedOption, setSelectedOption] = useState<any>(defaultValue);
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -39,21 +40,18 @@ export const Dropdown = ({
 		};
 	}, [isExpanded]);
 
-	useEffect(() => {
-		setSelectedOption(defaultValue);
-	}, [defaultValue, options]);
-
 	const handleOptionSelect = (option: string) => {
-		setSelectedOption(option);
 		setIsExpanded(false);
 		onChange?.(option);
 	};
+
+	const selectedLabel = value?.name ?? defaultValue;
 
 	return (
 		<div className="dropdown" ref={dropdownRef}>
 			<div className="dropdown-current">
 				<button onClick={toggleExpansion}>
-					{selectedOption.name ?? defaultValue}
+					{selectedLabel}
 				</button>
 			</div>
 			<div
@@ -62,11 +60,11 @@ export const Dropdown = ({
 				}`}
 			>
 				{options.map(
-					(option: any) =>
-						option !== selectedOption && (
+					(option: any, index: number) =>
+						option !== value && (
 							<div
 								className="dropdown-option-item"
-								key={option.name}
+								key={option.name+index}
 								onClick={() => handleOptionSelect(option)}
 							>
 								<button>{option.name}</button>
