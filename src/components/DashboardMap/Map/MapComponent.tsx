@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
 	MapContainer,
 	TileLayer,
-	Marker,
-	Popup,
-	Polyline,
 	useMap,
 } from "react-leaflet";
-import { LatLngExpression, LatLngTuple } from "leaflet";
 import "./MapComponent.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
@@ -56,6 +52,9 @@ export const MapComponent: React.FC = () => {
 		const currentCity = useSelector(
 			(state: RootState) => state.dashboard.currentCity
 		);
+		const currentAttraction = useSelector(
+			(state: RootState) => state.dashboard.currentAttraction
+		);
 		const map = useMap();
 
 		// const handleLocationSelect = (position: LatLngExpression) => {
@@ -70,16 +69,25 @@ export const MapComponent: React.FC = () => {
 		// };
 
 		useEffect(() => {
-			if (currentCountry) {
+			if (currentCountry && !currentCity && !currentAttraction) {
+				console.log("country")
 				map.flyTo(currentCountry.coordinates, 6, { duration: 1.5 });
 			}
 		}, [currentCountry]);
 
 		useEffect(() => {
-			if (currentCity) {
+			if (currentCity && !currentAttraction) {
+				console.log("city")
 				map.flyTo(currentCity.coordinates, 11, { duration: 1.5 });
 			}
 		}, [currentCity]);
+
+		useEffect(() => {
+			if (currentAttraction) {
+					console.log("attraction")
+					map.flyTo(currentAttraction.coordinates, 17, { duration: 1.5 });
+			}
+		}, [currentAttraction]);
 
 		return null;
 
