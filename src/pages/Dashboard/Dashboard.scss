@@ -19,6 +19,9 @@
       border: 1px solid green;
       width: 60rem;
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
 
       .center-dropdown-container {
         display: flex;
