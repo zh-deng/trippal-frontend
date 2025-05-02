@@ -8,6 +8,7 @@ import "./MapComponent.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
 import { LatLngTuple } from "leaflet";
+import "./MapComponent.scss"
 
 
 export const MapComponent: React.FC = () => {
@@ -68,7 +69,7 @@ export const MapComponent: React.FC = () => {
 	};
 
 	return (
-		<div id="map">
+		<div className="map" id="map">
 			<MapContainer
 				center={[20, 0]}
 				zoom={2}

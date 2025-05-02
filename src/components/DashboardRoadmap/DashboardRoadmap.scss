@@ -1,21 +1,27 @@
 .dashboard-roadmap {
-  width: 100%;
-  height: 100%;
-  border: 1px solid red;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
 
-  .roadmap-header {
-    border: 1px solid black;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    display: flex;
-    gap: 1rem;
-  }
+	.roadmap-content {
+		width: 100%;
+		height: 100%;
+		padding: 0.5rem;
+		display: flex;
+		flex-direction: column;
+    background-color: white;
+    border-radius: 0.5rem;
+    gap: 0.25rem;
 
-  .roadmap-content {
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
+		.roadmap-header {
+			padding: 1rem;
+			display: flex;
+			gap: 1rem;
+		}
+
+		.roadmap-content {
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+	}
 }

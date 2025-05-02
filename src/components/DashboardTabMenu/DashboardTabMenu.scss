@@ -1,18 +1,26 @@
 .dashboard-tabmenu {
-  border: 1px solid red;
+  border: 1px solid grey;
   padding: 0 0.5rem;
-  display: flex;
-  gap: 0.5rem;
   height: 2.5rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem 0.5rem 0 0;
+
+  .tabmenu-item-container {
+    display: flex;
+    width: fit-content;
+    gap: 0.5rem;
+  }
 
   .tabmenu-item {
     display: flex;
     align-items: center;
-    border: 1px solid green;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
 
     &-name {
       padding: 0.25rem 0.5rem;
-      border: 1px solid yellow;
       cursor: pointer;
     }
 
@@ -22,7 +30,6 @@
       justify-content: center;
       height: 100%;
       width: 1.25rem;
-      border: 1px solid green;
       cursor: pointer;
     }
   }
@@ -30,8 +37,14 @@
   .tabmenu-add {
     display: flex;
     align-items: center;
-    border: 1px solid black;
     padding: 0 0.5rem;
     cursor: pointer;
+    gap: 0.5rem;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+  }
+
+  .active-tab {
+    background-color: aquamarine;
   }
 }
