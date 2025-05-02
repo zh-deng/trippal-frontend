@@ -11,25 +11,6 @@ import { RoadMapItem } from "./RoadMapItem/RoadMapItem";
 import { Text } from "../Text/Text";
 
 export const DashboardRoadmap = () => {
-	const mockItems: RoadmapItem[] = [
-		{
-			id: 1,
-			content: "First Item",
-		},
-		{
-			id: 1,
-			content: "Second Item",
-		},
-		{
-			id: 1,
-			content: "Third Item",
-		},
-		{
-			id: 1,
-			content: "Fourth Item",
-		},
-	];
-
 	const [items, setItems] = useState<string[]>([
 		"Video 1",
 		"Video 2",
@@ -62,21 +43,23 @@ export const DashboardRoadmap = () => {
 
 	return (
 		<div className="dashboard-roadmap">
-			<div className="roadmap-header">
-				<Text content="dashboard.left.header-text" isBold={true} />
-				<div className="roadmap-header-name">TestRoadmap</div>
-			</div>
 			<div className="roadmap-content">
-				<DndContext
-					collisionDetection={closestCenter}
-					onDragEnd={handleDragEnd}
-				>
-					<SortableContext items={items} strategy={verticalListSortingStrategy}>
-						{items.map((id) => (
-							<RoadMapItem key={id} id={id} />
-						))}
-					</SortableContext>
-				</DndContext>
+				<div className="roadmap-header">
+					<Text content="dashboard.left.header-text" isBold={true} />
+					<div className="roadmap-header-name">TestRoadmap</div>
+				</div>
+				<div className="roadmap-content">
+					<DndContext
+						collisionDetection={closestCenter}
+						onDragEnd={handleDragEnd}
+					>
+						<SortableContext items={items} strategy={verticalListSortingStrategy}>
+							{items.map((id) => (
+								<RoadMapItem key={id} id={id} />
+							))}
+						</SortableContext>
+					</DndContext>
+				</div>
 			</div>
 		</div>
 	);

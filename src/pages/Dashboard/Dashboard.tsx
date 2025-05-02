@@ -20,14 +20,16 @@ import {
 	updateCurrentCity,
 	updateCurrentCountry,
 } from "../../state/dashboard/dashboardSlice";
-import { fetchImages } from "../../services/imageService";
+import { fetchImages, ImageData } from "../../services/imageService";
 import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
+import { useTranslation } from "react-i18next";
 
 export const Dashboard = () => {
+	const { t } = useTranslation();
 	const [countries, setCountries] = useState<Country[]>([]);
 	const [cities, setCities] = useState<City[]>([]);
 	const [attractions, setAttractions] = useState<Attraction[]>([]);
-	const [images, setImages] = useState<any[]>([]);
+	const [images, setImages] = useState<ImageData[]>([]);
 
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
@@ -43,13 +45,13 @@ export const Dashboard = () => {
 
 	const handleChosenCountry = (option: Country) => {
 		dispatch(updateCurrentCountry(option));
-		dispatch(updateCurrentCity(null))
-		dispatch(updateCurrentAttraction(null))
+		dispatch(updateCurrentCity(null));
+		dispatch(updateCurrentAttraction(null));
 	};
 
 	const handleChosenCity = (option: City) => {
 		dispatch(updateCurrentCity(option));
-		dispatch(updateCurrentAttraction(null))
+		dispatch(updateCurrentAttraction(null));
 	};
 
 	const handleChosenAttraction = (option: Attraction) => {
@@ -98,32 +100,37 @@ export const Dashboard = () => {
 					<DashboardRoadmap />
 				</div>
 				<div className="dashboard-main-center">
-					<div className="center-dropdown-container">
-						<Dropdown
-							options={countries}
-							value={currentCountry}
-							defaultValue={"Country"}
-							onChange={handleChosenCountry}
-						/>
-						{currentCountry && (
+					<div className="center-container">
+						<div className="center-dropdown-container">
 							<Dropdown
-								options={cities}
-								value={currentCity}
-								defaultValue={"City"}
-								onChange={handleChosenCity}
+								options={countries}
+								value={currentCountry}
+								defaultValue={t("dashboard.center.dropdown.country")}
+								onChange={handleChosenCountry}
 							/>
-						)}
-						{currentCity && (
-							<Dropdown
-								options={attractions}
-								value={currentAttraction}
-								defaultValue={"Attractions"}
-								onChange={handleChosenAttraction}
-							/>
-						)}
-					</div>
-					<div className="center-image-gallery">
-						{currentAttraction && <ImageGallery images={images} />}
+							{currentCountry && (
+								<Dropdown
+									options={cities}
+									value={currentCity}
+									defaultValue={t("dashboard.center.dropdown.city")}
+									onChange={handleChosenCity}
+								/>
+							)}
+							{currentCity && (
+								<Dropdown
+									options={attractions}
+									value={currentAttraction}
+									defaultValue={t("dashboard.center.dropdown.attraction")}
+									onChange={handleChosenAttraction}
+								/>
+							)}
+						</div>
+						<div className="center-image-gallery">
+							{currentAttraction && <ImageGallery images={images} />}
+						</div>
+						<div className="center-controls">
+							TEST
+						</div>
 					</div>
 				</div>
 				<div className="dashboard-main-right">
