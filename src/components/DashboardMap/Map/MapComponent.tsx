@@ -7,43 +7,10 @@ import {
 import "./MapComponent.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
+import { LatLngTuple } from "leaflet";
 
-// const locations: Record<string, LatLngExpression> = {
-// 	"New York": [40.7128, -74.006],
-// 	London: [51.5074, -0.1278],
-// 	Tokyo: [35.6895, 139.6917],
-// };
-
-// const LocationSelector: React.FC<{
-// 	onSelect: (position: LatLngExpression) => void;
-// }> = ({ onSelect }) => {
-// 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-// 		const selected = locations[event.target.value];
-// 		if (selected) {
-// 			onSelect(selected);
-// 		}
-// 	};
-
-// 	return (
-// 		<select onChange={handleChange}>
-// 			<option value="">Select a location</option>
-// 			{Object.keys(locations).map((city) => (
-// 				<option key={city} value={city}>
-// 					{city}
-// 				</option>
-// 			))}
-// 		</select>
-// 	);
-// };
 
 export const MapComponent: React.FC = () => {
-	// const [markers, setMarkers] = useState<LatLngExpression[]>([]);
-	// const [polyline, setPolyline] = useState<LatLngExpression[]>([]);
-
-	// const handleAddMarker = (mapCenter: LatLngExpression) => {
-	// 	setMarkers((prev) => [...prev, mapCenter]);
-	// 	setPolyline((prev) => [...prev, mapCenter]);
-	// };
 
 	const MapControls: React.FC = () => {
 		const currentCountry = useSelector(
@@ -56,59 +23,48 @@ export const MapComponent: React.FC = () => {
 			(state: RootState) => state.dashboard.currentAttraction
 		);
 		const map = useMap();
+		
+		let currentCountryCoord: LatLngTuple | null = null;
+		let currentCityCoord: LatLngTuple | null = null;
+		let currentAttractionCoord: LatLngTuple | null = null;
 
-		// const handleLocationSelect = (position: LatLngExpression) => {
-		// 	map.flyTo(position, 10, {
-		// 		duration: 1.5,
-		// 	});
-		// };
-
-		// const handleAddPin = () => {
-		// 	const center = map.getCenter();
-		// 	handleAddMarker([center.lat, center.lng]);
-		// };
+		const hasSameCoords = (currentCoord: LatLngTuple | null, newCoord: LatLngTuple) => {
+			if(currentCoord && currentCoord[0] === newCoord[0] && currentCoord[1] === newCoord[1]){
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 		useEffect(() => {
-			if (currentCountry && !currentCity && !currentAttraction) {
+			if (currentCountry && !hasSameCoords(currentCountryCoord, currentCountry.coordinates as LatLngTuple)) {
 				console.log("country")
 				map.flyTo(currentCountry.coordinates, 6, { duration: 1.5 });
+				currentCountryCoord = currentCountry.coordinates as LatLngTuple;
+				currentCityCoord = null;
+				currentAttractionCoord = null;
 			}
 		}, [currentCountry]);
 
 		useEffect(() => {
-			if (currentCity && !currentAttraction) {
+			if (currentCity && !hasSameCoords(currentCityCoord, currentCity.coordinates as LatLngTuple)) {
 				console.log("city")
 				map.flyTo(currentCity.coordinates, 11, { duration: 1.5 });
+				currentCityCoord = currentCity.coordinates as LatLngTuple;
+				currentAttractionCoord = null;
 			}
 		}, [currentCity]);
 
 		useEffect(() => {
-			if (currentAttraction) {
+			if (currentAttraction && !hasSameCoords(currentAttractionCoord, currentAttraction.coordinates as LatLngTuple)) {
 					console.log("attraction")
 					map.flyTo(currentAttraction.coordinates, 17, { duration: 1.5 });
+					currentAttractionCoord = currentAttraction.coordinates as LatLngTuple;
 			}
 		}, [currentAttraction]);
 
 		return null;
 
-		// return (
-		// 	<div
-		// 		style={{
-		// 			position: "absolute",
-		// 			top: 10,
-		// 			left: 10,
-		// 			zIndex: 1000,
-		// 			background: "white",
-		// 			padding: "10px",
-		// 			borderRadius: "5px",
-		// 		}}
-		// 	>
-		// 		<LocationSelector onSelect={handleLocationSelect} />
-		// 		<button onClick={handleAddPin} style={{ marginLeft: "10px" }}>
-		// 			Add Pin
-		// 		</button>
-		// 	</div>
-		// );
 	};
 
 	return (
@@ -123,12 +79,6 @@ export const MapComponent: React.FC = () => {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 				<MapControls />
-				{/* {markers.map((position, idx) => (
-					<Marker key={idx} position={position}>
-						<Popup>Marker {idx + 1}</Popup>
-					</Marker>
-				))}
-				{polyline.length > 1 && <Polyline positions={polyline} color="blue" />} */}
 			</MapContainer>
 		</div>
 	);
