@@ -28,6 +28,7 @@ export const Dashboard = () => {
 	const [cities, setCities] = useState<City[]>([]);
 	const [attractions, setAttractions] = useState<Attraction[]>([]);
 	const [images, setImages] = useState<any[]>([]);
+
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
 	);
@@ -37,17 +38,18 @@ export const Dashboard = () => {
 	const currentAttraction = useSelector(
 		(state: RootState) => state.dashboard.currentAttraction
 	);
+
 	const dispatch = useDispatch();
 
 	const handleChosenCountry = (option: Country) => {
 		dispatch(updateCurrentCountry(option));
-		// dispatch(updateCurrentCity(null))
-		// dispatch(updateCurrentAttraction(null))
+		dispatch(updateCurrentCity(null))
+		dispatch(updateCurrentAttraction(null))
 	};
 
 	const handleChosenCity = (option: City) => {
 		dispatch(updateCurrentCity(option));
-		// dispatch(updateCurrentAttraction(null))
+		dispatch(updateCurrentAttraction(null))
 	};
 
 	const handleChosenAttraction = (option: Attraction) => {
