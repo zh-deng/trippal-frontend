@@ -7,8 +7,18 @@
     "registration": "Registrieren"
   },
   "dashboard": {
+    "tabBar": {
+      "addTrip": "Neue Reise"
+    },
     "left": {
       "header-text": "Reiseroute:"
+    },
+    "center": {
+      "dropdown": {
+        "country": "Land",
+        "city": "Stadt",
+        "attraction": "Sehenswürdigkeit"
+      }
     }
   }
 }

@@ -7,8 +7,18 @@
     "registration": "Registration"
   },
   "dashboard": {
+    "tabBar": {
+      "addTrip": "New trip"
+    },
     "left": {
       "header-text": "Itenary:"
+    },
+    "center": {
+      "dropdown": {
+        "country": "Country",
+        "city": "City",
+        "attraction": "Attraction"
+      }
     }
   }
 }
