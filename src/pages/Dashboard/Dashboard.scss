@@ -35,10 +35,26 @@
           gap: 1rem;
         }
 
+        .center-image-gallery {
+          height: 20rem;
+        }
+
+        .image-gallery-fallback {
+          height: 100%;
+          border: 1px solid grey;
+          border-radius: 0.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: lightblue;
+        }
+
         .center-controls {
           height: 100%;
           padding: 1rem;
-          background-color: grey;
+          border: 1px solid grey;
+          background-color: lightblue;
+          border-radius: 0.5rem;
         }
       }
     }

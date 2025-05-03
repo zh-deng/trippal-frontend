@@ -45,7 +45,7 @@ export const DashboardRoadmap = () => {
 		<div className="dashboard-roadmap">
 			<div className="roadmap-content">
 				<div className="roadmap-header">
-					<Text content="dashboard.left.header-text" isBold={true} />
+					<Text content="dashboard.left.headerText" isBold={true} />
 					<div className="roadmap-header-name">TestRoadmap</div>
 				</div>
 				<div className="roadmap-content">

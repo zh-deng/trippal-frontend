@@ -23,6 +23,8 @@ import {
 import { fetchImages, ImageData } from "../../services/imageService";
 import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
 import { useTranslation } from "react-i18next";
+import { Text } from "../../components/Text/Text";
+import { DashboardInput } from "../../components/DashboardInput/DashboardInput";
 
 export const Dashboard = () => {
 	const { t } = useTranslation();
@@ -42,21 +44,6 @@ export const Dashboard = () => {
 	);
 
 	const dispatch = useDispatch();
-
-	const handleChosenCountry = (option: Country) => {
-		dispatch(updateCurrentCountry(option));
-		dispatch(updateCurrentCity(null));
-		dispatch(updateCurrentAttraction(null));
-	};
-
-	const handleChosenCity = (option: City) => {
-		dispatch(updateCurrentCity(option));
-		dispatch(updateCurrentAttraction(null));
-	};
-
-	const handleChosenAttraction = (option: Attraction) => {
-		dispatch(updateCurrentAttraction(option));
-	};
 
 	useEffect(() => {
 		fetchCountries()
@@ -89,6 +76,27 @@ export const Dashboard = () => {
 				.catch((error) => console.error("Failed to load images:", error));
 		}
 	}, [currentAttraction]);
+
+	const handleChosenCountry = (option: Country) => {
+		dispatch(updateCurrentCountry(option));
+		dispatch(updateCurrentCity(null));
+		dispatch(updateCurrentAttraction(null));
+	};
+
+	const handleChosenCity = (option: City) => {
+		dispatch(updateCurrentCity(option));
+		dispatch(updateCurrentAttraction(null));
+	};
+
+	const handleChosenAttraction = (option: Attraction) => {
+		dispatch(updateCurrentAttraction(option));
+	};
+
+	const ImageGalleryFallback = () => (
+		<div className="image-gallery-fallback">
+			<Text content={"dashboard.center.imageGallery.fallback"} />
+		</div>
+	);
 
 	return (
 		<div className="dashboard">
@@ -126,10 +134,14 @@ export const Dashboard = () => {
 							)}
 						</div>
 						<div className="center-image-gallery">
-							{currentAttraction && <ImageGallery images={images} />}
+							{currentAttraction ? (
+								<ImageGallery images={images} />
+							) : (
+								<ImageGalleryFallback />
+							)}
 						</div>
 						<div className="center-controls">
-							TEST
+							<DashboardInput />
 						</div>
 					</div>
 				</div>
