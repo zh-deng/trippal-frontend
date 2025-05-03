@@ -11,13 +11,16 @@
       "addTrip": "Neue Reise"
     },
     "left": {
-      "header-text": "Reiseroute:"
+      "headerText": "Reiseroute:"
     },
     "center": {
       "dropdown": {
         "country": "Land",
         "city": "Stadt",
         "attraction": "Sehenswürdigkeit"
+      },
+      "imageGallery": {
+        "fallback": "Keine Bilder vorhanden"
       }
     }
   }

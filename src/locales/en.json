@@ -11,13 +11,16 @@
       "addTrip": "New trip"
     },
     "left": {
-      "header-text": "Itenary:"
+      "headerText": "Itenary:"
     },
     "center": {
       "dropdown": {
         "country": "Country",
         "city": "City",
         "attraction": "Attraction"
+      },
+      "imageGallery": {
+        "fallback": "No pictures available"
       }
     }
   }
