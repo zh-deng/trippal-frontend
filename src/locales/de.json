@@ -21,6 +21,9 @@
       },
       "imageGallery": {
         "fallback": "Keine Bilder vorhanden"
+      },
+      "inputs": {
+        "uploads": "Unterstützte Datenformate: PDF, JPG, JPEG, PNG, TXT"
       }
     }
   }
