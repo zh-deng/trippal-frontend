@@ -30,4 +30,17 @@
       width: 12rem;
     }
   }
+
+  .input-uploads {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .upload-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid red;
+    }
+  }
 }
