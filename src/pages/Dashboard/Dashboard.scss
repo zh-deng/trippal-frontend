@@ -28,7 +28,11 @@
         background-color: white;
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1rem;
+
+        &-breadcrumb {
+          padding: 0 0.5rem;
+        }
 
         .center-dropdown-container {
           display: flex;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DashboardMap } from "../../components/DashboardMap/DashboardMap";
 import { DashboardRoadmap } from "../../components/DashboardRoadmap/DashboardRoadmap";
 import { DashboardTabMenu } from "../../components/DashboardTabMenu/DashboardTabMenu";
@@ -77,6 +77,14 @@ export const Dashboard = () => {
 		}
 	}, [currentAttraction]);
 
+	const routeItemTitle = [
+		currentCountry?.name,
+		currentCity?.name,
+		currentAttraction?.name,
+	]
+		.filter(Boolean)
+		.join(" / ");
+
 	const handleChosenCountry = (option: Country) => {
 		dispatch(updateCurrentCountry(option));
 		dispatch(updateCurrentCity(null));
@@ -109,6 +117,13 @@ export const Dashboard = () => {
 				</div>
 				<div className="dashboard-main-center">
 					<div className="center-container">
+						<div className="center-container-breadcrumb">
+							{routeItemTitle ? (
+								<span>{routeItemTitle}</span>
+							) : (
+								<Text content="dashboard.center.routeTitleFallback" />
+							)}
+						</div>
 						<div className="center-dropdown-container">
 							<Dropdown
 								options={countries}
@@ -120,6 +135,7 @@ export const Dashboard = () => {
 								<Dropdown
 									options={cities}
 									value={currentCity}
+
 									defaultValue={t("dashboard.center.dropdown.city")}
 									onChange={handleChosenCity}
 								/>
