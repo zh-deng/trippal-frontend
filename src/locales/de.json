@@ -11,9 +11,15 @@
       "addTrip": "Neue Reise"
     },
     "left": {
-      "headerText": "Reiseroute:"
+      "headerText": "Reiseroute:",
+      "lockIcons": {
+        "public": "Klicke, um diese Route zu veröffentlichen",
+        "private": "Klicke, um diese Route zu privat zu machen"
+      },
+      "downloadIcon": "Route downloaden"
     },
     "center": {
+      "routeTitleFallback": "Wähle ein Land aus.",
       "dropdown": {
         "country": "Land",
         "city": "Stadt",
@@ -26,6 +32,7 @@
         "notes": "Notizen",
         "notesPlaceholder": "Füge hier deine Notizen ein.",
         "uploads": "Unterstützte Datenformate: PDF, JPG, JPEG, PNG, TXT",
+        "uploadsInfo": "Füge Buchungen, Belege und Tickets hinzu.",
         "submit": "Daten speichern"
       }
     }

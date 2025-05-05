@@ -11,9 +11,15 @@
       "addTrip": "New trip"
     },
     "left": {
-      "headerText": "Itenary:"
+      "headerText": "Itenary:",
+      "lockIcons": {
+        "public": "Click to publish route",
+        "private": "Click to make route private"
+      },
+      "downloadIcon": "Download route"
     },
     "center": {
+      "routeTitleFallback": "Choose a country.",
       "dropdown": {
         "country": "Country",
         "city": "City",
@@ -23,9 +29,10 @@
         "fallback": "No pictures available"
       },
       "inputs": {
-        "notes": "notes",
+        "notes": "Notes",
         "notesPlaceholder": "Write your notes here.",
         "uploads": "Supported data formats: PDF, JPG, JPEG, PNG, TXT",
+        "uploadsInfo": "Add bookings, receipts, and tickets.",
         "submit": "Save data"
       }
     }
