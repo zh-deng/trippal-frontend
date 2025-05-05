@@ -19,6 +19,8 @@
 				border-radius: 0.5rem;
 				padding: 0.25rem 0.5rem;
 				width: 12rem;
+				letter-spacing: 0.1rem;
+				background-color: white;
 			}
 		}
 
@@ -32,6 +34,7 @@
 				border-radius: 0.5rem;
 				padding: 0.25rem 0.5rem;
 				width: 100%;
+				background-color: white;
 			}
 		}
 	}
@@ -54,10 +57,19 @@
         border: 1px solid grey;
         padding: 0.5rem;
         border-radius: 0.5rem;
+				background-color: white;
+
+				input {
+					border: 1px solid grey;
+					width: fit-content;
+					padding: 0.25rem 0.5rem;
+					border-radius: 0.5rem;
+					cursor: pointer;
+				}
 			}
 
 			.upload-container {
-				height: 12rem;
+				height: 11rem;
 				display: flex;
 				flex-direction: column;
         overflow-y: auto;

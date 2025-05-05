@@ -55,7 +55,7 @@ export const DashboardInput = () => {
 			<div className="input-container-right">
 				<div className="input-uploads">
 					<div className="input-uploads-info">
-						<Text content={"Füge Buchungen, Belege und Tickets hinzu."} />
+						<Text content={"dashboard.center.inputs.uploadsInfo"} />
 						<input
 							type="file"
 							accept=".pdf,.jpg,.jpeg,.png,.txt"
