@@ -5,20 +5,23 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { Modal } from "../Modal/Modal";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+	const { t } = useTranslation();
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-	const [isRegisterModalOpen, setIsRegisterModalOpen] = useState<boolean>(false);
+	const [isRegisterModalOpen, setIsRegisterModalOpen] =
+		useState<boolean>(false);
 
 	const handleLoginSwitch = () => {
 		setIsRegisterModalOpen(false);
 		setIsLoginModalOpen(true);
-	}
+	};
 
 	const handleRegisterSwitch = () => {
 		setIsLoginModalOpen(false);
 		setIsRegisterModalOpen(true);
-	}
+	};
 
 	return (
 		<nav className="navbar">
@@ -59,30 +62,43 @@ const Navbar = () => {
 					<Modal
 						isOpen={isRegisterModalOpen}
 						onClose={() => setIsRegisterModalOpen(false)}
-						title="Sign Up"
+						title={t("registerModal.signUp")}
 					>
 						<form>
 							<div className="register-form">
 								<label>
-									Username
-									<input type="text" placeholder="Username" />
+									<Text content={t("registerModal.username")} />
+									<input
+										type="text"
+										placeholder={t("registerModal.username")}
+									/>
 								</label>
 								<label>
-									Email
-									<input type="email" placeholder="Email" />
+									<Text content={t("registerModal.email")} />
+									<input type="email" placeholder={t("registerModal.email")} />
 								</label>
 								<label>
-									Password
-									<input type="password" placeholder="Password" />
+									<Text content={t("registerModal.password")} />
+									<input
+										type="password"
+										placeholder={t("registerModal.password")}
+									/>
 								</label>
 								<label>
-									Repeat password
-									<input type="password" placeholder="Repeat password" />
+									<Text content={t("registerModal.passwordRepeat")} />
+									<input
+										type="password"
+										placeholder={t("registerModal.passwordRepeat")}
+									/>
 								</label>
-								<button type="submit">Sign up</button>
+								<button type="submit">
+									<Text content={t("registerModal.signUp")} />
+								</button>
 								<div className="register-form-login">
-									<Text content={"Already have an account?"} />
-									<div className="login-button" onClick={handleLoginSwitch}>Login</div>
+									<Text content={"registerModal.loginSwitchText"} />
+									<div className="login-button" onClick={handleLoginSwitch}>
+										<Text content={"registerModal.loginSwitch"} />
+									</div>
 								</div>
 							</div>
 						</form>
@@ -90,22 +106,32 @@ const Navbar = () => {
 					<Modal
 						isOpen={isLoginModalOpen}
 						onClose={() => setIsLoginModalOpen(false)}
-						title="Login"
+						title={t("loginModal.login")}
 					>
 						<form>
 							<div className="login-form">
 								<label>
-									Email
-									<input type="email" placeholder="Email" />
+									<Text content={t("loginModal.email")} />
+									<input type="email" placeholder={t("loginModal.email")} />
 								</label>
 								<label>
-									Password
-									<input type="password" placeholder="Password" />
+									<Text content={t("loginModal.password")} />
+									<input
+										type="password"
+										placeholder={t("loginModal.password")}
+									/>
 								</label>
-								<button type="submit">Login</button>
+								<button type="submit">
+									<Text content={t("loginModal.login")} />
+								</button>
 								<div className="login-form-register">
-									<Text content={"Already have an account?"} />
-									<div className="register-button" onClick={handleRegisterSwitch}>Register</div>
+									<Text content={"loginModal.registerSwitchText"} />
+									<div
+										className="register-button"
+										onClick={handleRegisterSwitch}
+									>
+										<Text content={"loginModal.registerSwitch"} />
+									</div>
 								</div>
 							</div>
 						</form>

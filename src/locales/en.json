@@ -37,5 +37,22 @@
         "submit": "Save data"
       }
     }
+  },
+  "loginModal": {
+    "login": "Login",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "registerSwitchText": "Not a member?",
+    "registerSwitch": "Register"
+  },
+  "registerModal": {
+    "signUp": "Sign up",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "passwordRepeat": "Repeat password",
+    "loginSwitchText": "Already have an account?",
+    "loginSwitch": "Login"
   }
 }
