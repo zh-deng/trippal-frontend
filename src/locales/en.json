@@ -23,7 +23,10 @@
         "fallback": "No pictures available"
       },
       "inputs": {
-        "uploads": "Supported data formats: PDF, JPG, JPEG, PNG, TXT"
+        "notes": "notes",
+        "notesPlaceholder": "Write your notes here.",
+        "uploads": "Supported data formats: PDF, JPG, JPEG, PNG, TXT",
+        "submit": "Save data"
       }
     }
   }
