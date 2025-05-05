@@ -1,46 +1,99 @@
 .dashboard-input {
-  height: 100%;
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+	height: 100%;
+	display: flex;
+	gap: 2rem;
 
-  .input-date {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+	.input-container-left {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 
-    input {
-      border: 1px solid grey;
-      border-radius: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      width: 12rem;
-    }
-  }
+		.input-date {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
 
-  .input-notes {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+			input {
+				border: 1px solid grey;
+				border-radius: 0.5rem;
+				padding: 0.25rem 0.5rem;
+				width: 12rem;
+			}
+		}
 
-    textarea {
-      border: 1px solid grey;
-      border-radius: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      width: 12rem;
-    }
-  }
+		.input-notes {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
 
-  .input-uploads {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+			textarea {
+				border: 1px solid grey;
+				border-radius: 0.5rem;
+				padding: 0.25rem 0.5rem;
+				width: 100%;
+			}
+		}
+	}
 
-    .upload-item {
+	.input-container-right {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		.input-uploads {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 1rem;
-      border: 1px solid red;
-    }
-  }
+
+			&-info {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+        border: 1px solid grey;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+			}
+
+			.upload-container {
+				height: 12rem;
+				display: flex;
+				flex-direction: column;
+        overflow-y: auto;
+
+				.upload-item {
+					display: flex;
+					align-items: center;
+					gap: 1rem;
+					padding: 0.5rem;
+
+					button {
+						cursor: pointer;
+					}
+				}
+
+				.odd-color {
+					background-color: #99d8e6;
+				}
+
+				.even-color {
+					background-color: #7fc4d3;
+				}
+			}
+		}
+
+		.input-save-button {
+			display: flex;
+			justify-content: end;
+
+			button {
+				padding: 0.5rem 2rem;
+				border: 1px solid grey;
+				border-radius: 2rem;
+				background-color: green;
+				color: white;
+			}
+		}
+	}
 }
