@@ -1,9 +1,8 @@
+import { Dashboard } from '../Dashboard/Dashboard'
 import './Demo.scss'
 
 export const Demo = () => {
   return (
-    <div className='demo'>
-      Demo
-    </div>
+      <Dashboard />
   )
 }
