@@ -7,12 +7,39 @@ import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Community } from "./pages/Community/Community";
 import { Footer } from "./components/Footer/Footer";
 import "leaflet/dist/leaflet.css";
+import LoginModal from "./components/Modal/LoginModal/LoginModal";
+import RegisterModal from "./components/Modal/RegisterModal/RegisterModal";
+import { useState } from "react";
 
 function App() {
+	const [isLoginOpen, setIsLoginOpen] = useState(false);
+	const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
 	return (
 		<div className="app">
-			<Navbar />
-			<div className="app__pages">
+			<div className="app-navbar">
+				<Navbar
+					onLoginClick={() => setIsLoginOpen(true)}
+					onRegisterClick={() => setIsRegisterOpen(true)}
+				/>
+				<LoginModal
+					isOpen={isLoginOpen}
+					onClose={() => setIsLoginOpen(false)}
+					onSwitchToRegister={() => {
+						setIsLoginOpen(false);
+						setIsRegisterOpen(true);
+					}}
+				/>
+				<RegisterModal
+					isOpen={isRegisterOpen}
+					onClose={() => setIsRegisterOpen(false)}
+					onSwitchToLogin={() => {
+						setIsRegisterOpen(false);
+						setIsLoginOpen(true);
+					}}
+				/>
+			</div>
+			<div className="app-pages">
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="demo" element={<Demo />} />
