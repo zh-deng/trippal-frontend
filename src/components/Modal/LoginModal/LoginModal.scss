@@ -1,0 +1,40 @@
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 20rem;
+
+	label {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+
+		input {
+			padding: 0.5rem;
+			border-radius: 0.5rem;
+			background-color: lightgrey;
+		}
+	}
+
+	button {
+		margin-top: 1rem;
+		padding: 0.5rem 1rem;
+		color: white;
+		background-color: blue;
+		border-radius: 0.5rem;
+		cursor: pointer;
+	}
+
+	&-register {
+		padding: 0.5rem;
+		display: flex;
+		gap: 0.5rem;
+		justify-content: center;
+
+		.register-button {
+			color: blue;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	}
+}
