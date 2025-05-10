@@ -16,8 +16,11 @@ const globalSlice = createSlice({
 		setActiveUser: (state, action: PayloadAction<UserInfo>) => {
 			state.activeUser = action.payload;
 		},
+		logoutActiveUser: (state) => {
+			state.activeUser = null;
+		}
 	},
 });
 
-export const { setActiveUser } = globalSlice.actions;
+export const { setActiveUser, logoutActiveUser } = globalSlice.actions;
 export default globalSlice.reducer;
