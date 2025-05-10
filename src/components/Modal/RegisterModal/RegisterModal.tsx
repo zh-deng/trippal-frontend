@@ -37,26 +37,19 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		// Simple client-side validation
 		if (formData.password !== formData.passwordRepeat) {
 			setError(t("registerModal.passwordMismatch"));
 			return;
 		}
 
 		try {
-			// Call the register user service
-			const user = await registerUser({
+			await registerUser({
 				name: formData.name,
 				password: formData.password,
 				email: formData.email,
-				roles: "ROLE_USER", // default role; adjust as necessary
+				roles: "ROLE_USER",
 			});
-
-			// Dispatch user info to Redux store
-			dispatch(setActiveUser(user))
-			console.log(user);
-
-			// Optionally close modal or navigate
+			
 			onClose();
 		} catch (err: any) {
 			setError(t("registerModal.registrationFailed"));
