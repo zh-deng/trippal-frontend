@@ -2,6 +2,8 @@ import { Modal } from "../../Modal/Modal";
 import { useTranslation } from "react-i18next";
 import { Text } from "../../Text/Text";
 import "./RegisterModal.scss";
+import { useState } from "react";
+import { registerUser } from "../../../services/userService";
 
 interface Props {
 	isOpen: boolean;
@@ -12,28 +14,97 @@ interface Props {
 const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 	const { t } = useTranslation();
 
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		password: "",
+		passwordRepeat: "",
+	});
+
+	const [error, setError] = useState<string>("");
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormData((prevState) => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		// Simple client-side validation
+		if (formData.password !== formData.passwordRepeat) {
+			setError(t("registerModal.passwordMismatch"));
+			return;
+		}
+
+		try {
+			// Call the register user service
+			const user = await registerUser({
+				name: formData.name,
+				password: formData.password,
+				email: formData.email,
+				roles: "ROLE_USER", // default role; adjust as necessary
+			});
+
+			// Dispatch user info to Redux store
+			console.log(user);
+
+			// Optionally close modal or navigate
+			onClose();
+		} catch (err: any) {
+			setError(t("registerModal.registrationFailed"));
+		}
+	};
+
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title={t("registerModal.signUp")}>
-			<form className="register-form">
+			<form className="register-form" onSubmit={handleSubmit}>
 				<label>
 					<Text content={t("registerModal.username")} />
-					<input type="text" placeholder={t("registerModal.username")} />
+					<input
+						type="text"
+						name="name"
+						value={formData.name}
+						onChange={handleChange}
+						placeholder={t("registerModal.username")}
+					/>
 				</label>
 				<label>
 					<Text content={t("registerModal.email")} />
-					<input type="email" placeholder={t("registerModal.email")} />
+					<input
+						type="email"
+						name="email"
+						value={formData.email}
+						onChange={handleChange}
+						placeholder={t("registerModal.email")}
+					/>
 				</label>
 				<label>
 					<Text content={t("registerModal.password")} />
-					<input type="password" placeholder={t("registerModal.password")} />
+					<input
+						type="password"
+						name="password"
+						value={formData.password}
+						onChange={handleChange}
+						placeholder={t("registerModal.password")}
+					/>
 				</label>
 				<label>
 					<Text content={t("registerModal.passwordRepeat")} />
 					<input
 						type="password"
+						name="passwordRepeat"
+						value={formData.passwordRepeat}
+						onChange={handleChange}
 						placeholder={t("registerModal.passwordRepeat")}
 					/>
 				</label>
+
+				{error && <div className="error-message">{error}</div>}
+
 				<button type="submit">
 					<Text content={t("registerModal.signUp")} />
 				</button>
