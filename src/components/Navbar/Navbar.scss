@@ -29,8 +29,17 @@
 			gap: 1rem;
 
 			.navbar-login,
+			.navbar-logout,
 			.navbar-registration {
 				cursor: pointer;
+			}
+
+			.navbar-user-icon {
+				border: 1px solid grey;
+				padding: 0.5rem;
+				width: 2.5rem;
+				border-radius: 50%;
+				background-color: greenyellow;
 			}
 		}
 	}

@@ -3,13 +3,27 @@ import "./Navbar.scss";
 import { Text } from "../Text/Text";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import logo from "../../assets/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { logoutActiveUser } from "../../state/global/globalSlice";
 
 type NavbarProps = {
 	onLoginClick: () => void;
 	onRegisterClick: () => void;
-}
+};
 
 const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
+	const activeUser = useSelector((state: RootState) => state.global.activeUser);
+
+	const dispatch = useDispatch();
+
+	const getNickname = (): string => {
+		return activeUser?.name.substring(0, 2).toUpperCase() ?? "";
+	}
+
+	const onLogoutClick = () => {
+		dispatch(logoutActiveUser())
+	}
 
 	return (
 		<nav className="navbar">
@@ -35,18 +49,28 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 				</div>
 				<div className="navbar-content-right">
 					<LanguageSwitcher />
-					<div
-						className="navbar-login"
-						onClick={onLoginClick}
-					>
-						<Text content="navbar.login" />
-					</div>
-					<div
-						className="navbar-registration"
-						onClick={onRegisterClick}
-					>
-						<Text content="navbar.registration" />
-					</div>
+					{!activeUser && (
+						<>
+							<div className="navbar-login" onClick={onLoginClick}>
+								<Text content="navbar.login" />
+							</div>
+							<div className="navbar-registration" onClick={onRegisterClick}>
+								<Text content="navbar.registration" />
+							</div>
+						</>
+					)}
+					{activeUser && (
+						<>
+							<div className="navbar-logout" onClick={onLogoutClick}>
+								<Text content="navbar.logout" />
+							</div>
+							<div className="navbar-user-icon" onClick={onRegisterClick}>
+								{
+									getNickname()
+								}
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</nav>
