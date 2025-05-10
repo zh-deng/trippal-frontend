@@ -4,6 +4,8 @@ import { Text } from "../../Text/Text";
 import "./RegisterModal.scss";
 import { useState } from "react";
 import { registerUser } from "../../../services/userService";
+import { useDispatch } from "react-redux";
+import { setActiveUser } from "../../../state/global/globalSlice";
 
 interface Props {
 	isOpen: boolean;
@@ -13,6 +15,7 @@ interface Props {
 
 const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
 		name: "",
@@ -50,6 +53,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 			});
 
 			// Dispatch user info to Redux store
+			dispatch(setActiveUser(user))
 			console.log(user);
 
 			// Optionally close modal or navigate
