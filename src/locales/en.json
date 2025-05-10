@@ -5,6 +5,7 @@
     "dashboard": "My Trips",
     "community": "Community",
     "login": "Login",
+    "logout": "Logout",
     "registration": "Registration"
   },
   "dashboard": {
@@ -53,6 +54,8 @@
     "password": "Password",
     "passwordRepeat": "Repeat password",
     "loginSwitchText": "Already have an account?",
-    "loginSwitch": "Login"
+    "loginSwitch": "Login",
+    "registrationFailed": "Error at sign on",
+    "passwordMismatch": "Passwords are different"
   }
 }

@@ -4,7 +4,8 @@
     "demo": "Demo",
     "dashboard": "Meine Reisen",
     "community": "Gemeinschaft",
-    "login": "Login",
+    "login": "Anmelden",
+    "logout": "Abmelden",
     "registration": "Registrieren"
   },
   "dashboard": {
@@ -54,6 +55,8 @@
     "password": "Passwort",
     "passwordRepeat": "Passwort wiederholen",
     "loginSwitchText": "Du hast bereits ein Konto?",
-    "loginSwitch": "Einloggen"
+    "loginSwitch": "Einloggen",
+    "registrationFailed": "Fehler beim Registrieren",
+    "passwordMismatch": "Passwörter sind unterschiedlich"
   }
 }
