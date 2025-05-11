@@ -18,7 +18,8 @@
         "public": "Klicke, um diese Route zu veröffentlichen",
         "private": "Klicke, um diese Route zu privat zu machen"
       },
-      "downloadIcon": "Route downloaden"
+      "downloadIcon": "Route downloaden",
+      "emptyFallback": "Füge deinen ersten Halt hinzu"
     },
     "center": {
       "routeTitleFallback": "Wähle ein Land aus.",

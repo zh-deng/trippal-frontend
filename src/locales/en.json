@@ -18,7 +18,8 @@
         "public": "Click to publish route",
         "private": "Click to make route private"
       },
-      "downloadIcon": "Download route"
+      "downloadIcon": "Download route",
+      "emptyFallback": "Add your first stop"
     },
     "center": {
       "routeTitleFallback": "Choose a country.",
