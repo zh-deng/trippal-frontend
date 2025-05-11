@@ -68,4 +68,18 @@
       max-width: 30rem;
     }
   }
+
+  &-fallback {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-text {
+      border: 1px solid gray;
+      padding: 4rem 2rem;
+      border-radius: 0.5rem;
+      background-color: white;
+    }
+  }
 }

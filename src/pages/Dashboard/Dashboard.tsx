@@ -33,6 +33,9 @@ export const Dashboard = () => {
 	const [attractions, setAttractions] = useState<Attraction[]>([]);
 	const [images, setImages] = useState<ImageData[]>([]);
 
+	const activeUser = useSelector(
+		(state: RootState) => state.global.activeUser
+	);
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
 	);
@@ -105,6 +108,16 @@ export const Dashboard = () => {
 			<Text content={"dashboard.center.imageGallery.fallback"} />
 		</div>
 	);
+
+	if(activeUser === null) {
+		return (
+			<div className="dashboard-fallback">
+				<div className="dashboard-fallback-text">
+					<Text isBold={true} content={"dashboard.fallback"} />
+				</div>
+			</div>
+		)
+	}
 
 	return (
 		<div className="dashboard">
