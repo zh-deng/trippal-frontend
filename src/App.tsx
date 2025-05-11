@@ -10,6 +10,7 @@ import "leaflet/dist/leaflet.css";
 import LoginModal from "./components/Modal/LoginModal/LoginModal";
 import RegisterModal from "./components/Modal/RegisterModal/RegisterModal";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -17,6 +18,7 @@ function App() {
 
 	return (
 		<div className="app">
+			<ToastContainer />
 			<div className="app-navbar">
 				<Navbar
 					onLoginClick={() => setIsLoginOpen(true)}
