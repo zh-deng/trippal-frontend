@@ -5,6 +5,7 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
+import { logoutUser } from "../../services/userService";
 import { logoutActiveUser } from "../../state/global/globalSlice";
 
 type NavbarProps = {
@@ -19,11 +20,18 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 
 	const getNickname = (): string => {
 		return activeUser?.name.substring(0, 2).toUpperCase() ?? "";
-	}
+	};
 
 	const onLogoutClick = () => {
-		dispatch(logoutActiveUser())
-	}
+		logoutUser()
+			.then(() => {
+				dispatch(logoutActiveUser());
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		//
+	};
 
 	return (
 		<nav className="navbar">
@@ -65,9 +73,7 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 								<Text content="navbar.logout" />
 							</div>
 							<div className="navbar-user-icon" onClick={onRegisterClick}>
-								{
-									getNickname()
-								}
+								{getNickname()}
 							</div>
 						</>
 					)}
