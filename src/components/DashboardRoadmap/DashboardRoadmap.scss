@@ -12,6 +12,13 @@
 		background-color: white;
 		border-radius: 0.5rem;
 
+		.roadmap-fallback {
+			border: 1px solid gray;
+			padding: 1rem;
+			border-radius: 1rem;
+			background-color: beige;
+		}
+
 		.roadmap-header {
 			display: flex;
 			align-items: center;

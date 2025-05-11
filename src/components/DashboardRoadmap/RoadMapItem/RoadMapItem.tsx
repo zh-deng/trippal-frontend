@@ -5,9 +5,10 @@ import { HiBars2 } from "react-icons/hi2";
 
 type RoadMapItemProps = {
 	id: string;
+	content: string
 };
 
-export const RoadMapItem = ({ id }: RoadMapItemProps) => {
+export const RoadMapItem = ({ id, content }: RoadMapItemProps) => {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id });
 
@@ -27,7 +28,7 @@ export const RoadMapItem = ({ id }: RoadMapItemProps) => {
 			<div className="roadmap-item-icon">
 				<HiBars2 size={32} />
 			</div>
-			<div className="roadmap-item-content">{id}</div>
+			<div className="roadmap-item-content">{content}</div>
 		</div>
 	);
 };
