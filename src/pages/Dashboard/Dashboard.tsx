@@ -126,7 +126,7 @@ export const Dashboard = () => {
 			</div>
 			<div className="dashboard-main">
 				<div className="dashboard-main-left">
-					<DashboardRoadmap />
+					<DashboardRoadmap roadmapItems={[]} />
 				</div>
 				<div className="dashboard-main-center">
 					<div className="center-container">
