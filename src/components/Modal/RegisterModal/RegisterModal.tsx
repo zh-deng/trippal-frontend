@@ -4,8 +4,7 @@ import { Text } from "../../Text/Text";
 import "./RegisterModal.scss";
 import { useState } from "react";
 import { registerUser } from "../../../services/userService";
-import { useDispatch } from "react-redux";
-import { setActiveUser } from "../../../state/global/globalSlice";
+import { toast } from "react-toastify";
 
 interface Props {
 	isOpen: boolean;
@@ -15,7 +14,6 @@ interface Props {
 
 const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 	const { t } = useTranslation();
-	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
 		name: "",
@@ -49,7 +47,16 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 				email: formData.email,
 				roles: "ROLE_USER",
 			});
-			
+
+			toast.success(t("registerModal.registrationSuccess"));
+
+			setFormData({
+				name: "",
+				email: "",
+				password: "",
+				passwordRepeat: "",
+			});
+
 			onClose();
 		} catch (err: any) {
 			setError(t("registerModal.registrationFailed"));
