@@ -37,7 +37,8 @@
         "uploadsInfo": "Füge Buchungen, Belege und Tickets hinzu.",
         "submit": "Daten speichern"
       }
-    }
+    },
+    "fallback": "Zum Fortfahren bitte anmelden oder registrieren"
   },
   "loginModal": {
     "login": "Einloggen",
@@ -57,6 +58,7 @@
     "loginSwitchText": "Du hast bereits ein Konto?",
     "loginSwitch": "Einloggen",
     "registrationFailed": "Fehler beim Registrieren",
-    "passwordMismatch": "Passwörter sind unterschiedlich"
+    "passwordMismatch": "Passwörter sind unterschiedlich",
+    "registrationSuccess": "Erfolgreich registriert. Jetzt anmelden!"
   }
 }

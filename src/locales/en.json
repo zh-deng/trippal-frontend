@@ -37,7 +37,8 @@
         "uploadsInfo": "Add bookings, receipts, and tickets.",
         "submit": "Save data"
       }
-    }
+    },
+    "fallback": "Please log in or register to proceed"
   },
   "loginModal": {
     "login": "Login",
@@ -56,6 +57,7 @@
     "loginSwitchText": "Already have an account?",
     "loginSwitch": "Login",
     "registrationFailed": "Error at sign on",
-    "passwordMismatch": "Passwords are different"
+    "passwordMismatch": "Passwords are different",
+    "registrationSuccess": "Successfully registered. Sign in now!"
   }
 }
