@@ -25,9 +25,26 @@
 			justify-content: space-between;
 			padding: 1rem;
 
+			&-input {
+				border: 1px solid gray;
+				border-radius: 0.5rem;
+				width: 10rem;
+				overflow-x: hidden;
+				padding-left: 0.3rem;
+			}
+
+			&-title {
+				height: 1.8rem;
+				width: 10rem;
+				padding-left: 0.5rem;
+				display: flex;
+				align-items: center;
+			}
+
 			&-text {
 				display: flex;
 				gap: 1rem;
+				align-items: center;
 			}
 
 			&-icons {
