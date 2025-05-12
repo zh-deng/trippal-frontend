@@ -19,6 +19,8 @@
         "private": "Click to make route private"
       },
       "downloadIcon": "Download route",
+      "editTitleIcon": "Change title",
+      "confirmTitleIcon": "Confirm title",
       "emptyFallback": "Add your first stop"
     },
     "center": {

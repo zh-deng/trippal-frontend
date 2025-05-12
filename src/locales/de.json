@@ -19,6 +19,8 @@
         "private": "Klicke, um diese Route zu privat zu machen"
       },
       "downloadIcon": "Route downloaden",
+      "editTitleIcon": "Titel ändern",
+      "confirmTitleIcon": "Titel bestätigen",
       "emptyFallback": "Füge deinen ersten Halt hinzu"
     },
     "center": {
