@@ -1,13 +1,24 @@
 .roadmap-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
-  background-color: #ffbb4e;
-  border-radius: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.5rem;
+	background-color: #ffbb4e;
+	border-radius: 0.5rem;
 
-  &-content {
-    width: 100%;
-    cursor: grab;
-  }
+	.roadmap-bar-icon {
+		cursor: grab;
+
+		&:active {
+			cursor: grabbing;
+		}
+	}
+
+	&-content {
+		width: 100%;
+	}
+
+	.roadmap-edit-icon {
+		cursor: pointer;
+	}
 }
