@@ -30,5 +30,9 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
+if (process.env.NODE_ENV === "development") {
+	persistor.purge();
+}
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
