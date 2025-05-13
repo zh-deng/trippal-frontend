@@ -110,7 +110,7 @@ export const Demo = () => {
 			</div>
 			<div className="demo-main">
 				<div className="demo-main-left">
-					<DashboardRoadmap roadmapItems={demoRoadmapItems} />
+					<DashboardRoadmap title="t2" roadmapItems={demoRoadmapItems} />
 				</div>
 				<div className="demo-main-center">
 					<div className="center-container">

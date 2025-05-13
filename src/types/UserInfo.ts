@@ -1,3 +1,5 @@
+import { Trip } from "./Trip";
+
 export type RegisterUserInput = {
   name: string;
   email: string;
@@ -9,4 +11,5 @@ export type UserInfo = {
   id: number;
   name: string;
   email: string;
+  trips: Trip[]
 }
