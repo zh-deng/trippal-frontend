@@ -3,7 +3,7 @@ import { RegisterUserInput, UserInfo } from "../types/UserInfo";
 
 
 export async function registerUser(user: RegisterUserInput): Promise<UserInfo> {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/auth/addNewUser`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/auth/createUser`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
