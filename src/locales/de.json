@@ -10,7 +10,8 @@
   },
   "dashboard": {
     "tabBar": {
-      "addTrip": "Neue Reise"
+      "addTrip": "Neue Reise",
+      "newTripName": "Deine Reise"
     },
     "left": {
       "headerText": "Reiseroute:",
