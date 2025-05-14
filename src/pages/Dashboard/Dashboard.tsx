@@ -45,6 +45,12 @@ export const Dashboard = () => {
 	const currentAttraction = useSelector(
 		(state: RootState) => state.dashboard.currentAttraction
 	);
+	const activeTripIndex = useSelector(
+		(state: RootState) => state.global.activeTripIndex
+	);
+
+	// relocate to roadmap?
+	const activeTripTitle: string = activeUser?.trips[activeTripIndex!].title ?? "defaultTitle"
 
 	const dispatch = useDispatch();
 
@@ -126,7 +132,7 @@ export const Dashboard = () => {
 			</div>
 			<div className="dashboard-main">
 				<div className="dashboard-main-left">
-					<DashboardRoadmap title="t1" roadmapItems={[]} />
+					<DashboardRoadmap title={activeTripTitle} roadmapItems={[]} />
 				</div>
 				<div className="dashboard-main-center">
 					<div className="center-container">

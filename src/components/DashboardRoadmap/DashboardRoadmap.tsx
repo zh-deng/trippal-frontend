@@ -27,7 +27,7 @@ type DashboardRoadmapProps = {
 };
 
 export const DashboardRoadmap: React.FC<DashboardRoadmapProps> = ({
-	title = "TEST",
+	title,
 	roadmapItems,
 }) => {
 	const { t } = useTranslation();
