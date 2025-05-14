@@ -50,8 +50,9 @@
     "email": "Email",
     "password": "Passwort",
     "registerSwitchText": "Noch kein Mitglied?",
-    "registerSwitch": "Registrieren"
-
+    "registerSwitch": "Registrieren",
+    "loginSuccess": "Erfolgreich angemeldet.",
+    "loginFailed": "Fehler bei der Anmeldung"
   },
   "registerModal": {
     "signUp": "Registrieren",
@@ -61,7 +62,7 @@
     "passwordRepeat": "Passwort wiederholen",
     "loginSwitchText": "Du hast bereits ein Konto?",
     "loginSwitch": "Einloggen",
-    "registrationFailed": "Fehler beim Registrieren",
+    "registrationFailed": "Fehler bei der Registrierung",
     "passwordMismatch": "Passwörter sind unterschiedlich",
     "registrationSuccess": "Erfolgreich registriert. Jetzt anmelden!"
   }

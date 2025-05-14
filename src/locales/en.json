@@ -50,7 +50,9 @@
     "email": "Email",
     "password": "Password",
     "registerSwitchText": "Not a member?",
-    "registerSwitch": "Register"
+    "registerSwitch": "Register",
+    "loginSuccess": "Successfully logged in.",
+    "loginFailed": "Error at login"
   },
   "registerModal": {
     "signUp": "Sign up",

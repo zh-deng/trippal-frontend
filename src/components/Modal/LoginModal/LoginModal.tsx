@@ -45,7 +45,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }: Props) => {
 
 			dispatch(setActiveUser(user))
 
-			toast.success(t("registerModal.registrationSuccess"));
+			toast.success(t("loginModal.loginSuccess"));
 
 			setFormData({
 				email: "",
@@ -54,7 +54,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }: Props) => {
 
 			onClose();
 		} catch (err: any) {
-			setError(t("registerModal.registrationFailed"));
+			setError(t("loginModal.loginFailed"));
 		}
 	};
 
