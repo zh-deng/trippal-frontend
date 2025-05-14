@@ -18,3 +18,15 @@ export async function createTrip(trip: Trip): Promise<Trip> {
   const createdTrip: Trip = await response.json();
   return createdTrip;
 }
+
+export async function removeTrip(tripId: number) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/trip/${tripId}`, {
+    method: "DELETE",
+    credentials: 'include'
+  })
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Deleting trip failed: ${errorText}`);
+  }
+}
