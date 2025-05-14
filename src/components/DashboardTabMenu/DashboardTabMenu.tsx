@@ -1,17 +1,29 @@
 import "./DashboardTabMenu.scss";
 import { BsPlusLg } from "react-icons/bs";
-import { SlOptionsVertical } from "react-icons/sl";
+
 import { Text } from "../Text/Text";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { Trip } from "../../types/Trip";
-import { addNewTrip, setActiveTripIndex } from "../../state/global/globalSlice";
-import { createTrip } from "../../services/tripService";
+import {
+	addNewTrip,
+	removeOldTrip,
+	setActiveTripIndex,
+} from "../../state/global/globalSlice";
+import { createTrip, removeTrip } from "../../services/tripService";
 import { useTranslation } from "react-i18next";
+import { TabMenuItem } from "./TabMenuItem/TabMenuItem";
+import { useState } from "react";
 
 export const DashboardTabMenu = () => {
 	const { t } = useTranslation();
+
+	const [activeOptionModal, setActiveOptionModal] = useState<number | null>(
+		null
+	);
+
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
+	const activeTrips = activeUser?.trips || [];
 	const activeTripIndex = useSelector(
 		(state: RootState) => state.global.activeTripIndex
 	);
@@ -34,26 +46,36 @@ export const DashboardTabMenu = () => {
 		}
 	};
 
-	const changeActiveTab = (index: number) => {
-		dispatch(setActiveTripIndex(index))
-	}
+	const setActiveTab = (index: number) => {
+		dispatch(setActiveTripIndex(index));
+	};
+
+	const setOptionModal = (index: number | null) => {
+		setActiveOptionModal(index);
+	};
+
+	const deleteTrip = (tripId: number) => {
+		removeTrip(tripId)
+			.then(() => {
+				dispatch(removeOldTrip(tripId));
+			})
+			.catch((error) => console.error("Failed to delete trip:", error));
+	};
 
 	return (
 		<div className="dashboard-tabmenu">
 			<div className="tabmenu-item-container">
-				{activeUser?.trips.map((trip: Trip, index: number) => (
-					<div
-						className={`tabmenu-item ${
-							index === activeTripIndex && "active-tab"
-						}`}
-						onClick={() => changeActiveTab(index)}
+				{activeTrips.map((trip: Trip, index: number) => (
+					<TabMenuItem
 						key={trip.id}
-					>
-						<div className="tabmenu-item-name">{trip.title}</div>
-						<div className="tabmenu-item-options">
-							<SlOptionsVertical size={16} />
-						</div>
-					</div>
+						trip={trip}
+						index={index}
+						activeTripIndex={activeTripIndex}
+						activeOptionModal={activeOptionModal}
+						setOptionModal={setOptionModal}
+						setActiveTab={setActiveTab}
+						deleteTrip={deleteTrip}
+					/>
 				))}
 				<div className="tabmenu-add" onClick={addTrip}>
 					<BsPlusLg size={24} />

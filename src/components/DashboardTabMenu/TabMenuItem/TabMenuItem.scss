@@ -1,0 +1,35 @@
+.tabmenu-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+    position: relative;
+
+    &-name {
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+    }
+
+    &-options {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 1.25rem;
+      cursor: pointer;
+    }
+
+    &-modal {
+      border: 1px solid gray;
+      border-radius: 0.5rem;
+      background-color: white;
+      padding: 0.25rem 1rem;
+      position: absolute;
+      top: 2.5rem;
+      right: -3.5rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  }
