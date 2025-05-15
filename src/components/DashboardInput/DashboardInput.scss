@@ -9,18 +9,38 @@
 		flex-direction: column;
 		gap: 1rem;
 
-		.input-date {
+		&-top {
 			display: flex;
-			flex-direction: column;
-			gap: 0.25rem;
+			align-items: center;
+			justify-content: space-between;
 
-			input {
-				border: 1px solid grey;
-				border-radius: 0.5rem;
-				padding: 0.25rem 0.5rem;
-				width: 12rem;
-				letter-spacing: 0.1rem;
-				background-color: white;
+			.input-title {
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+
+				input {
+					border: 1px solid grey;
+					border-radius: 0.5rem;
+					padding: 0.25rem 0.5rem;
+					width: 12rem;
+					background-color: white;
+				}
+			}
+
+			.input-date {
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+
+				input {
+					border: 1px solid grey;
+					border-radius: 0.5rem;
+					padding: 0.25rem 0.5rem;
+					width: 12rem;
+					letter-spacing: 0.1rem;
+					background-color: white;
+				}
 			}
 		}
 
@@ -46,17 +66,17 @@
 		justify-content: space-between;
 
 		.input-uploads {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
 
 			&-info {
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
-        border: 1px solid grey;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
+				border: 1px solid grey;
+				padding: 0.5rem;
+				border-radius: 0.5rem;
 				background-color: white;
 
 				input {
@@ -73,13 +93,18 @@
 				height: 11rem;
 				display: flex;
 				flex-direction: column;
-        overflow-y: auto;
+				overflow-y: auto;
 
 				.upload-item {
 					display: flex;
 					align-items: center;
 					gap: 1rem;
 					padding: 0.5rem;
+
+					&-title {
+						cursor: pointer;
+						text-decoration: underline;
+					}
 
 					button {
 						cursor: pointer;
@@ -106,6 +131,15 @@
 				border-radius: 2rem;
 				background-color: green;
 				color: white;
+				cursor: pointer;
+			}
+
+			&.disabled {
+				opacity: 0.5;
+
+				button {
+					cursor:default;
+				}
 			}
 		}
 	}
