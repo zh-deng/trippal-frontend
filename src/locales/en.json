@@ -35,11 +35,14 @@
         "fallback": "No pictures available"
       },
       "inputs": {
+        "title": "Route name",
+        "date": "Date",
         "notes": "Notes",
         "notesPlaceholder": "Write your notes here.",
         "uploads": "Supported data formats: PDF, JPG, JPEG, PNG, TXT",
         "uploadsInfo": "Add bookings, receipts, and tickets.",
-        "submit": "Save data"
+        "submit": "Save data",
+        "clickToDownload": "Click to download"
       }
     },
     "fallback": "Please log in or register to proceed"

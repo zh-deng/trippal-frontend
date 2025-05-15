@@ -35,11 +35,14 @@
         "fallback": "Keine Bilder vorhanden"
       },
       "inputs": {
+        "title": "Routenname",
+        "date": "Datum",
         "notes": "Notizen",
         "notesPlaceholder": "Füge hier deine Notizen ein.",
         "uploads": "Unterstützte Datenformate: PDF, JPG, JPEG, PNG, TXT",
         "uploadsInfo": "Füge Buchungen, Belege und Tickets hinzu.",
-        "submit": "Daten speichern"
+        "submit": "Daten speichern",
+        "clickToDownload": "Klicken um herunterzuladen"
       }
     },
     "fallback": "Zum Fortfahren bitte anmelden oder registrieren"
