@@ -33,9 +33,7 @@ export const Dashboard = () => {
 	const [attractions, setAttractions] = useState<Attraction[]>([]);
 	const [images, setImages] = useState<ImageData[]>([]);
 
-	const activeUser = useSelector(
-		(state: RootState) => state.global.activeUser
-	);
+	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
 	);
@@ -45,12 +43,6 @@ export const Dashboard = () => {
 	const currentAttraction = useSelector(
 		(state: RootState) => state.dashboard.currentAttraction
 	);
-	const activeTripIndex = useSelector(
-		(state: RootState) => state.global.activeTripIndex
-	);
-
-	// relocate to roadmap?
-	const activeTripTitle: string = activeUser?.trips[activeTripIndex!].title ?? "defaultTitle"
 
 	const dispatch = useDispatch();
 
@@ -115,14 +107,14 @@ export const Dashboard = () => {
 		</div>
 	);
 
-	if(activeUser === null) {
+	if (activeUser === null) {
 		return (
 			<div className="dashboard-fallback">
 				<div className="dashboard-fallback-text">
 					<Text isBold={true} content={"dashboard.fallback"} />
 				</div>
 			</div>
-		)
+		);
 	}
 
 	return (
@@ -132,7 +124,7 @@ export const Dashboard = () => {
 			</div>
 			<div className="dashboard-main">
 				<div className="dashboard-main-left">
-					<DashboardRoadmap title={activeTripTitle} roadmapItems={[]} />
+					<DashboardRoadmap />
 				</div>
 				<div className="dashboard-main-center">
 					<div className="center-container">
@@ -154,7 +146,6 @@ export const Dashboard = () => {
 								<Dropdown
 									options={cities}
 									value={currentCity}
-
 									defaultValue={t("dashboard.center.dropdown.city")}
 									onChange={handleChosenCity}
 								/>

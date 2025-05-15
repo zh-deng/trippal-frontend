@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./DashboardRoadmap.scss";
 import {
 	closestCenter,
@@ -20,25 +20,29 @@ import { FaLock, FaLockOpen, FaCheck } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { RoadmapItems } from "../../types/Roadmap";
 import { MdModeEditOutline } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
 
-type DashboardRoadmapProps = {
-	title: string;
-	roadmapItems: RoadmapItems;
-};
-
-export const DashboardRoadmap: React.FC<DashboardRoadmapProps> = ({
-	title,
-	roadmapItems,
-}) => {
+export const DashboardRoadmap = () => {
 	const { t } = useTranslation();
-
-	const [items, setItems] = useState<RoadmapItems>(roadmapItems);
-
+	const [roadmapItems, setRoadmapItems] = useState<RoadmapItems>([]);
 	const [isPublic, setIsPublic] = useState<boolean>(false);
-
 	const [editingTitle, setEditingTitle] = useState<boolean>(false);
+	const [titleInput, setTitleInput] = useState<string>("defaultTitle");
 
-	const [titleInput, setTitleInput] = useState<string>(title);
+	const activeUser = useSelector((state: RootState) => state.global.activeUser);
+	const activeTripIndex = useSelector(
+		(state: RootState) => state.global.activeTripIndex
+	);
+
+	useEffect(() => {
+		if (activeUser && activeTripIndex) {
+			setTitleInput(activeUser.trips[activeTripIndex].title);
+			// TODO
+			if (activeUser.trips[activeTripIndex].roadMapItems)
+				setRoadmapItems(activeUser.trips[activeTripIndex].roadMapItems);
+		}
+	}, [activeTripIndex]);
 
 	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTitleInput(event.target.value);
@@ -52,7 +56,7 @@ export const DashboardRoadmap: React.FC<DashboardRoadmapProps> = ({
 		const { active, over } = event;
 
 		if (over && active.id !== over.id) {
-			setItems((items) => {
+			setRoadmapItems((items) => {
 				const oldIndex = items.findIndex((item) => item.id === active.id);
 				const newIndex = items.findIndex((item) => item.id === over.id);
 				return arrayMove(items, oldIndex, newIndex);
@@ -130,10 +134,10 @@ export const DashboardRoadmap: React.FC<DashboardRoadmapProps> = ({
 							onDragEnd={handleDragEnd}
 						>
 							<SortableContext
-								items={items.map((item) => item.id)}
+								items={roadmapItems.map((item) => item.id)}
 								strategy={verticalListSortingStrategy}
 							>
-								{items.map((item) => (
+								{roadmapItems.map((item) => (
 									<RoadMapItem
 										key={item.id}
 										id={item.id}

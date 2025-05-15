@@ -3,7 +3,7 @@ import { RegisterUserInput, UserInfo } from "../types/UserInfo";
 
 
 export async function registerUser(user: RegisterUserInput): Promise<UserInfo> {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/auth/createUser`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/createUser`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export async function registerUser(user: RegisterUserInput): Promise<UserInfo> {
 }
 
 export async function loginUser(loginData: LoginData): Promise<UserInfo> {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/auth/login`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/login`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -43,7 +43,7 @@ export async function loginUser(loginData: LoginData): Promise<UserInfo> {
 
 export async function logoutUser() {
     try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/auth/logout`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/logout`, {
             method: 'POST',
             credentials: 'include',
         });

@@ -1,7 +1,7 @@
 import { Trip } from "../types/Trip";
 
 export async function createTrip(trip: Trip): Promise<Trip> {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/trip`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export async function createTrip(trip: Trip): Promise<Trip> {
 }
 
 export async function removeTrip(tripId: number) {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/trip/${tripId}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}`, {
     method: "DELETE",
     credentials: 'include'
   })
