@@ -34,6 +34,9 @@ export const Dashboard = () => {
 	const [images, setImages] = useState<ImageData[]>([]);
 
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
+	const activeTripIndex = useSelector(
+		(state: RootState) => state.global.activeTripIndex
+	);
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
 	);
@@ -107,6 +110,12 @@ export const Dashboard = () => {
 		</div>
 	);
 
+		const EmptyTripsFallback = () => (
+		<div className="empty-trips-fallback">
+			<Text content={"dashboard.emptyTripFallback"} />
+		</div>
+	);
+
 	if (activeUser === null) {
 		return (
 			<div className="dashboard-fallback">
@@ -123,57 +132,63 @@ export const Dashboard = () => {
 				<DashboardTabMenu />
 			</div>
 			<div className="dashboard-main">
-				<div className="dashboard-main-left">
-					<DashboardRoadmap />
-				</div>
-				<div className="dashboard-main-center">
-					<div className="center-container">
-						<div className="center-container-breadcrumb">
-							{routeItemTitle ? (
-								<span>{routeItemTitle}</span>
-							) : (
-								<Text content="dashboard.center.routeTitleFallback" />
-							)}
+				{activeTripIndex !== null && activeTripIndex >= 0 ? (
+					<>
+						<div className="dashboard-main-left">
+							<DashboardRoadmap />
 						</div>
-						<div className="center-dropdown-container">
-							<Dropdown
-								options={countries}
-								value={currentCountry}
-								defaultValue={t("dashboard.center.dropdown.country")}
-								onChange={handleChosenCountry}
-							/>
-							{currentCountry && (
-								<Dropdown
-									options={cities}
-									value={currentCity}
-									defaultValue={t("dashboard.center.dropdown.city")}
-									onChange={handleChosenCity}
-								/>
-							)}
-							{currentCity && (
-								<Dropdown
-									options={attractions}
-									value={currentAttraction}
-									defaultValue={t("dashboard.center.dropdown.attraction")}
-									onChange={handleChosenAttraction}
-								/>
-							)}
+						<div className="dashboard-main-center">
+							<div className="center-container">
+								<div className="center-container-breadcrumb">
+									{routeItemTitle ? (
+										<span>{routeItemTitle}</span>
+									) : (
+										<Text content="dashboard.center.routeTitleFallback" />
+									)}
+								</div>
+								<div className="center-dropdown-container">
+									<Dropdown
+										options={countries}
+										value={currentCountry}
+										defaultValue={t("dashboard.center.dropdown.country")}
+										onChange={handleChosenCountry}
+									/>
+									{currentCountry && (
+										<Dropdown
+											options={cities}
+											value={currentCity}
+											defaultValue={t("dashboard.center.dropdown.city")}
+											onChange={handleChosenCity}
+										/>
+									)}
+									{currentCity && (
+										<Dropdown
+											options={attractions}
+											value={currentAttraction}
+											defaultValue={t("dashboard.center.dropdown.attraction")}
+											onChange={handleChosenAttraction}
+										/>
+									)}
+								</div>
+								<div className="center-image-gallery">
+									{currentAttraction ? (
+										<ImageGallery images={images} />
+									) : (
+										<ImageGalleryFallback />
+									)}
+								</div>
+								<div className="center-controls">
+									<DashboardInput />
+								</div>
+							</div>
 						</div>
-						<div className="center-image-gallery">
-							{currentAttraction ? (
-								<ImageGallery images={images} />
-							) : (
-								<ImageGalleryFallback />
-							)}
+						<div className="dashboard-main-right">
+							<DashboardMap />
 						</div>
-						<div className="center-controls">
-							<DashboardInput />
-						</div>
-					</div>
-				</div>
-				<div className="dashboard-main-right">
-					<DashboardMap />
-				</div>
+					</>
+				) : (
+					<EmptyTripsFallback />
+				)}
 			</div>
 		</div>
 	);
