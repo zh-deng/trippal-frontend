@@ -36,9 +36,12 @@
 			&-title {
 				height: 1.8rem;
 				width: 10rem;
-				padding-left: 0.5rem;
+				padding: 0 0.5rem;
 				display: flex;
 				align-items: center;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
 			}
 
 			&-text {
@@ -52,7 +55,7 @@
 				gap: 1rem;
 			}
 
-			&-icons > *{
+			&-icons > * {
 				cursor: pointer;
 			}
 		}

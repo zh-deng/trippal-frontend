@@ -20,8 +20,10 @@ import { FaLock, FaLockOpen, FaCheck } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { RoadmapItems } from "../../types/Roadmap";
 import { MdModeEditOutline } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
+import { updateOldTrip } from "../../state/global/globalSlice";
+import { updateTrip } from "../../services/tripService";
 
 export const DashboardRoadmap = () => {
 	const { t } = useTranslation();
@@ -35,14 +37,21 @@ export const DashboardRoadmap = () => {
 		(state: RootState) => state.global.activeTripIndex
 	);
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
-		if (activeUser && activeTripIndex) {
+		if (
+			activeUser !== null &&
+			activeTripIndex !== null &&
+			activeTripIndex >= 0
+		) {
 			setTitleInput(activeUser.trips[activeTripIndex].title);
-			// TODO
+
 			if (activeUser.trips[activeTripIndex].roadMapItems)
 				setRoadmapItems(activeUser.trips[activeTripIndex].roadMapItems);
 		}
-	}, [activeTripIndex]);
+		setEditingTitle(false);
+	}, [activeTripIndex, activeUser]);
 
 	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTitleInput(event.target.value);
@@ -70,6 +79,24 @@ export const DashboardRoadmap = () => {
 
 	const toggleEditingTitle = () => {
 		setEditingTitle(!editingTitle);
+		if (
+			editingTitle &&
+			activeUser !== null &&
+			activeTripIndex !== null &&
+			activeTripIndex >= 0
+		) {
+			if (titleInput !== activeUser?.trips[activeTripIndex].title) {
+				updateTrip({
+					...activeUser.trips[activeTripIndex],
+					title: titleInput,
+				})
+					.then((updatedTrip) => {
+						dispatch(updateOldTrip(updatedTrip));
+						setTitleInput(updatedTrip.title);
+					})
+					.catch((error) => console.error("Failed to update trip:", error));
+			}
+		}
 	};
 
 	const RoadmapEmptyFallback = () => (
@@ -93,7 +120,7 @@ export const DashboardRoadmap = () => {
 								/>
 							</div>
 						) : (
-							<div className="roadmap-header-title">{titleInput}</div>
+							<div className="roadmap-header-title" title={titleInput}>{titleInput}</div>
 						)}
 					</div>
 					<div className="roadmap-header-icons">
@@ -134,14 +161,14 @@ export const DashboardRoadmap = () => {
 							onDragEnd={handleDragEnd}
 						>
 							<SortableContext
-								items={roadmapItems.map((item) => item.id)}
+								items={roadmapItems.map((item) => item.id!)}
 								strategy={verticalListSortingStrategy}
 							>
 								{roadmapItems.map((item) => (
 									<RoadMapItem
 										key={item.id}
-										id={item.id}
-										content={item.content}
+										id={item.id!}
+										content={item.title}
 									/>
 								))}
 							</SortableContext>
