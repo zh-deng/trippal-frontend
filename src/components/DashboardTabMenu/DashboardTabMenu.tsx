@@ -58,6 +58,7 @@ export const DashboardTabMenu = () => {
 		removeTrip(tripId)
 			.then(() => {
 				dispatch(removeOldTrip(tripId));
+				setOptionModal(null);
 			})
 			.catch((error) => console.error("Failed to delete trip:", error));
 	};

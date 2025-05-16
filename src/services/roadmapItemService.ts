@@ -1,7 +1,7 @@
 import { RoadmapItem } from "../types/Roadmap";
 
 export async function createRoadmapItem(roadmapItem: RoadmapItem): Promise<RoadmapItem> {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/roadmapItem`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
