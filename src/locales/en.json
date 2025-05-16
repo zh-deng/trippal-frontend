@@ -13,6 +13,7 @@
       "addTrip": "New trip",
       "newTripName": "Your trip"
     },
+    "emptyTripFallback": "Create your first trip!",
     "left": {
       "headerText": "Itenary:",
       "lockIcons": {

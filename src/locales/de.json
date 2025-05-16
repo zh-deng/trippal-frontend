@@ -13,6 +13,7 @@
       "addTrip": "Neue Reise",
       "newTripName": "Deine Reise"
     },
+    "emptyTripFallback": "Erstelle deine erste Reise!",
     "left": {
       "headerText": "Reiseroute:",
       "lockIcons": {
