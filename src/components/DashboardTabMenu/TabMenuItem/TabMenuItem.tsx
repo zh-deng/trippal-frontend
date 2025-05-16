@@ -50,7 +50,7 @@ export const TabMenuItem: React.FC<TabMenuItemProps> = ({
 			className={`tabmenu-item ${index === activeTripIndex && "active-tab"}`}
 			ref={modalRef}
 		>
-			<div className="tabmenu-item-name" onClick={() => setActiveTab(index)}>
+			<div className="tabmenu-item-name" title={trip.title} onClick={() => setActiveTab(index)}>
 				{trip.title}
 			</div>
 			<div className="tabmenu-item-options" onClick={toggleModal}>
