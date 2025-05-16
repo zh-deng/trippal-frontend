@@ -4,9 +4,10 @@ import "./DashboardInput.scss";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
 import { createRoadmapItem } from "../../services/roadmapItemService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { RoadmapItem } from "../../types/Roadmap";
+import { addNewRoadmapItem } from "../../state/global/globalSlice";
 
 export type UploadedFile = {
 	name: string;
@@ -23,6 +24,11 @@ export const DashboardInput = () => {
 		files: [] as UploadedFile[],
 	});
 
+	const activeUser = useSelector((state: RootState) => state.global.activeUser);
+	const activeTripIndex = useSelector(
+		(state: RootState) => state.global.activeTripIndex
+	);
+
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
 	);
@@ -32,6 +38,8 @@ export const DashboardInput = () => {
 	const currentAttraction = useSelector(
 		(state: RootState) => state.dashboard.currentAttraction
 	);
+
+	const dispatch = useDispatch();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -87,17 +95,28 @@ export const DashboardInput = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		createRoadmapItem({
-			title: formData.title,
-			date: new Date(formData.date),
-			notes: formData.notes,
-			files: formData.files,
-			country: currentCountry,
-			city: currentCity,
-			attraction: currentAttraction,
-		} as RoadmapItem).then(
-			// TODO
-		).catch((error) => console.error("Failed to create roadmap item:", error))
+		if (activeUser !== null && activeTripIndex !== null) {
+			const currentTripId = activeUser.trips[activeTripIndex].id;
+
+			const newRoadmapItem = {
+				title: formData.title,
+				date: new Date(formData.date),
+				notes: formData.notes,
+				files: formData.files,
+				country: currentCountry,
+				city: currentCity,
+				attraction: currentAttraction,
+				tripId: currentTripId,
+			} as RoadmapItem
+
+			createRoadmapItem(newRoadmapItem)
+				.then((newRoadmapItem) => {
+					dispatch(addNewRoadmapItem(newRoadmapItem));
+				})
+				.catch((error) =>
+					console.error("Failed to create roadmap item:", error)
+				);
+		}
 	};
 
 	return (
