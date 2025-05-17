@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Trip } from "../../../types/Trip";
 import "./TabMenuItem.scss";
 import { SlOptionsVertical } from "react-icons/sl";
+import { Text } from "../../Text/Text";
 
 type TabMenuItemProps = {
 	trip: Trip;
@@ -64,7 +65,7 @@ export const TabMenuItem: React.FC<TabMenuItemProps> = ({
 					deleteTrip(trip.id!);
 				}}
 			>
-				delete
+				<Text content={"dashboard.tabBar.deleteTrip"} />
 			</div>
 		</div>
 	);
