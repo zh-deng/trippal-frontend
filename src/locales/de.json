@@ -11,7 +11,8 @@
   "dashboard": {
     "tabBar": {
       "addTrip": "Neue Reise",
-      "newTripName": "Deine Reise"
+      "newTripName": "Deine Reise",
+      "deleteTrip": "Löschen"
     },
     "emptyTripFallback": "Erstelle deine erste Reise!",
     "left": {
