@@ -8,6 +8,12 @@
     "logout": "Logout",
     "registration": "Registration"
   },
+  "home": {
+    "hero": {
+      "header": "Start now and plan your ultimate trip!",
+      "description": "Create routes worldwide and manage everything on this website."
+    }
+  },
   "dashboard": {
     "tabBar": {
       "addTrip": "New trip",
