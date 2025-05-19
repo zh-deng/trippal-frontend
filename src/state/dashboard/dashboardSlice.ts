@@ -17,7 +17,7 @@ const dashboardSlice = createSlice({
 	name: "dashboard",
 	initialState,
 	reducers: {
-		updateCurrentCountry: (state, action: PayloadAction<Country>) => {
+		updateCurrentCountry: (state, action: PayloadAction<Country | null>) => {
 			state.currentCountry = action.payload;
 		},
 		updateCurrentCity: (state, action: PayloadAction<City | null>) => {

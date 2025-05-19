@@ -6,11 +6,13 @@ import { RoadmapItem } from "../../types/Roadmap";
 interface GlobalState {
 	activeUser: UserInfo | null;
 	activeTripIndex: number | null;
+	activeRoadmapItem: number | null;
 }
 
 const initialState: GlobalState = {
 	activeUser: null,
 	activeTripIndex: null,
+	activeRoadmapItem: null
 };
 
 const globalSlice = createSlice({
@@ -23,6 +25,9 @@ const globalSlice = createSlice({
 		},
 		setActiveTripIndex: (state, action: PayloadAction<number>) => {
 			state.activeTripIndex = action.payload;
+		},
+		setActiveRoadmapItem: (state, action: PayloadAction<number | null>) => {
+			state.activeRoadmapItem = action.payload;
 		},
 		logoutActiveUser: (state) => {
 			state.activeUser = null;
@@ -89,5 +94,6 @@ export const {
 	removeOldTrip,
 	updateOldTrip,
 	addNewRoadmapItem,
+	setActiveRoadmapItem
 } = globalSlice.actions;
 export default globalSlice.reducer;
