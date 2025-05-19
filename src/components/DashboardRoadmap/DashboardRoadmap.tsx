@@ -22,7 +22,7 @@ import { RoadmapItems } from "../../types/Roadmap";
 import { MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { updateOldTrip } from "../../state/global/globalSlice";
+import { setActiveRoadmapItem, updateOldTrip } from "../../state/global/globalSlice";
 import { updateTrip } from "../../services/tripService";
 
 export const DashboardRoadmap = () => {
@@ -35,6 +35,9 @@ export const DashboardRoadmap = () => {
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 	const activeTripIndex = useSelector(
 		(state: RootState) => state.global.activeTripIndex
+	);
+	const activeRoadmapItem = useSelector(
+		(state: RootState) => state.global.activeRoadmapItem
 	);
 
 	const dispatch = useDispatch();
@@ -99,6 +102,10 @@ export const DashboardRoadmap = () => {
 		}
 	};
 
+	const createNewItem = () => {
+		dispatch(setActiveRoadmapItem(null))
+	}
+
 	const RoadmapEmptyFallback = () => (
 		<div className="roadmap-fallback">
 			<Text content={"dashboard.left.emptyFallback"} />
@@ -120,7 +127,9 @@ export const DashboardRoadmap = () => {
 								/>
 							</div>
 						) : (
-							<div className="roadmap-header-title" title={titleInput}>{titleInput}</div>
+							<div className="roadmap-header-title" title={titleInput}>
+								{titleInput}
+							</div>
 						)}
 					</div>
 					<div className="roadmap-header-icons">
@@ -169,6 +178,7 @@ export const DashboardRoadmap = () => {
 										key={item.id}
 										id={item.id!}
 										content={item.title}
+										active={item.id === activeRoadmapItem}
 									/>
 								))}
 							</SortableContext>
@@ -177,6 +187,9 @@ export const DashboardRoadmap = () => {
 				) : (
 					<RoadmapEmptyFallback />
 				)}
+				<div className="roadmap-cta" onClick={createNewItem}>
+					<Text content="dashboard.left.cta" isBold={true} />
+				</div>
 			</div>
 		</div>
 	);

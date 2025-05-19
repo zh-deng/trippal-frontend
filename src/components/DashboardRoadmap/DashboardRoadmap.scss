@@ -68,5 +68,15 @@
 			overflow-y: auto;
 			overflow-x: hidden;
 		}
+
+		.roadmap-cta {
+			margin-top: 0.5rem;
+			background-color: yellow;
+			border: 1px solid gray;
+			border-radius: 0.5rem;
+			padding: 1rem 2rem;
+			text-align: center;
+			cursor: pointer;
+		}
 	}
 }
