@@ -18,3 +18,18 @@ export async function createRoadmapItem(roadmapItem: RoadmapItem): Promise<Roadm
   const createdRoadmapItem: RoadmapItem = await response.json();
   return createdRoadmapItem;
 }
+
+export async function fetchRoadmapItemById(id: number): Promise<RoadmapItem> {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/roadmapItem/${id}`, {
+    method: "GET",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Fetching a roadmap item failed: ${errorText}`);
+  }
+
+  const fetchedRoadmapItem: RoadmapItem = await response.json();
+  return fetchedRoadmapItem;
+}
