@@ -1,13 +1,24 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Text } from "../Text/Text";
 import "./DashboardInput.scss";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";
-import { createRoadmapItem } from "../../services/roadmapItemService";
+import {
+	createRoadmapItem,
+	fetchRoadmapItemById,
+} from "../../services/roadmapItemService";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { RoadmapItem } from "../../types/Roadmap";
-import { addNewRoadmapItem } from "../../state/global/globalSlice";
+import {
+	addNewRoadmapItem,
+	setActiveRoadmapItem,
+} from "../../state/global/globalSlice";
+import {
+	updateCurrentAttraction,
+	updateCurrentCity,
+	updateCurrentCountry,
+} from "../../state/dashboard/dashboardSlice";
 
 export type UploadedFile = {
 	name: string;
@@ -17,16 +28,20 @@ export type UploadedFile = {
 export const DashboardInput = () => {
 	const { t } = useTranslation();
 	const fileInputRef = useRef<HTMLInputElement>(null);
-	const [formData, setFormData] = useState({
+	const formInitialState = {
 		title: "",
 		date: "",
 		notes: "",
 		files: [] as UploadedFile[],
-	});
+	};
+	const [formData, setFormData] = useState(formInitialState);
 
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 	const activeTripIndex = useSelector(
 		(state: RootState) => state.global.activeTripIndex
+	);
+	const activeRoadmapItem = useSelector(
+		(state: RootState) => state.global.activeRoadmapItem
 	);
 
 	const currentCountry = useSelector(
@@ -40,6 +55,31 @@ export const DashboardInput = () => {
 	);
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (activeRoadmapItem === null) {
+			setFormData(formInitialState);
+		} else {
+			loadInputData(activeRoadmapItem);
+		}
+	}, [activeRoadmapItem]);
+
+	const loadInputData = (roadmapItemId: number) => {
+		fetchRoadmapItemById(roadmapItemId)
+			.then((roadmapitem) => {
+				dispatch(updateCurrentCountry(roadmapitem.country));
+				dispatch(updateCurrentCity(roadmapitem.city));
+				dispatch(updateCurrentAttraction(roadmapitem.attraction));
+
+				setFormData({
+					title: roadmapitem.title,
+					date: roadmapitem.date.toString(),
+					notes: roadmapitem.notes,
+					files: roadmapitem.files,
+				});
+			})
+			.catch((error) => console.error("Failed to fetch roadmap item:", error));
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -96,7 +136,7 @@ export const DashboardInput = () => {
 		e.preventDefault();
 
 		if (activeUser !== null && activeTripIndex !== null) {
-			const currentTripId = activeUser.trips[activeTripIndex].id;
+			const currentTrip = activeUser.trips[activeTripIndex];
 
 			const newRoadmapItem = {
 				title: formData.title,
@@ -106,12 +146,15 @@ export const DashboardInput = () => {
 				country: currentCountry,
 				city: currentCity,
 				attraction: currentAttraction,
-				tripId: currentTripId,
-			} as RoadmapItem
+				tripId: currentTrip.id,
+			} as RoadmapItem;
 
+			// TODO check if roadmapitem exists already for update, local caching check
 			createRoadmapItem(newRoadmapItem)
 				.then((newRoadmapItem) => {
+					console.log(newRoadmapItem);
 					dispatch(addNewRoadmapItem(newRoadmapItem));
+					dispatch(setActiveRoadmapItem(newRoadmapItem.id!));
 				})
 				.catch((error) =>
 					console.error("Failed to create roadmap item:", error)
