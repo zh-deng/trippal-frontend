@@ -30,7 +30,8 @@
       "downloadIcon": "Route downloaden",
       "editTitleIcon": "Titel ändern",
       "confirmTitleIcon": "Titel bestätigen",
-      "emptyFallback": "Füge deinen ersten Halt hinzu"
+      "emptyFallback": "Füge deinen ersten Halt hinzu",
+      "cta": "Nächsten Halt hinzufügen"
     },
     "center": {
       "routeTitleFallback": "Wähle ein Land aus.",

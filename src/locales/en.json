@@ -30,7 +30,8 @@
       "downloadIcon": "Download route",
       "editTitleIcon": "Change title",
       "confirmTitleIcon": "Confirm title",
-      "emptyFallback": "Add your first stop"
+      "emptyFallback": "Add your first stop",
+      "cta": "Add next stop"
     },
     "center": {
       "routeTitleFallback": "Choose a country.",
