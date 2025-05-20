@@ -4,7 +4,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { HiBars2 } from "react-icons/hi2";
 import { FaRegEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { setActiveRoadmapItem } from "../../../state/global/globalSlice";
+import { setActiveRoadmapItemId } from "../../../state/global/globalSlice";
 
 type RoadMapItemProps = {
 	id: number;
@@ -24,7 +24,7 @@ export const RoadMapItem = ({ id, content, active }: RoadMapItemProps) => {
 	};
 
 	const handleEdit = () => {
-		dispatch(setActiveRoadmapItem(id))
+		dispatch(setActiveRoadmapItemId(id))
 	};
 
 	return (

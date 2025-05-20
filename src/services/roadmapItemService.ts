@@ -19,6 +19,25 @@ export async function createRoadmapItem(roadmapItem: RoadmapItem): Promise<Roadm
   return createdRoadmapItem;
 }
 
+export async function updateRoadmapItem(id: number, roadmapItem: RoadmapItem): Promise<RoadmapItem> {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/roadmapItem/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({id: id, ...roadmapItem}),
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Creating a roadmap item failed: ${errorText}`);
+  }
+
+  const updatedRoadmapItem: RoadmapItem = await response.json();
+  return updatedRoadmapItem;
+}
+
 export async function fetchRoadmapItemById(id: number): Promise<RoadmapItem> {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/roadmapItem/${id}`, {
     method: "GET",

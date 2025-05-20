@@ -6,13 +6,15 @@ import { useTranslation } from "react-i18next";
 import {
 	createRoadmapItem,
 	fetchRoadmapItemById,
+	updateRoadmapItem,
 } from "../../services/roadmapItemService";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { RoadmapItem } from "../../types/Roadmap";
 import {
 	addNewRoadmapItem,
-	setActiveRoadmapItem,
+	setActiveRoadmapItemId,
+	updateOldRoadmapItem,
 } from "../../state/global/globalSlice";
 import {
 	updateCurrentAttraction,
@@ -40,8 +42,8 @@ export const DashboardInput = () => {
 	const activeTripIndex = useSelector(
 		(state: RootState) => state.global.activeTripIndex
 	);
-	const activeRoadmapItem = useSelector(
-		(state: RootState) => state.global.activeRoadmapItem
+	const activeRoadmapItemId = useSelector(
+		(state: RootState) => state.global.activeRoadmapItemId
 	);
 
 	const currentCountry = useSelector(
@@ -57,12 +59,12 @@ export const DashboardInput = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (activeRoadmapItem === null) {
+		if (activeRoadmapItemId === null) {
 			setFormData(formInitialState);
 		} else {
-			loadInputData(activeRoadmapItem);
+			loadInputData(activeRoadmapItemId);
 		}
-	}, [activeRoadmapItem]);
+	}, [activeRoadmapItemId]);
 
 	const loadInputData = (roadmapItemId: number) => {
 		fetchRoadmapItemById(roadmapItemId)
@@ -73,9 +75,9 @@ export const DashboardInput = () => {
 
 				setFormData({
 					title: roadmapitem.title,
-					date: roadmapitem.date.toString(),
+					date: roadmapitem.date ? roadmapitem.date.toString() : "",
 					notes: roadmapitem.notes,
-					files: roadmapitem.files,
+					files: roadmapitem.files ? roadmapitem.files : [],
 				});
 			})
 			.catch((error) => console.error("Failed to fetch roadmap item:", error));
@@ -149,16 +151,23 @@ export const DashboardInput = () => {
 				tripId: currentTrip.id,
 			} as RoadmapItem;
 
-			// TODO check if roadmapitem exists already for update, local caching check
-			createRoadmapItem(newRoadmapItem)
-				.then((newRoadmapItem) => {
-					console.log(newRoadmapItem);
-					dispatch(addNewRoadmapItem(newRoadmapItem));
-					dispatch(setActiveRoadmapItem(newRoadmapItem.id!));
-				})
-				.catch((error) =>
-					console.error("Failed to create roadmap item:", error)
-				);
+			if (activeRoadmapItemId === null) {
+				createRoadmapItem(newRoadmapItem)
+					.then((newRoadmapItem) => {
+						console.log(newRoadmapItem);
+						dispatch(addNewRoadmapItem(newRoadmapItem));
+						dispatch(setActiveRoadmapItemId(newRoadmapItem.id!));
+					})
+					.catch((error) =>
+						console.error("Failed to create roadmap item:", error)
+					);
+			} else {
+				updateRoadmapItem(activeRoadmapItemId, newRoadmapItem).then((updatedRoadmapItem) => {
+					dispatch(updateOldRoadmapItem(updatedRoadmapItem))
+				}).catch((error) =>
+						console.error("Failed to update roadmap item:", error)
+					);
+			}
 		}
 	};
 

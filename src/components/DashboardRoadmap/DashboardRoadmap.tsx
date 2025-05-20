@@ -22,7 +22,7 @@ import { RoadmapItems } from "../../types/Roadmap";
 import { MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { setActiveRoadmapItem, updateOldTrip } from "../../state/global/globalSlice";
+import { setActiveRoadmapItemId, updateOldTrip } from "../../state/global/globalSlice";
 import { updateTrip } from "../../services/tripService";
 
 export const DashboardRoadmap = () => {
@@ -37,8 +37,10 @@ export const DashboardRoadmap = () => {
 		(state: RootState) => state.global.activeTripIndex
 	);
 	const activeRoadmapItem = useSelector(
-		(state: RootState) => state.global.activeRoadmapItem
+		(state: RootState) => state.global.activeRoadmapItemId
 	);
+
+	const emptyRoadmap = activeTripIndex !== null && activeUser?.trips[activeTripIndex].roadMapItems;
 
 	const dispatch = useDispatch();
 
@@ -103,7 +105,7 @@ export const DashboardRoadmap = () => {
 	};
 
 	const createNewItem = () => {
-		dispatch(setActiveRoadmapItem(null))
+		dispatch(setActiveRoadmapItemId(null))
 	}
 
 	const RoadmapEmptyFallback = () => (
@@ -187,9 +189,9 @@ export const DashboardRoadmap = () => {
 				) : (
 					<RoadmapEmptyFallback />
 				)}
-				<div className="roadmap-cta" onClick={createNewItem}>
+				{emptyRoadmap && <div className="roadmap-cta" onClick={createNewItem}>
 					<Text content="dashboard.left.cta" isBold={true} />
-				</div>
+				</div>}
 			</div>
 		</div>
 	);
