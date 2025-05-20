@@ -6,13 +6,13 @@ import { RoadmapItem } from "../../types/Roadmap";
 interface GlobalState {
 	activeUser: UserInfo | null;
 	activeTripIndex: number | null;
-	activeRoadmapItem: number | null;
+	activeRoadmapItemId: number | null;
 }
 
 const initialState: GlobalState = {
 	activeUser: null,
 	activeTripIndex: null,
-	activeRoadmapItem: null
+	activeRoadmapItemId: null,
 };
 
 const globalSlice = createSlice({
@@ -26,8 +26,8 @@ const globalSlice = createSlice({
 		setActiveTripIndex: (state, action: PayloadAction<number>) => {
 			state.activeTripIndex = action.payload;
 		},
-		setActiveRoadmapItem: (state, action: PayloadAction<number | null>) => {
-			state.activeRoadmapItem = action.payload;
+		setActiveRoadmapItemId: (state, action: PayloadAction<number | null>) => {
+			state.activeRoadmapItemId = action.payload;
 		},
 		logoutActiveUser: (state) => {
 			state.activeUser = null;
@@ -83,6 +83,28 @@ const globalSlice = createSlice({
 				);
 			}
 		},
+		updateOldRoadmapItem: (state, action: PayloadAction<RoadmapItem>) => {
+			const updatedRoadmapItem = action.payload;
+
+			if (
+				state.activeUser &&
+				state.activeTripIndex !== null &&
+				state.activeUser.trips[state.activeTripIndex]
+			) {
+				const trip = state.activeUser.trips[state.activeTripIndex];
+
+				const updatedTrip = {
+					...trip,
+					roadMapItems: [...(trip.roadMapItems ?? []).map((item) => {
+						return updatedRoadmapItem.id !== item.id ? item : updatedRoadmapItem
+					})],
+				};
+
+				state.activeUser.trips = state.activeUser.trips.map((t) =>
+					t.id === updatedTrip.id ? updatedTrip : t
+				);
+			}
+		},
 	},
 });
 
@@ -94,6 +116,7 @@ export const {
 	removeOldTrip,
 	updateOldTrip,
 	addNewRoadmapItem,
-	setActiveRoadmapItem
+	updateOldRoadmapItem,
+	setActiveRoadmapItemId,
 } = globalSlice.actions;
 export default globalSlice.reducer;
