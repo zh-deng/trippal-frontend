@@ -18,12 +18,16 @@ import { Text } from "../Text/Text";
 import { FiDownload } from "react-icons/fi";
 import { FaLock, FaLockOpen, FaCheck } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { RoadmapItems } from "../../types/Roadmap";
+import { RoadmapItem, RoadmapItems } from "../../types/Roadmap";
 import { MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { setActiveRoadmapItemId, updateOldTrip } from "../../state/global/globalSlice";
-import { updateTrip } from "../../services/tripService";
+import {
+	replaceRoadmapItems,
+	setActiveRoadmapItemId,
+	updateOldTrip,
+} from "../../state/global/globalSlice";
+import { fetchRoadmapList, updateTrip } from "../../services/tripService";
 
 export const DashboardRoadmap = () => {
 	const { t } = useTranslation();
@@ -40,7 +44,8 @@ export const DashboardRoadmap = () => {
 		(state: RootState) => state.global.activeRoadmapItemId
 	);
 
-	const emptyRoadmap = activeTripIndex !== null && activeUser?.trips[activeTripIndex].roadMapItems;
+	const emptyRoadmap =
+		activeTripIndex !== null && activeUser?.trips[activeTripIndex].roadMapItems;
 
 	const dispatch = useDispatch();
 
@@ -52,8 +57,22 @@ export const DashboardRoadmap = () => {
 		) {
 			setTitleInput(activeUser.trips[activeTripIndex].title);
 
-			if (activeUser.trips[activeTripIndex].roadMapItems)
-				setRoadmapItems(activeUser.trips[activeTripIndex].roadMapItems);
+			if (!activeUser.trips[activeTripIndex].roadMapItems) {
+				fetchRoadmapList(activeUser.trips[activeTripIndex].id!)
+					.then((roadmapList) => {
+						const roadmapItems = roadmapList.map((item) => {
+							return {
+								id: item.id,
+								title: item.title,
+							} as RoadmapItem;
+						});
+						dispatch(replaceRoadmapItems(roadmapItems));
+						setRoadmapItems(roadmapItems);
+					})
+					.catch((error) =>
+						console.error("Failed to fetch roadmap list:", error)
+					);
+			}
 		}
 		setEditingTitle(false);
 	}, [activeTripIndex, activeUser]);
@@ -105,8 +124,8 @@ export const DashboardRoadmap = () => {
 	};
 
 	const createNewItem = () => {
-		dispatch(setActiveRoadmapItemId(null))
-	}
+		dispatch(setActiveRoadmapItemId(null));
+	};
 
 	const RoadmapEmptyFallback = () => (
 		<div className="roadmap-fallback">
@@ -189,9 +208,11 @@ export const DashboardRoadmap = () => {
 				) : (
 					<RoadmapEmptyFallback />
 				)}
-				{emptyRoadmap && <div className="roadmap-cta" onClick={createNewItem}>
-					<Text content="dashboard.left.cta" isBold={true} />
-				</div>}
+				{emptyRoadmap && (
+					<div className="roadmap-cta" onClick={createNewItem}>
+						<Text content="dashboard.left.cta" isBold={true} />
+					</div>
+				)}
 			</div>
 		</div>
 	);
