@@ -14,3 +14,10 @@ export type RoadmapItem = {
 };
 
 export type RoadmapItems = RoadmapItem[];
+
+export type RoadmapItemPreview = {
+	id: number;
+	title: string
+}
+
+export type RoadmapList = RoadmapItemPreview[]

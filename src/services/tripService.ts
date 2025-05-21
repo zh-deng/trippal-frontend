@@ -1,4 +1,21 @@
+
+import { RoadmapList } from "../types/Roadmap";
 import { Trip } from "../types/Trip";
+
+export async function fetchRoadmapList(id: number): Promise<RoadmapList> {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${id}/roadmapList`, {
+    method: "GET",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Fetching a roadmap list failed: ${errorText}`);
+  }
+
+  const roadmapList: RoadmapList = await response.json();
+  return roadmapList;
+}
 
 export async function createTrip(trip: Trip): Promise<Trip> {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip`, {
