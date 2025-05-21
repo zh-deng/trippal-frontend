@@ -95,9 +95,33 @@ const globalSlice = createSlice({
 
 				const updatedTrip = {
 					...trip,
-					roadMapItems: [...(trip.roadMapItems ?? []).map((item) => {
-						return updatedRoadmapItem.id !== item.id ? item : updatedRoadmapItem
-					})],
+					roadMapItems: [
+						...(trip.roadMapItems ?? []).map((item) => {
+							return updatedRoadmapItem.id !== item.id
+								? item
+								: updatedRoadmapItem;
+						}),
+					],
+				};
+
+				state.activeUser.trips = state.activeUser.trips.map((t) =>
+					t.id === updatedTrip.id ? updatedTrip : t
+				);
+			}
+		},
+		replaceRoadmapItems: (state, action: PayloadAction<RoadmapItem[]>) => {
+			const roadmapItems = action.payload;
+
+			if (
+				state.activeUser &&
+				state.activeTripIndex !== null &&
+				state.activeUser.trips[state.activeTripIndex]
+			) {
+				const trip = state.activeUser.trips[state.activeTripIndex];
+
+				const updatedTrip = {
+					...trip,
+					roadMapItems: [...roadmapItems],
 				};
 
 				state.activeUser.trips = state.activeUser.trips.map((t) =>
@@ -118,5 +142,6 @@ export const {
 	addNewRoadmapItem,
 	updateOldRoadmapItem,
 	setActiveRoadmapItemId,
+	replaceRoadmapItems
 } = globalSlice.actions;
 export default globalSlice.reducer;
