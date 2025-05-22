@@ -58,26 +58,61 @@ export const DashboardInput = () => {
 
 	const dispatch = useDispatch();
 
+	const validStates =
+		activeUser !== null && activeTripIndex !== null && activeTripIndex >= 0;
+
 	useEffect(() => {
 		if (activeRoadmapItemId === null) {
 			setFormData(formInitialState);
-		} else {
+		} else if (!roadmapItemsCached(activeRoadmapItemId)) {
 			loadInputData(activeRoadmapItemId);
+		} else {
+			if (validStates) {
+				(activeUser.trips[activeTripIndex].roadMapItems ?? []).forEach(
+					(item) => {
+						if (item.id === activeRoadmapItemId) {
+							setFormData({
+							title: item.title,
+							date: item.date
+								? formatDateForInput(item.date.toString())
+								: "",
+							notes: item.notes,
+							files: item.files ? item.files : [],
+						});
+						}
+						
+					}
+				);
+			}
 		}
 	}, [activeRoadmapItemId]);
 
+	const formatDateForInput = (isoString: string): string => {
+		return new Date(isoString).toISOString().split("T")[0];
+	};
+
+	const roadmapItemsCached = (id: number) => {
+		if (validStates) {
+			return (activeUser.trips[activeTripIndex].roadMapItems ?? []).some(
+				(item) => item.id === id
+			);
+		}
+	};
+
 	const loadInputData = (roadmapItemId: number) => {
 		fetchRoadmapItemById(roadmapItemId)
-			.then((roadmapitem) => {
-				dispatch(updateCurrentCountry(roadmapitem.country));
-				dispatch(updateCurrentCity(roadmapitem.city));
-				dispatch(updateCurrentAttraction(roadmapitem.attraction));
+			.then((roadmapItem) => {
+				dispatch(updateCurrentCountry(roadmapItem.country));
+				dispatch(updateCurrentCity(roadmapItem.city));
+				dispatch(updateCurrentAttraction(roadmapItem.attraction));
 
 				setFormData({
-					title: roadmapitem.title,
-					date: roadmapitem.date ? roadmapitem.date.toString() : "",
-					notes: roadmapitem.notes,
-					files: roadmapitem.files ? roadmapitem.files : [],
+					title: roadmapItem.title,
+					date: roadmapItem.date
+						? formatDateForInput(roadmapItem.date.toString())
+						: "",
+					notes: roadmapItem.notes,
+					files: roadmapItem.files ? roadmapItem.files : [],
 				});
 			})
 			.catch((error) => console.error("Failed to fetch roadmap item:", error));
@@ -162,9 +197,11 @@ export const DashboardInput = () => {
 						console.error("Failed to create roadmap item:", error)
 					);
 			} else {
-				updateRoadmapItem(activeRoadmapItemId, newRoadmapItem).then((updatedRoadmapItem) => {
-					dispatch(updateOldRoadmapItem(updatedRoadmapItem))
-				}).catch((error) =>
+				updateRoadmapItem(activeRoadmapItemId, newRoadmapItem)
+					.then((updatedRoadmapItem) => {
+						dispatch(updateOldRoadmapItem(updatedRoadmapItem));
+					})
+					.catch((error) =>
 						console.error("Failed to update roadmap item:", error)
 					);
 			}

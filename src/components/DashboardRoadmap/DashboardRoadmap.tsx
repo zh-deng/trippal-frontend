@@ -40,12 +40,9 @@ export const DashboardRoadmap = () => {
 	const activeTripIndex = useSelector(
 		(state: RootState) => state.global.activeTripIndex
 	);
-	const activeRoadmapItem = useSelector(
+	const activeRoadmapItemId = useSelector(
 		(state: RootState) => state.global.activeRoadmapItemId
 	);
-
-	const emptyRoadmap =
-		activeTripIndex !== null && activeUser?.trips[activeTripIndex].roadMapItems;
 
 	const dispatch = useDispatch();
 
@@ -72,6 +69,13 @@ export const DashboardRoadmap = () => {
 					.catch((error) =>
 						console.error("Failed to fetch roadmap list:", error)
 					);
+			} else {
+				setRoadmapItems(activeUser.trips[activeTripIndex].roadMapItems.map((item) => {
+					return {
+						id: item.id,
+						title: item.title
+					} as RoadmapItem
+				}))
 			}
 		}
 		setEditingTitle(false);
@@ -184,34 +188,34 @@ export const DashboardRoadmap = () => {
 					</div>
 				</div>
 				{roadmapItems.length ? (
-					<div className="roadmap-content">
-						<DndContext
-							sensors={sensors}
-							collisionDetection={closestCenter}
-							onDragEnd={handleDragEnd}
-						>
-							<SortableContext
-								items={roadmapItems.map((item) => item.id!)}
-								strategy={verticalListSortingStrategy}
+					<>
+						<div className="roadmap-content">
+							<DndContext
+								sensors={sensors}
+								collisionDetection={closestCenter}
+								onDragEnd={handleDragEnd}
 							>
-								{roadmapItems.map((item) => (
-									<RoadMapItem
-										key={item.id}
-										id={item.id!}
-										content={item.title}
-										active={item.id === activeRoadmapItem}
-									/>
-								))}
-							</SortableContext>
-						</DndContext>
-					</div>
+								<SortableContext
+									items={roadmapItems.map((item) => item.id!)}
+									strategy={verticalListSortingStrategy}
+								>
+									{roadmapItems.map((item) => (
+										<RoadMapItem
+											key={item.id}
+											id={item.id!}
+											content={item.title}
+											active={item.id === activeRoadmapItemId}
+										/>
+									))}
+								</SortableContext>
+							</DndContext>
+						</div>
+						<div className="roadmap-cta" onClick={createNewItem}>
+							<Text content="dashboard.left.cta" isBold={true} />
+						</div>
+					</>
 				) : (
 					<RoadmapEmptyFallback />
-				)}
-				{emptyRoadmap && (
-					<div className="roadmap-cta" onClick={createNewItem}>
-						<Text content="dashboard.left.cta" isBold={true} />
-					</div>
 				)}
 			</div>
 		</div>
