@@ -52,3 +52,15 @@ export async function fetchRoadmapItemById(id: number): Promise<RoadmapItem> {
   const fetchedRoadmapItem: RoadmapItem = await response.json();
   return fetchedRoadmapItem;
 }
+
+export async function deleteRoadmapItemById(id: number) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/roadmapItem/${id}`, {
+    method: "DELETE",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Deleting a roadmap item failed: ${errorText}`);
+  }
+}
