@@ -129,6 +129,29 @@ const globalSlice = createSlice({
 				);
 			}
 		},
+		removeActiveRoadmapItem: (state) => {
+			const roadmapItemId = state.activeRoadmapItemId;
+			if (state.activeUser !== null && state.activeTripIndex !== null) {
+				const trip = state.activeUser.trips[state.activeTripIndex];
+
+				const updatedRoadMapItems = (trip.roadMapItems ?? []).filter(
+					(roadmapItem) => roadmapItem.id !== roadmapItemId
+				);
+
+				const updatedTrips = [...state.activeUser.trips];
+				updatedTrips[state.activeTripIndex] = {
+					...trip,
+					roadMapItems: updatedRoadMapItems,
+				};
+
+				state.activeUser = {
+					...state.activeUser,
+					trips: updatedTrips,
+				};
+
+				state.activeRoadmapItemId = null;
+			}
+		},
 	},
 });
 
@@ -142,6 +165,7 @@ export const {
 	addNewRoadmapItem,
 	updateOldRoadmapItem,
 	setActiveRoadmapItemId,
-	replaceRoadmapItems
+	replaceRoadmapItems,
+	removeActiveRoadmapItem,
 } = globalSlice.actions;
 export default globalSlice.reducer;
