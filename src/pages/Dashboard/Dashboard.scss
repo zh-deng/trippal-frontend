@@ -1,100 +1,107 @@
 .dashboard {
-  height: calc(100% - 2.5rem);
-  display: flex;
-  flex-direction: column;
+	height: calc(100% - 2.5rem);
+	display: flex;
+	flex-direction: column;
 
-  &-main {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    background-color: #f5f5ec;
-    border: 1px solid grey;
-    border-radius: 0 0 0.5rem 0.5rem;
-  
-    &-left {
-      flex: 1;
-      max-width: 30rem;
-    }
-  
-    &-center {
-      width: 60rem;
-      padding: 1rem;
+	&-main {
+		display: flex;
+		justify-content: center;
+		height: 100%;
+		width: 100%;
+		background-color: #f5f5ec;
+		border: 1px solid grey;
+		border-radius: 0 0 0.5rem 0.5rem;
 
-      .center-container {
-        height: 100%;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+		&-left {
+			flex: 1;
+			max-width: 30rem;
+		}
 
-        &-breadcrumb {
-          padding: 0 0.5rem;
-        }
+		&-center {
+			width: 60rem;
+			padding: 1rem;
 
-        .center-dropdown-container {
-          display: flex;
-          gap: 1rem;
-        }
+			.center-container {
+				height: 100%;
+				padding: 1rem;
+				border-radius: 0.5rem;
+				background-color: white;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
 
-        .center-image-gallery {
-          height: 20rem;
-        }
+				&-breadcrumb {
+					padding: 0 0.5rem;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
 
-        .image-gallery-fallback {
-          height: 100%;
-          border: 1px solid grey;
-          border-radius: 0.5rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: lightblue;
-        }
+					.center-container-delete {
+						cursor: pointer;
+					}
+				}
 
-        .center-controls {
-          height: 100%;
-          padding: 1rem;
-          border: 1px solid grey;
-          background-color: lightblue;
-          border-radius: 0.5rem;
-        }
-      }
-    }
-  
-    &-right {
-      flex: 1;
-      max-width: 30rem;
-    }
-  }
+				.center-dropdown-container {
+					display: flex;
+					gap: 1rem;
+				}
 
-  &-fallback {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+				.center-image-gallery {
+					height: 20rem;
+				}
 
-    &-text {
-      border: 1px solid gray;
-      padding: 4rem 2rem;
-      border-radius: 0.5rem;
-      background-color: white;
-    }
-  }
+				.image-gallery-fallback {
+					height: 100%;
+					border: 1px solid grey;
+					border-radius: 0.5rem;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: lightblue;
+				}
 
-  .empty-trips-fallback {
-    border: 1px solid;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+				.center-controls {
+					height: 100%;
+					padding: 1rem;
+					border: 1px solid grey;
+					background-color: lightblue;
+					border-radius: 0.5rem;
+				}
+			}
+		}
 
-    & >* {
-      border: 1px solid;
-      background-color: white;
-      padding: 4rem 6rem;
-      border-radius: 0.5rem;
-    }
-  }
+		&-right {
+			flex: 1;
+			max-width: 30rem;
+		}
+	}
+
+	&-fallback {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&-text {
+			border: 1px solid gray;
+			padding: 4rem 2rem;
+			border-radius: 0.5rem;
+			background-color: white;
+		}
+	}
+
+	.empty-trips-fallback {
+		border: 1px solid;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		& > * {
+			border: 1px solid;
+			background-color: white;
+			padding: 4rem 6rem;
+			border-radius: 0.5rem;
+		}
+	}
 }

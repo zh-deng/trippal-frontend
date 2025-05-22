@@ -25,6 +25,9 @@ import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
 import { useTranslation } from "react-i18next";
 import { Text } from "../../components/Text/Text";
 import { DashboardInput } from "../../components/DashboardInput/DashboardInput";
+import { MdDelete } from "react-icons/md";
+import { deleteRoadmapItemById } from "../../services/roadmapItemService";
+import { removeActiveRoadmapItem } from "../../state/global/globalSlice";
 
 export const Dashboard = () => {
 	const { t } = useTranslation();
@@ -36,6 +39,9 @@ export const Dashboard = () => {
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 	const activeTripIndex = useSelector(
 		(state: RootState) => state.global.activeTripIndex
+	);
+	const activeRoadmapItemId = useSelector(
+		(state: RootState) => state.global.activeRoadmapItemId
 	);
 	const currentCountry = useSelector(
 		(state: RootState) => state.dashboard.currentCountry
@@ -104,13 +110,23 @@ export const Dashboard = () => {
 		dispatch(updateCurrentAttraction(option));
 	};
 
+	const deleteRoadmapItem = () => {
+		if (activeRoadmapItemId !== null) {
+			deleteRoadmapItemById(activeRoadmapItemId)
+				.then(() => {
+					dispatch(removeActiveRoadmapItem())
+				})
+				.catch((error) => console.error("Failed to load images:", error));
+		}
+	};
+
 	const ImageGalleryFallback = () => (
 		<div className="image-gallery-fallback">
 			<Text content={"dashboard.center.imageGallery.fallback"} />
 		</div>
 	);
 
-		const EmptyTripsFallback = () => (
+	const EmptyTripsFallback = () => (
 		<div className="empty-trips-fallback">
 			<Text content={"dashboard.emptyTripFallback"} />
 		</div>
@@ -128,6 +144,8 @@ export const Dashboard = () => {
 
 	return (
 		<div className="dashboard">
+			<div>{`Current user: ${JSON.stringify(activeUser)}`}</div>
+			<div>{activeRoadmapItemId}</div>
 			<div>
 				<DashboardTabMenu />
 			</div>
@@ -145,6 +163,9 @@ export const Dashboard = () => {
 									) : (
 										<Text content="dashboard.center.routeTitleFallback" />
 									)}
+									{activeRoadmapItemId !== null && <div className="center-container-delete">
+										<MdDelete size={24} onClick={deleteRoadmapItem} />
+									</div>}
 								</div>
 								<div className="center-dropdown-container">
 									<Dropdown
