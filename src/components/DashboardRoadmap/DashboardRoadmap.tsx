@@ -28,6 +28,10 @@ import {
 	updateOldTrip,
 } from "../../state/global/globalSlice";
 import { fetchRoadmapList, updateTrip } from "../../services/tripService";
+import {
+	loadMapData,
+	resetMapData,
+} from "../../state/dashboard/dashboardSlice";
 
 export const DashboardRoadmap = () => {
 	const { t } = useTranslation();
@@ -70,16 +74,36 @@ export const DashboardRoadmap = () => {
 						console.error("Failed to fetch roadmap list:", error)
 					);
 			} else {
-				setRoadmapItems(activeUser.trips[activeTripIndex].roadMapItems.map((item) => {
-					return {
-						id: item.id,
-						title: item.title
-					} as RoadmapItem
-				}))
+				setRoadmapItems(
+					activeUser.trips[activeTripIndex].roadMapItems.map((item) => {
+						return {
+							id: item.id,
+							title: item.title,
+						} as RoadmapItem;
+					})
+				);
 			}
 		}
 		setEditingTitle(false);
 	}, [activeTripIndex, activeUser]);
+
+	useEffect(() => {
+		if (
+			activeUser !== null &&
+			activeTripIndex !== null &&
+			activeTripIndex >= 0 &&
+			activeUser.trips[activeTripIndex].roadMapItems
+		) {
+			const roadmapItem =
+				activeUser.trips[activeTripIndex].roadMapItems.find(
+					(item) => item.id === activeRoadmapItemId
+				) ?? null;
+
+			dispatch(
+				activeRoadmapItemId === null ? resetMapData() : loadMapData(roadmapItem)
+			);
+		}
+	}, [activeRoadmapItemId]);
 
 	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTitleInput(event.target.value);
