@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Attraction, City, Country } from "../../services/mapDataService";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { RoadmapItem } from "../../types/Roadmap";
 
 interface DashboardState {
 	currentCountry: Country | null;
@@ -29,6 +32,20 @@ const dashboardSlice = createSlice({
 		) => {
 			state.currentAttraction = action.payload;
 		},
+		resetMapData: (state) => {
+			state.currentCountry = null;
+			state.currentCity = null;
+			state.currentAttraction = null;
+		},
+		loadMapData: (state, action: PayloadAction<RoadmapItem | null>) => {
+			if (action.payload !== null) {
+				const roadmapItem: RoadmapItem = action.payload;
+
+				state.currentCountry = roadmapItem.country;
+				state.currentCity = roadmapItem.city;
+				state.currentAttraction = roadmapItem.attraction;
+			}
+		},
 	},
 });
 
@@ -36,5 +53,7 @@ export const {
 	updateCurrentCountry,
 	updateCurrentCity,
 	updateCurrentAttraction,
+	resetMapData,
+	loadMapData,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

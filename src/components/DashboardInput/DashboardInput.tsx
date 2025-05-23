@@ -72,15 +72,12 @@ export const DashboardInput = () => {
 					(item) => {
 						if (item.id === activeRoadmapItemId) {
 							setFormData({
-							title: item.title,
-							date: item.date
-								? formatDateForInput(item.date.toString())
-								: "",
-							notes: item.notes,
-							files: item.files ? item.files : [],
-						});
+								title: item.title,
+								date: item.date ? formatDateForInput(item.date.toString()) : "",
+								notes: item.notes,
+								files: item.files ? item.files : [],
+							});
 						}
-						
 					}
 				);
 			}

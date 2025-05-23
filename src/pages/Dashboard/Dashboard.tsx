@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DashboardMap } from "../../components/DashboardMap/DashboardMap";
 import { DashboardRoadmap } from "../../components/DashboardRoadmap/DashboardRoadmap";
 import { DashboardTabMenu } from "../../components/DashboardTabMenu/DashboardTabMenu";
@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useDispatch } from "react-redux";
 import {
+	resetMapData,
 	updateCurrentAttraction,
 	updateCurrentCity,
 	updateCurrentCountry,
@@ -27,7 +28,7 @@ import { Text } from "../../components/Text/Text";
 import { DashboardInput } from "../../components/DashboardInput/DashboardInput";
 import { MdDelete } from "react-icons/md";
 import { deleteRoadmapItemById } from "../../services/roadmapItemService";
-import { removeActiveRoadmapItem } from "../../state/global/globalSlice";
+import { removeActiveRoadmapItem, setActiveRoadmapItemId } from "../../state/global/globalSlice";
 
 export const Dashboard = () => {
 	const { t } = useTranslation();
@@ -35,6 +36,8 @@ export const Dashboard = () => {
 	const [cities, setCities] = useState<City[]>([]);
 	const [attractions, setAttractions] = useState<Attraction[]>([]);
 	const [images, setImages] = useState<ImageData[]>([]);
+	const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+	const modalRef = useRef<HTMLDivElement>(null);
 
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 	const activeTripIndex = useSelector(
@@ -87,6 +90,27 @@ export const Dashboard = () => {
 		}
 	}, [currentAttraction]);
 
+	useEffect(() => {
+		dispatch(setActiveRoadmapItemId(null))
+		dispatch(resetMapData())
+	}, [activeTripIndex])
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				modalRef.current &&
+				!modalRef.current.contains(event.target as Node)
+			) {
+				setOpenDeleteModal(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [openDeleteModal]);
+
 	const routeItemTitle = [
 		currentCountry?.name,
 		currentCity?.name,
@@ -110,11 +134,17 @@ export const Dashboard = () => {
 		dispatch(updateCurrentAttraction(option));
 	};
 
+	const toggleDeleteModal = () => {
+		setOpenDeleteModal(!openDeleteModal);
+	};
+
 	const deleteRoadmapItem = () => {
+		toggleDeleteModal();
+
 		if (activeRoadmapItemId !== null) {
 			deleteRoadmapItemById(activeRoadmapItemId)
 				.then(() => {
-					dispatch(removeActiveRoadmapItem())
+					dispatch(removeActiveRoadmapItem());
 				})
 				.catch((error) => console.error("Failed to load images:", error));
 		}
@@ -144,8 +174,21 @@ export const Dashboard = () => {
 
 	return (
 		<div className="dashboard">
+			{/* For testing purposes */}
 			<div>{`Current user: ${JSON.stringify(activeUser)}`}</div>
-			<div>{activeRoadmapItemId}</div>
+			{openDeleteModal && (
+				<div className="dashboard-delete-modal" ref={modalRef}>
+					<Text isBold={true} content={"dashboard.deleteModal.text"} />
+					<div className="delete-modal-buttons">
+						<button onClick={deleteRoadmapItem}>
+							<Text isBold={true} content={"dashboard.deleteModal.delete"} />
+						</button>
+						<button onClick={toggleDeleteModal}>
+							<Text isBold={true} content={"dashboard.deleteModal.cancel"} />
+						</button>
+					</div>
+				</div>
+			)}
 			<div>
 				<DashboardTabMenu />
 			</div>
@@ -163,9 +206,11 @@ export const Dashboard = () => {
 									) : (
 										<Text content="dashboard.center.routeTitleFallback" />
 									)}
-									{activeRoadmapItemId !== null && <div className="center-container-delete">
-										<MdDelete size={24} onClick={deleteRoadmapItem} />
-									</div>}
+									{activeRoadmapItemId !== null && (
+										<div className="center-container-delete">
+											<MdDelete size={24} onClick={toggleDeleteModal} />
+										</div>
+									)}
 								</div>
 								<div className="center-dropdown-container">
 									<Dropdown
