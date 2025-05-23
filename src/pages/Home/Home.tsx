@@ -1,12 +1,7 @@
-import { useSelector } from "react-redux";
 import "./Home.scss";
-import { RootState } from "../../state/store";
 import { Text } from "../../components/Text/Text";
 
 export const Home = () => {
-	const activeUser = useSelector(
-		(state: RootState) => state.global.activeUser
-	);
 
 	return (
     <div className="home">
@@ -19,9 +14,6 @@ export const Home = () => {
             <Text content={"home.hero.description"} />
           </span>
         </div>
-        {
-          `Current user: ${JSON.stringify(activeUser)}`
-        }
       </div>
     </div>
   );
