@@ -15,6 +15,11 @@
     }
   },
   "dashboard": {
+    "deleteModal": {
+      "text": "Möchtest du wirklich diesen Halt löschen",
+      "delete": "Löschen",
+      "cancel": "Abbrechen"
+    },
     "tabBar": {
       "addTrip": "Neue Reise",
       "newTripName": "Deine Reise",

@@ -15,6 +15,11 @@
     }
   },
   "dashboard": {
+    "deleteModal": {
+      "text": "Do you really want to delete this stop?",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
     "tabBar": {
       "addTrip": "New trip",
       "newTripName": "Your trip",
