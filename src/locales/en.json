@@ -8,6 +8,9 @@
     "logout": "Logout",
     "registration": "Registration"
   },
+  "footer": {
+    "copyright": "Copyright © by zh-deng"
+  },
   "home": {
     "hero": {
       "header": "Start now and plan your ultimate trip!",
@@ -23,6 +26,7 @@
     "tabBar": {
       "addTrip": "New trip",
       "newTripName": "Your trip",
+      "options": "Options",
       "deleteTrip": "Delete"
     },
     "emptyTripFallback": "Create your first trip!",

@@ -1,86 +1,94 @@
 {
-  "navbar": {
-    "home": "Startseite",
-    "demo": "Demo",
-    "dashboard": "Meine Reisen",
-    "community": "Gemeinschaft",
-    "login": "Anmelden",
-    "logout": "Abmelden",
-    "registration": "Registrieren"
+	"navbar": {
+		"home": "Startseite",
+		"demo": "Demo",
+		"dashboard": "Meine Reisen",
+		"community": "Gemeinschaft",
+		"login": "Anmelden",
+		"logout": "Abmelden",
+		"registration": "Registrieren",
+		"language": {
+			"de": "DE",
+			"en": "EN"
+		}
+	},
+  "footer": {
+    "copyright": "Copyright © by zh-deng"
   },
-    "home": {
-    "hero": {
-      "header": "Starte jetzt und plane deine ultimate Reise!",
-      "description": "Erstelle Routen auf der ganzen Welt und verwalte alles auf dieser Seite."
-    }
-  },
-  "dashboard": {
-    "deleteModal": {
-      "text": "Möchtest du wirklich diesen Halt löschen",
-      "delete": "Löschen",
-      "cancel": "Abbrechen"
-    },
-    "tabBar": {
-      "addTrip": "Neue Reise",
-      "newTripName": "Deine Reise",
-      "deleteTrip": "Löschen"
-    },
-    "emptyTripFallback": "Erstelle deine erste Reise!",
-    "left": {
-      "headerText": "Reiseroute:",
-      "lockIcons": {
-        "public": "Klicke, um diese Route zu veröffentlichen",
-        "private": "Klicke, um diese Route zu privat zu machen"
-      },
-      "downloadIcon": "Route downloaden",
-      "editTitleIcon": "Titel ändern",
-      "confirmTitleIcon": "Titel bestätigen",
-      "emptyFallback": "Füge deinen ersten Halt hinzu",
-      "cta": "Nächsten Halt hinzufügen"
-    },
-    "center": {
-      "routeTitleFallback": "Wähle ein Land aus.",
-      "dropdown": {
-        "country": "Land",
-        "city": "Stadt",
-        "attraction": "Sehenswürdigkeit"
-      },
-      "imageGallery": {
-        "fallback": "Keine Bilder vorhanden"
-      },
-      "inputs": {
-        "title": "Routenname",
-        "date": "Datum",
-        "notes": "Notizen",
-        "notesPlaceholder": "Füge hier deine Notizen ein.",
-        "uploads": "Unterstützte Datenformate: PDF, JPG, JPEG, PNG, TXT",
-        "uploadsInfo": "Füge Buchungen, Belege und Tickets hinzu.",
-        "submit": "Daten speichern",
-        "clickToDownload": "Klicken um herunterzuladen"
-      }
-    },
-    "fallback": "Zum Fortfahren bitte anmelden oder registrieren"
-  },
-  "loginModal": {
-    "login": "Einloggen",
-    "username": "Nutername",
-    "email": "Email",
-    "password": "Passwort",
-    "registerSwitchText": "Noch kein Mitglied?",
-    "registerSwitch": "Registrieren",
-    "loginSuccess": "Erfolgreich angemeldet.",
-    "loginFailed": "Fehler bei der Anmeldung"
-  },
-  "registerModal": {
-    "signUp": "Registrieren",
-    "username": "Nutzername",
-    "email": "Email",
-    "password": "Passwort",
-    "passwordRepeat": "Passwort wiederholen",
-    "loginSwitchText": "Du hast bereits ein Konto?",
-    "loginSwitch": "Einloggen",
-    "registrationFailed": "Fehler bei der Registrierung",
-    "passwordMismatch": "Passwörter sind unterschiedlich",
-    "registrationSuccess": "Erfolgreich registriert. Jetzt anmelden!"
-  }
+	"home": {
+		"hero": {
+			"header": "Starte jetzt und plane deine ultimate Reise!",
+			"description": "Erstelle Routen auf der ganzen Welt und verwalte alles auf dieser Seite."
+		}
+	},
+	"dashboard": {
+		"deleteModal": {
+			"text": "Möchtest du wirklich diesen Halt löschen",
+			"delete": "Löschen",
+			"cancel": "Abbrechen"
+		},
+		"tabBar": {
+			"addTrip": "Neue Reise",
+			"newTripName": "Deine Reise",
+			"options": "Optionen",
+			"deleteTrip": "Löschen"
+		},
+		"emptyTripFallback": "Erstelle deine erste Reise!",
+		"left": {
+			"headerText": "Reiseroute:",
+			"lockIcons": {
+				"public": "Klicke, um diese Route zu veröffentlichen",
+				"private": "Klicke, um diese Route zu privat zu machen"
+			},
+			"downloadIcon": "Route downloaden",
+			"editTitleIcon": "Titel ändern",
+			"confirmTitleIcon": "Titel bestätigen",
+			"emptyFallback": "Füge deinen ersten Halt hinzu",
+			"cta": "Nächsten Halt hinzufügen"
+		},
+		"center": {
+			"routeTitleFallback": "Wähle ein Land aus.",
+			"dropdown": {
+				"country": "Land",
+				"city": "Stadt",
+				"attraction": "Sehenswürdigkeit"
+			},
+			"imageGallery": {
+				"fallback": "Keine Bilder vorhanden"
+			},
+			"inputs": {
+				"title": "Routenname",
+				"date": "Datum",
+				"notes": "Notizen",
+				"notesPlaceholder": "Füge hier deine Notizen ein.",
+				"uploads": "Unterstützte Datenformate: PDF, JPG, JPEG, PNG, TXT",
+				"uploadsInfo": "Füge Buchungen, Belege und Tickets hinzu.",
+				"submit": "Daten speichern",
+				"clickToDownload": "Klicken um herunterzuladen"
+			}
+		},
+		"fallback": "Zum Fortfahren bitte anmelden oder registrieren"
+	},
+	"loginModal": {
+		"login": "Einloggen",
+		"username": "Nutername",
+		"email": "Email",
+		"password": "Passwort",
+		"registerSwitchText": "Noch kein Mitglied?",
+		"registerSwitch": "Registrieren",
+		"loginSuccess": "Erfolgreich angemeldet.",
+		"loginFailed": "Fehler bei der Anmeldung"
+	},
+	"registerModal": {
+		"signUp": "Registrieren",
+		"username": "Nutzername",
+		"email": "Email",
+		"password": "Passwort",
+		"passwordRepeat": "Passwort wiederholen",
+		"loginSwitchText": "Du hast bereits ein Konto?",
+		"loginSwitch": "Einloggen",
+		"registrationFailed": "Fehler bei der Registrierung",
+		"passwordMismatch": "Passwörter sind unterschiedlich",
+		"registrationSuccess": "Erfolgreich registriert. Jetzt anmelden!"
+	}
 }
