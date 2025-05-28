@@ -3,6 +3,7 @@ import { Trip } from "../../../types/Trip";
 import "./TabMenuItem.scss";
 import { SlOptionsVertical } from "react-icons/sl";
 import { Text } from "../../Text/Text";
+import { useTranslation } from "react-i18next";
 
 type TabMenuItemProps = {
 	trip: Trip;
@@ -23,9 +24,11 @@ export const TabMenuItem: React.FC<TabMenuItemProps> = ({
 	setActiveTab,
 	deleteTrip,
 }) => {
+	const { t } = useTranslation();
 	const modalRef = useRef<HTMLDivElement>(null);
 
 	const toggleModal = () => {
+		// TODO
 		setOptionModal(activeOptionModal === index ? null : index);
 	};
 
@@ -51,10 +54,18 @@ export const TabMenuItem: React.FC<TabMenuItemProps> = ({
 			className={`tabmenu-item ${index === activeTripIndex && "active-tab"}`}
 			ref={modalRef}
 		>
-			<div className="tabmenu-item-name" title={trip.title} onClick={() => setActiveTab(index)}>
+			<div
+				className="tabmenu-item-name"
+				title={trip.title}
+				onClick={() => setActiveTab(index)}
+			>
 				{trip.title}
 			</div>
-			<div className="tabmenu-item-options" onClick={toggleModal}>
+			<div
+				className="tabmenu-item-options"
+				onClick={toggleModal}
+				title={t("dashboard.tabBar.options")}
+			>
 				<SlOptionsVertical size={16} />
 			</div>
 			<div

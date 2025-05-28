@@ -1,22 +1,29 @@
-import { useState } from "react";
-import "./LanguageSwitcher.scss"
-import { useTranslation } from 'react-i18next';
+import "./LanguageSwitcher.scss";
+import { useTranslation } from "react-i18next";
+import { Text } from "../Text/Text";
 
-function LanguageSwitcher() {
-  const { i18n } = useTranslation();
-  const [activeLanguage, setActiveLanguage] = useState<string>("de")
+export const LanguageSwitcher = () => {
+	const { i18n } = useTranslation();
+	const languages = ["de", "en"];
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    setActiveLanguage(lng);
-  };
+	const changeLanguage = (lng: string) => {
+		if (lng !== i18n.language) {
+			i18n.changeLanguage(lng);
+		}
+	};
 
-  return (
-    <div className="language-switcher">
-      <button className={activeLanguage === "en" ? "language-active" : ""} onClick={() => changeLanguage('en')}>EN</button>
-      <button className={activeLanguage === "de" ? "language-active" : ""} onClick={() => changeLanguage('de')}>DE</button>
-    </div>
-  );
-}
-
-export default LanguageSwitcher;
+	return (
+		<div className="language-switcher">
+			{languages.map((lng) => (
+				<button
+					key={lng}
+					type="button"
+					className={i18n.language === lng ? "language-active" : ""}
+					onClick={() => changeLanguage(lng)}
+				>
+					<Text content={`navbar.language.${lng}`} />
+				</button>
+			))}
+		</div>
+	);
+};

@@ -1,26 +1,32 @@
 import { Link } from "react-router";
 import "./Navbar.scss";
 import { Text } from "../Text/Text";
-import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import logo from "../../assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { logoutUser } from "../../services/userService";
 import { logoutActiveUser } from "../../state/global/globalSlice";
+import { useState } from "react";
+import { getNickname } from "../../utils/utils";
 
 type NavbarProps = {
 	onLoginClick: () => void;
 	onRegisterClick: () => void;
 };
 
-const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
+export const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
+	const navItems = [
+		{ name: "home", path: "/" },
+		{ name: "demo", path: "/demo" },
+		{ name: "dashboard", path: "/dashboard" },
+		{ name: "community", path: "/community" },
+	];
+
+	const [activeNavItem, setActiveNavItem] = useState<string>("home");
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 
 	const dispatch = useDispatch();
-
-	const getNickname = (): string => {
-		return activeUser?.name.substring(0, 2).toUpperCase() ?? "";
-	};
 
 	const onLogoutClick = () => {
 		logoutUser()
@@ -30,7 +36,10 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 			.catch((error) => {
 				console.error(error);
 			});
-		//
+	};
+
+	const handleNavItemClick = (itemName: string) => {
+		setActiveNavItem(itemName);
 	};
 
 	return (
@@ -39,21 +48,19 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 				<div className="navbar-content-left">
 					<div className="navbar-logo">
 						<Link to="/">
-							<img src={logo} />
+							<img src={logo} alt="App Logo" />
 						</Link>
 					</div>
-					<Link to="/">
-						<Text content="navbar.home" />
-					</Link>
-					<Link to="demo">
-						<Text content="navbar.demo" />
-					</Link>
-					<Link to="dashboard">
-						<Text content="navbar.dashboard" />
-					</Link>
-					<Link to="community">
-						<Text content="navbar.community" />
-					</Link>
+					{navItems.map(({ name, path }) => (
+						<Link
+							key={name}
+							to={path}
+							className={activeNavItem === name ? "active-nav-item" : ""}
+							onClick={() => handleNavItemClick(name)}
+						>
+							<Text content={`navbar.${name}`} />
+						</Link>
+					))}
 				</div>
 				<div className="navbar-content-right">
 					<LanguageSwitcher />
@@ -73,7 +80,7 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 								<Text content="navbar.logout" />
 							</div>
 							<div className="navbar-user-icon" onClick={onRegisterClick}>
-								{getNickname()}
+								{getNickname(activeUser.name)}
 							</div>
 						</>
 					)}
@@ -82,5 +89,3 @@ const Navbar = ({ onLoginClick, onRegisterClick }: NavbarProps) => {
 		</nav>
 	);
 };
-
-export default Navbar;
