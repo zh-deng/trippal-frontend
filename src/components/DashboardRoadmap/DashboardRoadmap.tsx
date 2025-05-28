@@ -166,7 +166,7 @@ export const DashboardRoadmap = () => {
 			<div className="roadmap-container">
 				<div className="roadmap-header">
 					<div className="roadmap-header-text">
-						<Text content="dashboard.left.headerText" isBold={true} />
+						<Text content="dashboard.left.headerText" isBold />
 						{editingTitle ? (
 							<div className="roadmap-header-input">
 								<input
@@ -235,7 +235,7 @@ export const DashboardRoadmap = () => {
 							</DndContext>
 						</div>
 						<div className="roadmap-cta" onClick={createNewItem}>
-							<Text content="dashboard.left.cta" isBold={true} />
+							<Text content="dashboard.left.cta" isBold />
 						</div>
 					</>
 				) : (

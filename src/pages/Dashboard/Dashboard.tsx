@@ -166,7 +166,7 @@ export const Dashboard = () => {
 		return (
 			<div className="dashboard-fallback">
 				<div className="dashboard-fallback-text">
-					<Text isBold={true} content={"dashboard.fallback"} />
+					<Text isBold content={"dashboard.fallback"} />
 				</div>
 			</div>
 		);
@@ -175,16 +175,16 @@ export const Dashboard = () => {
 	return (
 		<div className="dashboard">
 			{/* For testing purposes */}
-			<div>{`Current user: ${JSON.stringify(activeUser)}`}</div>
+			{/* <div>{`Current user: ${JSON.stringify(activeUser)}`}</div> */}
 			{openDeleteModal && (
 				<div className="dashboard-delete-modal" ref={modalRef}>
-					<Text isBold={true} content={"dashboard.deleteModal.text"} />
+					<Text isBold content={"dashboard.deleteModal.text"} />
 					<div className="delete-modal-buttons">
 						<button onClick={deleteRoadmapItem}>
-							<Text isBold={true} content={"dashboard.deleteModal.delete"} />
+							<Text isBold content={"dashboard.deleteModal.delete"} />
 						</button>
 						<button onClick={toggleDeleteModal}>
-							<Text isBold={true} content={"dashboard.deleteModal.cancel"} />
+							<Text isBold content={"dashboard.deleteModal.cancel"} />
 						</button>
 					</div>
 				</div>
