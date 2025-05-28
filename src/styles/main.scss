@@ -3,11 +3,15 @@
 @use './mixins';
 
 .app {
-  background-color: lightblue;
+  background-color: var(--main-background-color);
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   &-pages {
-    padding: 1rem;
-    height: calc(100% - 6.1rem);
+    flex: 1;
+    margin-top: 4.1rem;
+    margin-bottom: 2rem;
+    overflow-y: auto;
   }
 }

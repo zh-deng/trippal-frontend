@@ -3,10 +3,11 @@
 
   Button {
     cursor: pointer;
+    color: var(--nav-footer-color);
   }
 
   .language-active {
     border-top: 2px solid transparent;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--nav-footer-color);
   }
 }

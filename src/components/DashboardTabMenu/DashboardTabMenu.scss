@@ -1,29 +1,29 @@
 .dashboard-tabmenu {
-  border: 1px solid grey;
-  padding: 0 0.5rem;
-  height: 2.5rem;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  border-radius: 0.5rem 0.5rem 0 0;
+	margin-top: 1rem;
+	border-bottom: 2px solid var(--main-border-color);
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	overflow-x: overlay;
+	scrollbar-width: thin;
 
-  .tabmenu-item-container {
-    display: flex;
-    width: fit-content;
-    gap: 0.5rem;
-  }
+	.tabmenu-item-container {
+		display: flex;
+		width: fit-content;
+		gap: 0.25rem;
+	}
 
-  .tabmenu-add {
-    display: flex;
-    align-items: center;
-    padding: 0 0.5rem;
-    cursor: pointer;
-    gap: 0.5rem;
-    border: 1px solid grey;
-    border-radius: 0.5rem;
-  }
+	.tabmenu-add {
+		display: flex;
+		align-items: center;
+		padding: 0 0.5rem;
+		cursor: pointer;
+		gap: 0.5rem;
+		border: 1px solid var(--main-border-color);
+		border-radius: 0.25rem;
+	}
 
-  .active-tab {
-    background-color: aquamarine;
-  }
+	.active-tab {
+		background-color: var(--white);
+	}
 }

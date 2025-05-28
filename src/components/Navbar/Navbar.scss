@@ -1,8 +1,12 @@
 .navbar {
-	border-bottom: 1px solid grey;
+	width: 100%;
+	background-color: var(--nav-footer-bg-color);
+	color: var(--nav-footer-color);
 	height: 4.1rem;
-
 	padding: 0 1rem;
+	position: fixed;
+	top: 0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 
 	&-content {
 		display: flex;
@@ -21,6 +25,10 @@
 			.navbar-logo {
 				max-width: 3rem;
 			}
+
+			& > * :hover{
+				color: var(--white);
+			}
 		}
 
 		&-right {
@@ -35,7 +43,8 @@
 			}
 
 			.navbar-user-icon {
-				border: 1px solid grey;
+				color: var(--black);
+				border: 1px solid var(--main-border-color);
 				padding: 0.5rem;
 				width: 2.5rem;
 				border-radius: 50%;
@@ -43,5 +52,12 @@
 				text-align: center;
 			}
 		}
+	}
+
+	.active-nav-item {
+		color: var(--white);
+		text-decoration: underline;
+		text-decoration-thickness: 0.2rem;
+		text-underline-offset: 0.3rem;
 	}
 }

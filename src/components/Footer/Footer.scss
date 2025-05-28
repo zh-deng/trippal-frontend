@@ -1,7 +1,12 @@
 .footer {
-  border-top: 1px solid grey;
+  width: 100%;
+  background-color: var(--nav-footer-bg-color);
+  color: var(--nav-footer-color);
   height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
 }
