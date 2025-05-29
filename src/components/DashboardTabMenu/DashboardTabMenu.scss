@@ -4,8 +4,6 @@
 	height: 2.5rem;
 	display: flex;
 	align-items: center;
-	overflow-x: overlay;
-	scrollbar-width: thin;
 
 	.tabmenu-item-container {
 		display: flex;
@@ -14,16 +12,18 @@
 	}
 
 	.tabmenu-add {
+		height: 2.2rem;
 		display: flex;
 		align-items: center;
 		padding: 0 0.5rem;
 		cursor: pointer;
 		gap: 0.5rem;
+		background-color: var(--white);
 		border: 1px solid var(--main-border-color);
 		border-radius: 0.25rem;
-	}
 
-	.active-tab {
-		background-color: var(--white);
+		&:hover {
+			background-color: var(--light-blue);
+		}
 	}
 }

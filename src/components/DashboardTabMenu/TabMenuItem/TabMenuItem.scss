@@ -6,8 +6,10 @@
 	border-radius: 0.25rem;
 	position: relative;
 	width: 8rem;
+	background-color: var(--white);
 
 	&-name {
+		height: 100%;
 		padding: 0.25rem 0.5rem;
 		cursor: pointer;
 		width: 100%;
@@ -15,6 +17,14 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
+
+		&:hover {
+			// Targeting the parent (with nesting support)
+			~ .tabmenu-item-options,
+			& {
+				background-color: var(--light-blue);
+			}
+		}
 	}
 
 	&-options {
@@ -27,16 +37,29 @@
 	}
 
 	&-modal {
-		border: 1px solid gray;
-		border-radius: 0.5rem;
-		background-color: white;
+		border: 1px solid var(--main-border-color);
+		border-radius: 0.25rem;
+		background-color: var(--white);
 		padding: 0.25rem 1rem;
 		position: absolute;
 		top: 2.5rem;
-		right: -3.5rem;
+		right: -4.5rem;
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--light-blue);
+		}
 	}
 
 	.hidden {
 		display: none;
+	}
+}
+
+.tabmenu-item.active-tab {
+	background-color: var(--light-blue);
+
+	.tabmenu-item-name {
+		cursor: unset;
 	}
 }
