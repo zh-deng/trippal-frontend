@@ -1,0 +1,59 @@
+.community-item {
+	width: 20rem;
+	height: 12rem;
+	background-color: var(--white);
+	border: 1px solid var(--main-border-color);
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+  &-title {
+    font-weight: bold;
+  }
+
+	&-data {
+		height: 7rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+    align-content: flex-start;
+
+		.data-item {
+      height: 2rem;
+			width: 48%;
+			border: 1px solid var(--main-border-color);
+			border-radius: 0.25rem;
+			background-color: var(--hover-background-color);
+      display: flex;
+      align-items: center;
+			padding: 0 0.25rem;
+
+			span {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+        
+			}
+		}
+	}
+
+	&-metadata {
+		display: flex;
+		gap: 2rem;
+
+		.metadata-stars {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.metadata-comments {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+	}
+}
