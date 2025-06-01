@@ -12,9 +12,9 @@
 			"en": "EN"
 		}
 	},
-  "footer": {
-    "copyright": "Copyright © by zh-deng"
-  },
+	"footer": {
+		"copyright": "Copyright © by zh-deng"
+	},
 	"home": {
 		"hero": {
 			"header": "Starte jetzt und plane deine ultimate Reise!",
@@ -68,6 +68,11 @@
 			}
 		},
 		"fallback": "Zum Fortfahren bitte anmelden oder registrieren"
+	},
+	"community": {
+		"header": "Finde deine Traumreise unter geteilten Reisen von Millionen Nutzern",
+		"previous": "Vorherige",
+		"next": "Nächste"
 	},
 	"loginModal": {
 		"login": "Einloggen",

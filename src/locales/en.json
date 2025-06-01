@@ -1,90 +1,95 @@
 {
-  "navbar": {
-    "home": "Home",
-    "demo": "Demo",
-    "dashboard": "My Trips",
-    "community": "Community",
-    "login": "Login",
-    "logout": "Logout",
-    "registration": "Registration"
-  },
-  "footer": {
-    "copyright": "Copyright © by zh-deng"
-  },
-  "home": {
-    "hero": {
-      "header": "Start now and plan your ultimate trip!",
-      "description": "Create routes worldwide and manage everything on this website."
-    }
-  },
-  "dashboard": {
-    "deleteModal": {
-      "text": "Do you really want to delete this stop?",
-      "delete": "Delete",
-      "cancel": "Cancel"
-    },
-    "tabBar": {
-      "addTrip": "New trip",
-      "newTripName": "Your trip",
-      "options": "Options",
-      "deleteTrip": "Delete"
-    },
-    "emptyTripFallback": "Create your first trip!",
-    "left": {
-      "headerText": "Itenary:",
-      "lockIcons": {
-        "public": "Click to publish route",
-        "private": "Click to make route private"
-      },
-      "downloadIcon": "Download route",
-      "editTitleIcon": "Change title",
-      "confirmTitleIcon": "Confirm title",
-      "emptyFallback": "Add your first stop",
-      "cta": "Add next stop"
-    },
-    "center": {
-      "routeTitleFallback": "Choose a country.",
-      "dropdown": {
-        "country": "Country",
-        "city": "City",
-        "attraction": "Attraction"
-      },
-      "imageGallery": {
-        "fallback": "No pictures available"
-      },
-      "inputs": {
-        "title": "Route name",
-        "date": "Date",
-        "notes": "Notes",
-        "notesPlaceholder": "Write your notes here.",
-        "uploads": "Supported data formats: PDF, JPG, JPEG, PNG, TXT",
-        "uploadsInfo": "Add bookings, receipts, and tickets.",
-        "submit": "Save data",
-        "clickToDownload": "Click to download"
-      }
-    },
-    "fallback": "Please log in or register to proceed"
-  },
-  "loginModal": {
-    "login": "Login",
-    "username": "Username",
-    "email": "Email",
-    "password": "Password",
-    "registerSwitchText": "Not a member?",
-    "registerSwitch": "Register",
-    "loginSuccess": "Successfully logged in.",
-    "loginFailed": "Error at login"
-  },
-  "registerModal": {
-    "signUp": "Sign up",
-    "username": "Username",
-    "email": "Email",
-    "password": "Password",
-    "passwordRepeat": "Repeat password",
-    "loginSwitchText": "Already have an account?",
-    "loginSwitch": "Login",
-    "registrationFailed": "Error at sign on",
-    "passwordMismatch": "Passwords are different",
-    "registrationSuccess": "Successfully registered. Sign in now!"
-  }
+	"navbar": {
+		"home": "Home",
+		"demo": "Demo",
+		"dashboard": "My Trips",
+		"community": "Community",
+		"login": "Login",
+		"logout": "Logout",
+		"registration": "Registration"
+	},
+	"footer": {
+		"copyright": "Copyright © by zh-deng"
+	},
+	"home": {
+		"hero": {
+			"header": "Start now and plan your ultimate trip!",
+			"description": "Create routes worldwide and manage everything on this website."
+		}
+	},
+	"dashboard": {
+		"deleteModal": {
+			"text": "Do you really want to delete this stop?",
+			"delete": "Delete",
+			"cancel": "Cancel"
+		},
+		"tabBar": {
+			"addTrip": "New trip",
+			"newTripName": "Your trip",
+			"options": "Options",
+			"deleteTrip": "Delete"
+		},
+		"emptyTripFallback": "Create your first trip!",
+		"left": {
+			"headerText": "Itenary:",
+			"lockIcons": {
+				"public": "Click to publish route",
+				"private": "Click to make route private"
+			},
+			"downloadIcon": "Download route",
+			"editTitleIcon": "Change title",
+			"confirmTitleIcon": "Confirm title",
+			"emptyFallback": "Add your first stop",
+			"cta": "Add next stop"
+		},
+		"center": {
+			"routeTitleFallback": "Choose a country.",
+			"dropdown": {
+				"country": "Country",
+				"city": "City",
+				"attraction": "Attraction"
+			},
+			"imageGallery": {
+				"fallback": "No pictures available"
+			},
+			"inputs": {
+				"title": "Route name",
+				"date": "Date",
+				"notes": "Notes",
+				"notesPlaceholder": "Write your notes here.",
+				"uploads": "Supported data formats: PDF, JPG, JPEG, PNG, TXT",
+				"uploadsInfo": "Add bookings, receipts, and tickets.",
+				"submit": "Save data",
+				"clickToDownload": "Click to download"
+			}
+		},
+		"fallback": "Please log in or register to proceed"
+	},
+	"community": {
+		"header": "Find your dream trip shared by millions of user",
+		"previous": "Previous",
+		"next": "Next"
+	},
+	"loginModal": {
+		"login": "Login",
+		"username": "Username",
+		"email": "Email",
+		"password": "Password",
+		"registerSwitchText": "Not a member?",
+		"registerSwitch": "Register",
+		"loginSuccess": "Successfully logged in.",
+		"loginFailed": "Error at login"
+	},
+	"registerModal": {
+		"signUp": "Sign up",
+		"username": "Username",
+		"email": "Email",
+		"password": "Password",
+		"passwordRepeat": "Repeat password",
+		"loginSwitchText": "Already have an account?",
+		"loginSwitch": "Login",
+		"registrationFailed": "Error at sign on",
+		"passwordMismatch": "Passwords are different",
+		"registrationSuccess": "Successfully registered. Sign in now!"
+	}
 }
