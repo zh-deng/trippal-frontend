@@ -75,7 +75,7 @@ const globalSlice = createSlice({
 
 				const updatedTrip = {
 					...trip,
-					roadMapItems: [...(trip.roadMapItems || []), newRoadmapItem],
+					roadmapItems: [...(trip.roadmapItems || []), newRoadmapItem],
 				};
 
 				state.activeUser.trips = state.activeUser.trips.map((t) =>
@@ -95,8 +95,8 @@ const globalSlice = createSlice({
 
 				const updatedTrip = {
 					...trip,
-					roadMapItems: [
-						...(trip.roadMapItems ?? []).map((item) => {
+					roadmapItems: [
+						...(trip.roadmapItems ?? []).map((item) => {
 							return updatedRoadmapItem.id !== item.id
 								? item
 								: updatedRoadmapItem;
@@ -121,7 +121,7 @@ const globalSlice = createSlice({
 
 				const updatedTrip = {
 					...trip,
-					roadMapItems: [...roadmapItems],
+					roadmapItems: [...roadmapItems],
 				};
 
 				state.activeUser.trips = state.activeUser.trips.map((t) =>
@@ -134,14 +134,14 @@ const globalSlice = createSlice({
 			if (state.activeUser !== null && state.activeTripIndex !== null) {
 				const trip = state.activeUser.trips[state.activeTripIndex];
 
-				const updatedRoadMapItems = (trip.roadMapItems ?? []).filter(
+				const updatedRoadMapItems = (trip.roadmapItems ?? []).filter(
 					(roadmapItem) => roadmapItem.id !== roadmapItemId
 				);
 
 				const updatedTrips = [...state.activeUser.trips];
 				updatedTrips[state.activeTripIndex] = {
 					...trip,
-					roadMapItems: updatedRoadMapItems,
+					roadmapItems: updatedRoadMapItems,
 				};
 
 				state.activeUser = {

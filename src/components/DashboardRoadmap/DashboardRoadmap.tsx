@@ -58,7 +58,7 @@ export const DashboardRoadmap = () => {
 		) {
 			setTitleInput(activeUser.trips[activeTripIndex].title);
 
-			if (!activeUser.trips[activeTripIndex].roadMapItems) {
+			if (!activeUser.trips[activeTripIndex].roadmapItems) {
 				fetchRoadmapList(activeUser.trips[activeTripIndex].id!)
 					.then((roadmapList) => {
 						const roadmapItems = roadmapList.map((item) => {
@@ -75,7 +75,7 @@ export const DashboardRoadmap = () => {
 					);
 			} else {
 				setRoadmapItems(
-					activeUser.trips[activeTripIndex].roadMapItems.map((item) => {
+					activeUser.trips[activeTripIndex].roadmapItems.map((item) => {
 						return {
 							id: item.id,
 							title: item.title,
@@ -92,10 +92,10 @@ export const DashboardRoadmap = () => {
 			activeUser !== null &&
 			activeTripIndex !== null &&
 			activeTripIndex >= 0 &&
-			activeUser.trips[activeTripIndex].roadMapItems
+			activeUser.trips[activeTripIndex].roadmapItems
 		) {
 			const roadmapItem =
-				activeUser.trips[activeTripIndex].roadMapItems.find(
+				activeUser.trips[activeTripIndex].roadmapItems.find(
 					(item) => item.id === activeRoadmapItemId
 				) ?? null;
 

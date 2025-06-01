@@ -68,7 +68,7 @@ export const DashboardInput = () => {
 			loadInputData(activeRoadmapItemId);
 		} else {
 			if (validStates) {
-				(activeUser.trips[activeTripIndex].roadMapItems ?? []).forEach(
+				(activeUser.trips[activeTripIndex].roadmapItems ?? []).forEach(
 					(item) => {
 						if (item.id === activeRoadmapItemId) {
 							setFormData({
@@ -90,7 +90,7 @@ export const DashboardInput = () => {
 
 	const roadmapItemsCached = (id: number) => {
 		if (validStates) {
-			return (activeUser.trips[activeTripIndex].roadMapItems ?? []).some(
+			return (activeUser.trips[activeTripIndex].roadmapItems ?? []).some(
 				(item) => item.id === id
 			);
 		}

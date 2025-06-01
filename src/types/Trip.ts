@@ -5,5 +5,5 @@ export type Trip = {
   title: string,
   isPublic: boolean,
   userId: number,
-  roadMapItems?: RoadmapItems
+  roadmapItems?: RoadmapItems
 }
