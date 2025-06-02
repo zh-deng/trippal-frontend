@@ -186,7 +186,6 @@ export const DashboardInput = () => {
 			if (activeRoadmapItemId === null) {
 				createRoadmapItem(newRoadmapItem)
 					.then((newRoadmapItem) => {
-						console.log(newRoadmapItem);
 						dispatch(addNewRoadmapItem(newRoadmapItem));
 						dispatch(setActiveRoadmapItemId(newRoadmapItem.id!));
 					})

@@ -39,7 +39,6 @@ export const MapComponent: React.FC = () => {
 
 		useEffect(() => {
 			if (currentCountry && !hasSameCoords(currentCountryCoord, currentCountry.coordinates as LatLngTuple)) {
-				console.log("country")
 				map.flyTo(currentCountry.coordinates, 6, { duration: 1.5 });
 				currentCountryCoord = currentCountry.coordinates as LatLngTuple;
 				currentCityCoord = null;
@@ -49,7 +48,6 @@ export const MapComponent: React.FC = () => {
 
 		useEffect(() => {
 			if (currentCity && !hasSameCoords(currentCityCoord, currentCity.coordinates as LatLngTuple)) {
-				console.log("city")
 				map.flyTo(currentCity.coordinates, 11, { duration: 1.5 });
 				currentCityCoord = currentCity.coordinates as LatLngTuple;
 				currentAttractionCoord = null;
@@ -58,7 +56,6 @@ export const MapComponent: React.FC = () => {
 
 		useEffect(() => {
 			if (currentAttraction && !hasSameCoords(currentAttractionCoord, currentAttraction.coordinates as LatLngTuple)) {
-					console.log("attraction")
 					map.flyTo(currentAttraction.coordinates, 17, { duration: 1.5 });
 					currentAttractionCoord = currentAttraction.coordinates as LatLngTuple;
 			}
