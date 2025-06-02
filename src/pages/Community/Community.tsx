@@ -7,21 +7,43 @@ import { CommunityItem } from "./CommunityItem/CommunityItem";
 
 export const Community = () => {
 	const [communityTrips, setCommunityTrips] = useState<Trip[]>([]);
-	const [currentPage, setCurrentPage] = useState<number>(0);
+	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [totalPages, setTotalPages] = useState<number>(0);
+	const [filteredCountry, setFilteredCountry] = useState<string | null>(null);
 
 	const filterCountries = ["Germany", "France", "Spain", "China", "Italy"];
 
+	const itemsPerPage = 6;
+	const loadedItems = communityTrips.length;
+	const expectedItems = currentPage * itemsPerPage;
+
+	const isPageDataMissing = loadedItems < expectedItems;
+	const isLastPageWithRemainingItems =
+		currentPage === totalPages && loadedItems > (totalPages - 1) * itemsPerPage;
+
+	const isInRange = (index: number) => {
+		return (
+			(currentPage - 1) * itemsPerPage <= index &&
+			index < currentPage * itemsPerPage
+		);
+	};
+
 	useEffect(() => {
-		fetchCommunityTrips(0)
+		if (isPageDataMissing && !isLastPageWithRemainingItems) {
+			fetchPublicTrips(currentPage - 1, filteredCountry);
+		}
+	}, [currentPage, filteredCountry]);
+
+	const fetchPublicTrips = (page: number, country: string | null) => {
+		fetchCommunityTrips(page, country)
 			.then((response) => {
-				setCommunityTrips(response.content);
+				setCommunityTrips((prev) => [...prev, ...response.content]);
 				setTotalPages(response.totalPages);
 			})
 			.catch((error) =>
 				console.error("Failed to load community trips:", error)
 			);
-	}, []);
+	};
 
 	const handlePreviousPage = () => {
 		setCurrentPage(currentPage - 1);
@@ -31,6 +53,12 @@ export const Community = () => {
 		setCurrentPage(currentPage + 1);
 	};
 
+	const handleFilterCountry = (country: string) => {
+		setFilteredCountry(filteredCountry === country ? null : country);
+		setCurrentPage(1);
+		setCommunityTrips([]);
+	};
+
 	return (
 		<div className="community">
 			<div className="community-container">
@@ -38,18 +66,30 @@ export const Community = () => {
 					<Text content={"community.header"} isBold />
 				</div>
 				<div className="community-container-filter">
-					{filterCountries.map((country) => (
-						<div className="filter-item">{country}</div>
+					{filterCountries.map((country, index) => (
+						<button
+							className={`filter-item ${
+								filteredCountry === country ? "active" : ""
+							}`}
+							key={index}
+							onClick={() => handleFilterCountry(country)}
+						>
+							{country}
+						</button>
 					))}
 				</div>
 				<div className="community-container-trips">
-					{communityTrips.map((trip) => {
-						return <CommunityItem trip={trip} key={trip.id} />;
+					{communityTrips.map((trip, index) => {
+						return isInRange(index) ? (
+							<CommunityItem trip={trip} key={index} />
+						) : (
+							<></>
+						);
 					})}
 				</div>
 				<div className="community-container-pagination">
 					<button
-						className={currentPage === 0 ? "hidden" : ""}
+						className={currentPage === 1 ? "hidden" : ""}
 						onClick={handlePreviousPage}
 					>
 						<Text content={"community.previous"} />
