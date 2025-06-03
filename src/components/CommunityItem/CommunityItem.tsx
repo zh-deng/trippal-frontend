@@ -1,18 +1,27 @@
-import { RoadmapItem } from "../../../types/Roadmap";
-import { Trip } from "../../../types/Trip";
+import { RoadmapItem } from "../../types/Roadmap";
+import { Trip } from "../../types/Trip";
 import "./CommunityItem.scss";
 import { FaStar, FaCommentAlt } from "react-icons/fa";
 import { IoOpenOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 type CommunityItemProps = {
 	trip: Trip;
+	onClick: (tripId: number) => void;
 };
 
-export const CommunityItem: React.FC<CommunityItemProps> = ({ trip }) => {
+export const CommunityItem: React.FC<CommunityItemProps> = ({
+	trip,
+	onClick,
+}) => {
 	const roadmapItems: RoadmapItem[] = trip.roadmapItems ?? [];
 
 	return (
-		<div className="community-item">
+		<motion.div
+			className="community-item"
+			onClick={() => onClick(trip.id!)}
+			layoutId={`card-${trip.id}`}
+		>
 			<div className="community-item-title">
 				{trip.title}
 				<IoOpenOutline size={22} />
@@ -40,6 +49,6 @@ export const CommunityItem: React.FC<CommunityItemProps> = ({ trip }) => {
 					<FaCommentAlt />
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
