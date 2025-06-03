@@ -68,7 +68,11 @@
 	"community": {
 		"header": "Find your dream trip",
 		"previous": "Previous",
-		"next": "Next"
+		"next": "Next",
+		"expandedView": {
+			"downloadIcon": "Download trip",
+			"copyIcon": "Save trip"
+		}
 	},
 	"loginModal": {
 		"login": "Login",

@@ -72,7 +72,11 @@
 	"community": {
 		"header": "Finde deine Traumreise",
 		"previous": "Vorherige",
-		"next": "Nächste"
+		"next": "Nächste",
+		"expandedView": {
+			"downloadIcon": "Reise downloaden",
+			"copyIcon": "Reise speichern"
+		}
 	},
 	"loginModal": {
 		"login": "Einloggen",
