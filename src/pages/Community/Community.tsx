@@ -3,13 +3,16 @@ import { Text } from "../../components/Text/Text";
 import "./Community.scss";
 import { fetchCommunityTrips } from "../../services/communityService";
 import { Trip } from "../../types/Trip";
-import { CommunityItem } from "./CommunityItem/CommunityItem";
+import { CommunityItem } from "../../components/CommunityItem/CommunityItem";
+import { AnimatePresence } from "framer-motion";
+import { ExpandedView } from "../../components/ExpandedView/ExpandedView";
 
 export const Community = () => {
 	const [communityTrips, setCommunityTrips] = useState<Trip[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [filteredCountry, setFilteredCountry] = useState<string | null>(null);
+	const [expandedId, setExpandedId] = useState<number | null>(null);
 
 	const filterCountries = ["Germany", "France", "Spain", "China", "Italy"];
 
@@ -81,12 +84,21 @@ export const Community = () => {
 				<div className="community-container-trips">
 					{communityTrips.map((trip, index) => {
 						return isInRange(index) ? (
-							<CommunityItem trip={trip} key={index} />
+							<CommunityItem trip={trip} key={index} onClick={setExpandedId} />
 						) : (
 							<></>
 						);
 					})}
 				</div>
+				<AnimatePresence>
+					{expandedId !== null && (
+						<ExpandedView
+							trip={communityTrips.find((trip) => trip.id === expandedId)!}
+							onClose={() => setExpandedId(null)}
+							expandedId={expandedId}
+						/>
+					)}
+				</AnimatePresence>
 				<div className="community-container-pagination">
 					<button
 						className={currentPage === 1 ? "hidden" : ""}

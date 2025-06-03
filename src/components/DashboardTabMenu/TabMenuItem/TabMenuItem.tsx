@@ -28,7 +28,6 @@ export const TabMenuItem: React.FC<TabMenuItemProps> = ({
 	const modalRef = useRef<HTMLDivElement>(null);
 
 	const toggleModal = () => {
-		// TODO
 		setOptionModal(activeOptionModal === index ? null : index);
 	};
 
