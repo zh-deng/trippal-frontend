@@ -71,7 +71,13 @@
 		"next": "Next",
 		"expandedView": {
 			"downloadIcon": "Download trip",
-			"copyIcon": "Save trip"
+			"copyIcon": "Save trip",
+			"comments": {
+				"header": "Comments",
+				"fallback": "No Comments yet. Be the first!",
+				"placeholder": "Comment here",
+				"submit": "Comment"
+			}
 		}
 	},
 	"loginModal": {

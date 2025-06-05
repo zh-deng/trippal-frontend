@@ -75,7 +75,13 @@
 		"next": "Nächste",
 		"expandedView": {
 			"downloadIcon": "Reise downloaden",
-			"copyIcon": "Reise speichern"
+			"copyIcon": "Reise speichern",
+			"comments": {
+				"header": "Kommentare",
+				"fallback": "Keine Kommentare. Sei der Erste!",
+				"placeholder": "Hier kommentieren",
+				"submit": "Kommentieren"
+			}
 		}
 	},
 	"loginModal": {
