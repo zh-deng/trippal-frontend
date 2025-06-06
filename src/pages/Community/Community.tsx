@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Text } from "../../components/Text/Text";
 import "./Community.scss";
 import { fetchCommunityTrips } from "../../services/communityService";
-import { TripExtended } from "../../types/Trip";
+import { Comment, TripExtended } from "../../types/Trip";
 import { CommunityItem } from "../../components/CommunityItem/CommunityItem";
 import { AnimatePresence } from "framer-motion";
 import { ExpandedView } from "../../components/ExpandedView/ExpandedView";
@@ -63,6 +63,20 @@ export const Community = () => {
 		setCommunityTrips([]);
 	};
 
+	const updateTripComments = (comment: Comment) => {
+		setCommunityTrips((prev) => {
+			return [
+				...prev.map((trip) => {
+					if (trip.id !== comment.tripId) {
+						return trip;
+					} else {
+						return { ...trip, comments: [...trip.comments, comment] };
+					}
+				}),
+			];
+		});
+	};
+
 	return (
 		<div className="community">
 			<div className="community-container">
@@ -85,7 +99,11 @@ export const Community = () => {
 				<div className="community-container-trips">
 					{communityTrips.map((trip, index) => {
 						return isInRange(index) ? (
-							<CommunityItem trip={trip} key={trip.id} onClick={setExpandedId} />
+							<CommunityItem
+								trip={trip}
+								key={trip.id}
+								onClick={setExpandedId}
+							/>
 						) : (
 							<React.Fragment key={`empty-${trip.id}`}></React.Fragment>
 						);
@@ -97,6 +115,7 @@ export const Community = () => {
 							trip={communityTrips.find((trip) => trip.id === expandedId)!}
 							onClose={() => setExpandedId(null)}
 							expandedId={expandedId}
+							onCommentUpdate={updateTripComments}
 						/>
 					)}
 				</AnimatePresence>

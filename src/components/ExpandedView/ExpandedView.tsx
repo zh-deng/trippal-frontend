@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Text } from "../Text/Text";
-import { Trip, TripExtended } from "../../types/Trip";
+import { Comment, TripExtended } from "../../types/Trip";
 import "./ExpandedView.scss";
 import { motion } from "framer-motion";
 import { FaStar, FaCopy, FaArrowDown } from "react-icons/fa";
@@ -9,23 +9,31 @@ import { RoadmapItemCard } from "../RoadmapItemCard/RoadmapItemCard";
 import { useTranslation } from "react-i18next";
 import { CommentItem } from "../CommentItem/CommentItem";
 import React from "react";
+import { createTripComment } from "../../services/tripCommentService";
+import { TripComment } from "../../dtos/tripComment.dto";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
 
 type ExpandedViewProps = {
 	trip: TripExtended;
 	onClose: () => void;
 	expandedId: number;
+	onCommentUpdate: (comment: Comment) => void;
 };
 
 export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	trip,
 	onClose,
 	expandedId,
+	onCommentUpdate,
 }) => {
 	const { t } = useTranslation();
 	const roadmapItems = trip.roadmapItems ?? [];
 	const modalRef = useRef<HTMLDivElement>(null);
-	const comments = trip.comments;
+	const [comments, setComments] = useState<Comment[]>(trip.comments);
 	const [currentComment, setCurrentComment] = useState<string>("");
+
+	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -43,11 +51,33 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 		};
 	}, [expandedId]);
 
+	useEffect(() => {
+		setComments(trip.comments);
+	}, [trip.comments]);
+
 	const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setCurrentComment(e.target.value);
 	};
 
-	const handleCommentSubmission = () => {};
+	const handleCommentSubmission = (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (activeUser !== null) {
+			const comment: TripComment = {
+				authorId: activeUser.id,
+				content: currentComment,
+				tripId: trip.id,
+			};
+			createTripComment(comment)
+				.then((tripComment) => {
+					onCommentUpdate(tripComment);
+					setCurrentComment("");
+				})
+				.catch((error) =>
+					console.error("Failed to create trip comment:", error)
+				);
+		}
+	};
 
 	const CommentsFallback = () => (
 		<div className="comments-fallback">
