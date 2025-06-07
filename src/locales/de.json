@@ -80,7 +80,9 @@
 				"header": "Kommentare",
 				"fallback": "Keine Kommentare. Sei der Erste!",
 				"placeholder": "Hier kommentieren",
-				"submit": "Kommentieren"
+				"submit": "Kommentieren",
+				"wysiwygFallback": "Logge dich ein, um zu kommentieren.",
+				"delete": "Delete comment"
 			}
 		}
 	},

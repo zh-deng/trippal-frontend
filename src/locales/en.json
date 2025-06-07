@@ -76,7 +76,9 @@
 				"header": "Comments",
 				"fallback": "No Comments yet. Be the first!",
 				"placeholder": "Comment here",
-				"submit": "Comment"
+				"submit": "Comment",
+				"wysiwygFallback": "Sign in to add comments.",
+				"delete": "Delete comment"
 			}
 		}
 	},
