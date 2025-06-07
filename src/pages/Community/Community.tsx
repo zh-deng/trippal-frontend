@@ -64,17 +64,29 @@ export const Community = () => {
 	};
 
 	const updateTripComments = (comment: Comment) => {
-		setCommunityTrips((prev) => {
-			return [
-				...prev.map((trip) => {
-					if (trip.id !== comment.tripId) {
-						return trip;
-					} else {
-						return { ...trip, comments: [...trip.comments, comment] };
-					}
-				}),
-			];
-		});
+		setCommunityTrips((prev) =>
+			prev.map((trip) => {
+				if (trip.id !== comment.tripId) {
+					return trip;
+				} else {
+					return { ...trip, comments: [...trip.comments, comment] };
+				}
+			})
+		);
+	};
+
+	const deleteTripComment = (commentId: number, tripId: number) => {
+		setCommunityTrips((prev) =>
+			prev.map((trip) => {
+				if (trip.id !== tripId) {
+					return trip;
+				}
+				return {
+					...trip,
+					comments: trip.comments.filter((comment) => comment.id !== commentId),
+				};
+			})
+		);
 	};
 
 	return (
@@ -116,6 +128,7 @@ export const Community = () => {
 							onClose={() => setExpandedId(null)}
 							expandedId={expandedId}
 							onCommentUpdate={updateTripComments}
+							onCommentDelete={deleteTripComment}
 						/>
 					)}
 				</AnimatePresence>

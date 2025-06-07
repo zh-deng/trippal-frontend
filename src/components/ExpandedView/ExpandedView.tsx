@@ -9,7 +9,10 @@ import { RoadmapItemCard } from "../RoadmapItemCard/RoadmapItemCard";
 import { useTranslation } from "react-i18next";
 import { CommentItem } from "../CommentItem/CommentItem";
 import React from "react";
-import { createTripComment } from "../../services/tripCommentService";
+import {
+	createTripComment,
+	removeTripComment,
+} from "../../services/tripCommentService";
 import { TripComment } from "../../dtos/tripComment.dto";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
@@ -19,6 +22,7 @@ type ExpandedViewProps = {
 	onClose: () => void;
 	expandedId: number;
 	onCommentUpdate: (comment: Comment) => void;
+	onCommentDelete: (commentId: number, tripId: number) => void;
 };
 
 export const ExpandedView: React.FC<ExpandedViewProps> = ({
@@ -26,6 +30,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	onClose,
 	expandedId,
 	onCommentUpdate,
+	onCommentDelete,
 }) => {
 	const { t } = useTranslation();
 	const roadmapItems = trip.roadmapItems ?? [];
@@ -34,6 +39,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	const [currentComment, setCurrentComment] = useState<string>("");
 
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
+	const loggedIn = activeUser !== null;
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -62,7 +68,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	const handleCommentSubmission = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (activeUser !== null) {
+		if (loggedIn) {
 			const comment: TripComment = {
 				authorId: activeUser.id,
 				content: currentComment,
@@ -79,9 +85,27 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 		}
 	};
 
+	const deleteComment = (commentId: number, tripId: number) => {
+		removeTripComment(commentId)
+			.then(() => {
+				onCommentDelete(commentId, tripId);
+			})
+			.catch((error) => console.error("Failed to delete trip comment:", error));
+	};
+
 	const CommentsFallback = () => (
 		<div className="comments-fallback">
 			<Text content={"community.expandedView.comments.fallback"} />
+		</div>
+	);
+
+	// if user is not logged in
+	const WysiwygFallback = () => (
+		<div className="wysiwyg-fallback">
+			<Text
+				content={"community.expandedView.comments.wysiwygFallback"}
+				isBold
+			/>
 		</div>
 	);
 
@@ -134,28 +158,39 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 					<div className="content-comments-container">
 						{comments.length > 0 ? (
 							comments.map((comment) => {
-								return <CommentItem comment={comment} key={comment.id} />;
+								return (
+									<CommentItem
+										comment={comment}
+										key={comment.id}
+										onDelete={deleteComment}
+										userId={loggedIn ? activeUser.id : -1}
+									/>
+								);
 							})
 						) : (
 							<CommentsFallback />
 						)}
 					</div>
-					<form onSubmit={handleCommentSubmission}>
-						<div className="content-comments-wysiwyg">
-							<textarea
-								id="textarea"
-								name="textarea"
-								placeholder={t("community.expandedView.comments.placeholder")}
-								value={currentComment}
-								onChange={handleTextareaChange}
-							/>
-						</div>
-						<div className="content-comments-submit">
-							<button type="submit">
-								<Text content={"community.expandedView.comments.submit"} />
-							</button>
-						</div>
-					</form>
+					{loggedIn ? (
+						<form onSubmit={handleCommentSubmission}>
+							<div className="content-comments-wysiwyg">
+								<textarea
+									id="textarea"
+									name="textarea"
+									placeholder={t("community.expandedView.comments.placeholder")}
+									value={currentComment}
+									onChange={handleTextareaChange}
+								/>
+							</div>
+							<div className="content-comments-submit">
+								<button type="submit">
+									<Text content={"community.expandedView.comments.submit"} />
+								</button>
+							</div>
+						</form>
+					) : (
+						<WysiwygFallback />
+					)}
 				</div>
 			</div>
 		</motion.div>

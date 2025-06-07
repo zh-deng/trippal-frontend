@@ -21,6 +21,7 @@ export type TripExtended = {
 export type Comment = {
 	id?: number;
 	author: string;
+	authorId: number;
 	content: string;
 	createdAt: Date;
 	tripId: number
