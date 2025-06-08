@@ -89,6 +89,21 @@ export const Community = () => {
 		);
 	};
 
+	const toggleStar = (tripId: number) => {
+		setCommunityTrips((prev) =>
+			prev.map((trip) => {
+				if (trip.id !== tripId) {
+					return trip;
+				}
+				return {
+					...trip,
+					stars: trip.isStarredByCurrentUser ? trip.stars - 1 : trip.stars + 1,
+					isStarredByCurrentUser: !trip.isStarredByCurrentUser,
+				};
+			})
+		);
+	};
+
 	return (
 		<div className="community">
 			<div className="community-container">
@@ -129,6 +144,7 @@ export const Community = () => {
 							expandedId={expandedId}
 							onCommentUpdate={updateTripComments}
 							onCommentDelete={deleteTripComment}
+							onToggleStar={toggleStar}
 						/>
 					)}
 				</AnimatePresence>

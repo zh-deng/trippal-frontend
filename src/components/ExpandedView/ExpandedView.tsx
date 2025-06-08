@@ -3,7 +3,7 @@ import { Text } from "../Text/Text";
 import { Comment, TripExtended } from "../../types/Trip";
 import "./ExpandedView.scss";
 import { motion } from "framer-motion";
-import { FaStar, FaCopy, FaArrowDown } from "react-icons/fa";
+import { FaStar, FaCopy, FaArrowDown, FaRegStar } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import { RoadmapItemCard } from "../RoadmapItemCard/RoadmapItemCard";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ import {
 import { TripComment } from "../../dtos/tripComment.dto";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
+import { starTrip, unstarTrip } from "../../services/starService";
 
 type ExpandedViewProps = {
 	trip: TripExtended;
@@ -23,6 +24,7 @@ type ExpandedViewProps = {
 	expandedId: number;
 	onCommentUpdate: (comment: Comment) => void;
 	onCommentDelete: (commentId: number, tripId: number) => void;
+	onToggleStar: (tripId: number) => void;
 };
 
 export const ExpandedView: React.FC<ExpandedViewProps> = ({
@@ -31,6 +33,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	expandedId,
 	onCommentUpdate,
 	onCommentDelete,
+	onToggleStar,
 }) => {
 	const { t } = useTranslation();
 	const roadmapItems = trip.roadmapItems ?? [];
@@ -93,6 +96,22 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 			.catch((error) => console.error("Failed to delete trip comment:", error));
 	};
 
+	const handleStarClick = () => {
+		if (trip.isStarredByCurrentUser) {
+			unstarTrip(trip.id)
+				.then(() => {
+					onToggleStar(trip.id);
+				})
+				.catch((error) => console.error("Failed to star trip:", error));
+		} else {
+			starTrip(trip.id)
+				.then(() => {
+					onToggleStar(trip.id);
+				})
+				.catch((error) => console.error("Failed to unstar trip:", error));
+		}
+	};
+
 	const CommentsFallback = () => (
 		<div className="comments-fallback">
 			<Text content={"community.expandedView.comments.fallback"} />
@@ -122,11 +141,21 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 				<div className={`view-actionbar-icons ${!loggedIn && "disabled"}`}>
 					<div className="view-actionbar-stars">
 						{trip.stars ?? 0}
-						<FaStar
-							className="icon"
-							size={22}
-							title={t("community.expandedView.starIcon")}
-						/>
+						{trip.isStarredByCurrentUser ? (
+							<FaStar
+								className="icon"
+								size={22}
+								title={t("community.expandedView.starIcon")}
+								onClick={handleStarClick}
+							/>
+						) : (
+							<FaRegStar
+								className="icon"
+								size={22}
+								title={t("community.expandedView.starIcon")}
+								onClick={handleStarClick}
+							/>
+						)}
 					</div>
 					<FaCopy
 						className="icon"
