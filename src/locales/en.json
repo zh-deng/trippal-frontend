@@ -72,7 +72,7 @@
 		"expandedView": {
 			"downloadIcon": "Download trip",
 			"copyIcon": "Save trip",
-			"starIcon": "Favorite trip",
+			"starIcon": "Like trip",
 			"back": "Back",
 			"comments": {
 				"header": "Comments",
