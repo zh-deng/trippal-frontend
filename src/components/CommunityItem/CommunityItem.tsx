@@ -1,12 +1,12 @@
 import { RoadmapItem } from "../../types/Roadmap";
-import { Trip } from "../../types/Trip";
+import { TripExtended } from "../../types/Trip";
 import "./CommunityItem.scss";
 import { FaStar, FaCommentAlt } from "react-icons/fa";
 import { IoOpenOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 type CommunityItemProps = {
-	trip: Trip;
+	trip: TripExtended;
 	onClick: (tripId: number) => void;
 };
 
@@ -39,13 +39,11 @@ export const CommunityItem: React.FC<CommunityItemProps> = ({
 			</div>
 			<div className="community-item-metadata">
 				<div className="metadata-stars">
-					{/* { trip.stars ?? 0 }  */}
-					0
+					{trip.stars ?? 0}
 					<FaStar />
 				</div>
 				<div className="metadata-comments">
-					{/* { trip.comments.length ?? 0 } */}
-					0
+					{trip.comments.length ?? 0}
 					<FaCommentAlt />
 				</div>
 			</div>
