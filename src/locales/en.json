@@ -72,6 +72,8 @@
 		"expandedView": {
 			"downloadIcon": "Download trip",
 			"copyIcon": "Save trip",
+			"starIcon": "Favorite trip",
+			"back": "Back",
 			"comments": {
 				"header": "Comments",
 				"fallback": "No Comments yet. Be the first!",

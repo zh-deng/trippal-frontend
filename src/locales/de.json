@@ -76,6 +76,8 @@
 		"expandedView": {
 			"downloadIcon": "Reise downloaden",
 			"copyIcon": "Reise speichern",
+			"starIcon": "Favorite trip",
+			"back": "Zurück",
 			"comments": {
 				"header": "Kommentare",
 				"fallback": "Keine Kommentare. Sei der Erste!",
