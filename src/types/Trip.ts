@@ -15,7 +15,8 @@ export type TripExtended = {
 	userId: number;
 	roadmapItems?: RoadmapItems;
   stars: number,
-  comments: Comment[]
+  comments: Comment[],
+	isStarredByCurrentUser: boolean
 };
 
 export type Comment = {
