@@ -37,9 +37,12 @@
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
+			}
 
-				.actionbar-star {
-					cursor: pointer;
+			&.disabled {
+				.icon {
+					opacity: 0.7;
+					cursor: default;
 				}
 			}
 		}

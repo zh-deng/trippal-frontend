@@ -117,12 +117,16 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 		>
 			<div className="view-actionbar">
 				<button onClick={onClose}>
-					<Text content={"Zurück"} />
+					<Text content={"community.expandedView.back"} />
 				</button>
-				<div className="view-actionbar-icons">
+				<div className={`view-actionbar-icons ${!loggedIn && "disabled"}`}>
 					<div className="view-actionbar-stars">
 						{trip.stars ?? 0}
-						<FaStar className="actionbar-star" size={22} />
+						<FaStar
+							className="icon"
+							size={22}
+							title={t("community.expandedView.starIcon")}
+						/>
 					</div>
 					<FaCopy
 						className="icon"
