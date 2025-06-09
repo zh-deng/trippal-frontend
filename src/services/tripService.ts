@@ -66,3 +66,18 @@ export async function removeTrip(tripId: number) {
     throw new Error(`Deleting trip failed: ${errorText}`);
   }
 }
+
+export async function copyTrip(tripId: number): Promise<Trip> {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/copy`, {
+    method: "POST",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Saving a shared trip failed: ${errorText}`);
+  }
+
+  const sharedTrip: Trip = await response.json();
+  return sharedTrip;
+}
