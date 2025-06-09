@@ -14,9 +14,12 @@ import {
 	removeTripComment,
 } from "../../services/tripCommentService";
 import { TripComment } from "../../dtos/tripComment.dto";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { starTrip, unstarTrip } from "../../services/starService";
+import { copyTrip } from "../../services/tripService";
+import { addNewTrip } from "../../state/global/globalSlice";
+import { toast } from "react-toastify";
 
 type ExpandedViewProps = {
 	trip: TripExtended;
@@ -43,6 +46,8 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 
 	const activeUser = useSelector((state: RootState) => state.global.activeUser);
 	const loggedIn = activeUser !== null;
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -97,6 +102,10 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	};
 
 	const handleStarClick = () => {
+		if (!loggedIn) {
+			return;
+		}
+
 		if (trip.isStarredByCurrentUser) {
 			unstarTrip(trip.id)
 				.then(() => {
@@ -110,6 +119,19 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 				})
 				.catch((error) => console.error("Failed to unstar trip:", error));
 		}
+	};
+
+	const handleSaveTrip = () => {
+		if (!loggedIn) {
+			return;
+		}
+
+		copyTrip(trip.id)
+			.then((trip) => {
+				dispatch(addNewTrip(trip));
+				toast.success(t("community.expandedView.copySuccess"));
+			})
+			.catch((error) => console.error("Failed to unstar trip:", error));
 	};
 
 	const CommentsFallback = () => (
@@ -141,7 +163,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 				<div className={`view-actionbar-icons ${!loggedIn && "disabled"}`}>
 					<div className="view-actionbar-stars">
 						{trip.stars ?? 0}
-						{trip.isStarredByCurrentUser ? (
+						{trip.isStarredByCurrentUser || !loggedIn ? (
 							<FaStar
 								className="icon"
 								size={22}
@@ -161,6 +183,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 						className="icon"
 						size={22}
 						title={t("community.expandedView.copyIcon")}
+						onClick={handleSaveTrip}
 					/>
 					<FiDownload
 						className="icon"
