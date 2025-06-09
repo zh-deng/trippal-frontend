@@ -81,7 +81,8 @@
 				"submit": "Comment",
 				"wysiwygFallback": "Sign in to add comments.",
 				"delete": "Delete comment"
-			}
+			},
+			"copySuccess": "Successfully saved trip"
 		}
 	},
 	"loginModal": {

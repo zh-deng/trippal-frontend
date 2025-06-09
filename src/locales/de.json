@@ -85,7 +85,8 @@
 				"submit": "Kommentieren",
 				"wysiwygFallback": "Logge dich ein, um zu kommentieren.",
 				"delete": "Delete comment"
-			}
+			},
+			"copySuccess": "Reise erfolgreich gespeichert"
 		}
 	},
 	"loginModal": {
