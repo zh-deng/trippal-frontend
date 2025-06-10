@@ -14,9 +14,9 @@ export type TripExtended = {
 	isPublic: boolean;
 	userId: number;
 	roadmapItems?: RoadmapItems;
-  stars: number,
-  comments: Comment[],
-	isStarredByCurrentUser: boolean
+	stars: number;
+	comments: Comment[];
+	isStarredByCurrentUser: boolean;
 };
 
 export type Comment = {
@@ -25,5 +25,10 @@ export type Comment = {
 	authorId: number;
 	content: string;
 	createdAt: Date;
-	tripId: number
+	tripId: number;
+};
+
+export type DownloadPdfResponse = {
+	data: Blob;
+	fileName: string;
 };
