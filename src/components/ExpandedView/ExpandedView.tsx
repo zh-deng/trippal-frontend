@@ -17,7 +17,7 @@ import { TripComment } from "../../dtos/tripComment.dto";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { starTrip, unstarTrip } from "../../services/starService";
-import { copyTrip } from "../../services/tripService";
+import { copyTrip, downloadTrip } from "../../services/tripService";
 import { addNewTrip } from "../../state/global/globalSlice";
 import { toast } from "react-toastify";
 
@@ -38,7 +38,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 	onCommentDelete,
 	onToggleStar,
 }) => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const roadmapItems = trip.roadmapItems ?? [];
 	const modalRef = useRef<HTMLDivElement>(null);
 	const [comments, setComments] = useState<Comment[]>(trip.comments);
@@ -134,6 +134,26 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 			.catch((error) => console.error("Failed to unstar trip:", error));
 	};
 
+	const handleDownloadTrip = () => {
+		if (!loggedIn) {
+			return;
+		}
+
+		downloadTrip(trip.id, i18n.language)
+			.then(({ data, fileName }) => {
+				const url = window.URL.createObjectURL(new Blob([data]));
+				const link = document.createElement("a");
+				link.href = url;
+				link.setAttribute("download", fileName);
+				document.body.appendChild(link);
+				link.click();
+
+				link.parentNode?.removeChild(link);
+				window.URL.revokeObjectURL(url);
+			})
+			.catch((error) => console.error("Failed to download trip:", error));
+	};
+
 	const CommentsFallback = () => (
 		<div className="comments-fallback">
 			<Text content={"community.expandedView.comments.fallback"} />
@@ -189,6 +209,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 						className="icon"
 						size={22}
 						title={t("community.expandedView.downloadIcon")}
+						onClick={handleDownloadTrip}
 					/>
 				</div>
 			</div>
