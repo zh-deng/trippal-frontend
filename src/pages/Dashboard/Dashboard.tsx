@@ -174,8 +174,6 @@ export const Dashboard = () => {
 
 	return (
 		<div className="dashboard">
-			{/* For testing purposes */}
-			{/* <div>{`Current user: ${JSON.stringify(activeUser)}`}</div> */}
 			{openDeleteModal && (
 				<div className="dashboard-delete-modal" ref={modalRef}>
 					<Text isBold content={"dashboard.deleteModal.text"} />
