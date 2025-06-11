@@ -7,15 +7,18 @@ import { CommunityItem } from "../../components/CommunityItem/CommunityItem";
 import { AnimatePresence } from "framer-motion";
 import { ExpandedView } from "../../components/ExpandedView/ExpandedView";
 import React from "react";
+import { fetchFilterCountries } from "../../services/roadmapItemService";
+import { Dropdown } from "../../components/Dropdown/Dropdown";
+import { useTranslation } from "react-i18next";
 
 export const Community = () => {
+	const { t } = useTranslation();
 	const [communityTrips, setCommunityTrips] = useState<TripExtended[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [filteredCountry, setFilteredCountry] = useState<string | null>(null);
 	const [expandedId, setExpandedId] = useState<number | null>(null);
-
-	const filterCountries = ["Germany", "France", "Spain", "China", "Italy"];
+	const [availableCountries, setAvailableCountries] = useState<string[]>([]);
 
 	const itemsPerPage = 6;
 	const loadedItems = communityTrips.length;
@@ -31,6 +34,14 @@ export const Community = () => {
 			index < currentPage * itemsPerPage
 		);
 	};
+
+	useEffect(() => {
+		fetchFilterCountries()
+			.then((countries) => setAvailableCountries(countries))
+			.catch((error) =>
+				console.error("Failed to load available countries:", error)
+			);
+	}, []);
 
 	useEffect(() => {
 		if (isPageDataMissing && !isLastPageWithRemainingItems) {
@@ -104,6 +115,12 @@ export const Community = () => {
 		);
 	};
 
+	const resetFilter = () => {
+		setFilteredCountry(null);
+		setCommunityTrips([]);
+		fetchPublicTrips(0, null);
+	};
+
 	return (
 		<div className="community">
 			<div className="community-container">
@@ -111,17 +128,17 @@ export const Community = () => {
 					<Text content={"community.header"} isBold />
 				</div>
 				<div className="community-container-filter">
-					{filterCountries.map((country, index) => (
-						<button
-							className={`filter-item ${
-								filteredCountry === country ? "active" : ""
-							}`}
-							key={index}
-							onClick={() => handleFilterCountry(country)}
-						>
-							{country}
+					<Dropdown
+						options={availableCountries}
+						value={filteredCountry}
+						defaultValue={t("community.expandedView.filterPlaceholder")}
+						onChange={handleFilterCountry}
+					/>
+					{filteredCountry && (
+						<button className="filter-reset" onClick={resetFilter}>
+							<Text content={"community.reset"} />
 						</button>
-					))}
+					)}
 				</div>
 				<div className="community-container-trips">
 					{communityTrips.map((trip, index) => {
