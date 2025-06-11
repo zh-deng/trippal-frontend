@@ -64,3 +64,18 @@ export async function deleteRoadmapItemById(id: number) {
     throw new Error(`Deleting a roadmap item failed: ${errorText}`);
   }
 }
+
+export async function fetchFilterCountries(): Promise<string[]> {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/roadmapItem/countries`, {
+    method: "GET",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Fetching filter countries failed: ${errorText}`);
+  }
+
+  const fetchedCountries: string[] = await response.json();
+  return fetchedCountries;
+}
