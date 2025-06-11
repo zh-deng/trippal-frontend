@@ -69,6 +69,7 @@
 		"header": "Find your dream trip",
 		"previous": "Previous",
 		"next": "Next",
+		"reset": "reset",
 		"expandedView": {
 			"downloadIcon": "Download trip",
 			"copyIcon": "Save trip",
@@ -82,7 +83,8 @@
 				"wysiwygFallback": "Sign in to add comments.",
 				"delete": "Delete comment"
 			},
-			"copySuccess": "Successfully saved trip"
+			"copySuccess": "Successfully saved trip",
+			"filterPlaceholder": "Filter"
 		}
 	},
 	"loginModal": {

@@ -73,6 +73,7 @@
 		"header": "Finde deine Traumreise",
 		"previous": "Vorherige",
 		"next": "Nächste",
+		"reset": "zurücksetzen",
 		"expandedView": {
 			"downloadIcon": "Reise downloaden",
 			"copyIcon": "Reise speichern",
@@ -86,7 +87,8 @@
 				"wysiwygFallback": "Logge dich ein, um zu kommentieren.",
 				"delete": "Delete comment"
 			},
-			"copySuccess": "Reise erfolgreich gespeichert"
+			"copySuccess": "Reise erfolgreich gespeichert",
+			"filterPlaceholder": "Filter"
 		}
 	},
 	"loginModal": {
