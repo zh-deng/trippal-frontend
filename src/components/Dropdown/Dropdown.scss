@@ -1,48 +1,50 @@
 .dropdown {
-  width: 15rem;
-  position: relative;
+	width: 15rem;
+	position: relative;
 
-  &-current {
-    padding: 0.25rem;
-    border: 1px solid gray;
-    background-color: white;
-    border-radius: 0.5rem;
+	&-current {
+		padding: 0.25rem;
+		border: 1px solid gray;
+		background-color: white;
+		border-radius: 0.25rem;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
 
-    button {
-      height: 100%;
-      width: 100%;
-      text-align: start;
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-    }
-  }
+		button {
+			height: 100%;
+			width: 100%;
+			text-align: start;
+			padding: 0.25rem 0.5rem;
+			cursor: pointer;
+		}
+	}
 
-  &-option-container {
-    width: 100%;
-    margin-top: 0.5rem;
-    max-height: 20rem;
-    border: 1px solid gray;
-    background-color: white;
-    overflow-y: auto;
-    border-radius: 0.5rem;
-    position: absolute;
-  }
+	&-option-container {
+		width: 100%;
+		margin-top: 0.5rem;
+		max-height: 20rem;
+		border: 1px solid gray;
+		background-color: white;
+		overflow-y: auto;
+		border-radius: 0.25rem;
+		position: absolute;
+	}
 
-  &-option-item {
+	&-option-item {
+		button {
+			width: 100%;
+			text-align: start;
+			padding: 0.5rem;
+			cursor: pointer;
 
-    button {
-      width: 100%;
-      text-align: start;
-      padding: 0.5rem;
-      cursor: pointer;
+			&:hover {
+				background-color: lightblue;
+			}
+		}
+	}
 
-      &:hover {
-        background-color: lightblue;
-      }
-    }
-  }
-
-  .options-hidden {
-    display: none;
-  }
+	.options-hidden {
+		display: none;
+	}
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./Dropdown.scss";
+import { FaCaretLeft, FaCaretDown } from "react-icons/fa";
 
 type DropdownProps = {
 	defaultValue?: any;
@@ -45,14 +46,13 @@ export const Dropdown = ({
 		onChange?.(option);
 	};
 
-	const selectedLabel = value?.name ?? defaultValue;
+	const selectedLabel = value?.name ?? value ?? defaultValue;
 
 	return (
 		<div className="dropdown" ref={dropdownRef}>
-			<div className="dropdown-current">
-				<button onClick={toggleExpansion}>
-					{selectedLabel}
-				</button>
+			<div className="dropdown-current" onClick={toggleExpansion}>
+				<button>{selectedLabel}</button>
+				{isExpanded ? <FaCaretDown size={22} /> : <FaCaretLeft size={22} />}
 			</div>
 			<div
 				className={`dropdown-option-container ${
@@ -64,10 +64,10 @@ export const Dropdown = ({
 						option !== value && (
 							<div
 								className="dropdown-option-item"
-								key={option.name+index}
+								key={option.name ?? option + index}
 								onClick={() => handleOptionSelect(option)}
 							>
-								<button>{option.name}</button>
+								<button>{option.name ?? option}</button>
 							</div>
 						)
 				)}
