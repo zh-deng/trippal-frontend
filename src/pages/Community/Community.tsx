@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Text } from "../../components/Text/Text";
 import "./Community.scss";
 import { fetchCommunityTrips } from "../../services/communityService";
@@ -19,6 +19,9 @@ export const Community = () => {
 	const [filteredCountry, setFilteredCountry] = useState<string | null>(null);
 	const [expandedId, setExpandedId] = useState<number | null>(null);
 	const [availableCountries, setAvailableCountries] = useState<string[]>([]);
+
+	// Workaround for strict mode to avoid double initial fetch
+	const alreadyFetchedRef = useRef(false);
 
 	const itemsPerPage = 6;
 	const loadedItems = communityTrips.length;
@@ -44,7 +47,10 @@ export const Community = () => {
 	}, []);
 
 	useEffect(() => {
+		if (alreadyFetchedRef.current && communityTrips.length < 6) return;
+
 		if (isPageDataMissing && !isLastPageWithRemainingItems) {
+			alreadyFetchedRef.current = true;
 			fetchPublicTrips(currentPage - 1, filteredCountry);
 		}
 	}, [currentPage, filteredCountry]);
