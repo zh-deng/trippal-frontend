@@ -10,7 +10,7 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--white);
-		border-radius: 0.5rem;
+		border-radius: 0.25rem;
 
 		.roadmap-fallback {
 			border: 1px solid var(--main-border-color);
@@ -71,7 +71,6 @@
 		.roadmap-content {
 			display: flex;
 			flex-direction: column;
-			border-radius: 0.5rem;
 			gap: 0.25rem;
 			overflow-y: auto;
 			overflow-x: hidden;

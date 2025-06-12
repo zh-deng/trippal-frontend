@@ -12,7 +12,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		border: 2px solid gray;
-		border-radius: 0.5rem;
+		border-radius: 0.25rem;
 		background-color: white;
 		width: fit-content;
 		padding: 2rem;
@@ -28,7 +28,7 @@
 			button {
 				width: 8rem;
 				border: 1px solid gray;
-				border-radius: 0.5rem;
+				border-radius: 0.25rem;
 				padding: 0.25rem 1rem;
 				cursor: pointer;
 				background-color: lightgray;
@@ -55,7 +55,7 @@
 			.center-container {
 				height: 100%;
 				padding: 1rem;
-				border-radius: 0.5rem;
+				border-radius: 0.25rem;
 				background-color: white;
 				display: flex;
 				flex-direction: column;
@@ -88,7 +88,7 @@
 				.image-gallery-fallback {
 					height: 100%;
 					border: 1px solid grey;
-					border-radius: 0.5rem;
+					border-radius: 0.25rem;
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -100,7 +100,7 @@
 					padding: 1rem;
 					border: 1px solid grey;
 					background-color: #add8e6;
-					border-radius: 0.5rem;
+					border-radius: 0.25rem;
 				}
 			}
 		}
@@ -120,7 +120,7 @@
 		&-text {
 			border: 1px solid gray;
 			padding: 4rem 2rem;
-			border-radius: 0.5rem;
+			border-radius: 0.25rem;
 			background-color: white;
 		}
 	}
@@ -135,7 +135,7 @@
 			border: 1px solid;
 			background-color: white;
 			padding: 4rem 6rem;
-			border-radius: 0.5rem;
+			border-radius: 0.25rem;
 		}
 	}
 }
