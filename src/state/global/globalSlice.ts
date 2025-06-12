@@ -47,6 +47,19 @@ const globalSlice = createSlice({
 				);
 			}
 		},
+		toggleTripVisibility: (state, action: PayloadAction<number>) => {
+			const tripId = action.payload;
+
+			if (state.activeUser) {
+				state.activeUser.trips = state.activeUser.trips.map((trip) => {
+					if (trip.id !== tripId) {
+						return trip;
+					} else {
+						return { ...trip, isPublic: !trip.isPublic };
+					}
+				});
+			}
+		},
 		removeOldTrip: (state, action: PayloadAction<number>) => {
 			const tripId = action.payload;
 
@@ -167,5 +180,6 @@ export const {
 	setActiveRoadmapItemId,
 	replaceRoadmapItems,
 	removeActiveRoadmapItem,
+	toggleTripVisibility
 } = globalSlice.actions;
 export default globalSlice.reducer;

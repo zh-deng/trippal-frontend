@@ -25,18 +25,24 @@ import { RootState } from "../../state/store";
 import {
 	replaceRoadmapItems,
 	setActiveRoadmapItemId,
+	toggleTripVisibility,
 	updateOldTrip,
 } from "../../state/global/globalSlice";
-import { fetchRoadmapList, updateTrip } from "../../services/tripService";
+import {
+	downloadTrip,
+	fetchRoadmapList,
+	publishTrip,
+	unpublishTrip,
+	updateTrip,
+} from "../../services/tripService";
 import {
 	loadMapData,
 	resetMapData,
 } from "../../state/dashboard/dashboardSlice";
 
 export const DashboardRoadmap = () => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const [roadmapItems, setRoadmapItems] = useState<RoadmapItems>([]);
-	const [isPublic, setIsPublic] = useState<boolean>(false);
 	const [editingTitle, setEditingTitle] = useState<boolean>(false);
 	const [titleInput, setTitleInput] = useState<string>("defaultTitle");
 
@@ -47,6 +53,8 @@ export const DashboardRoadmap = () => {
 	const activeRoadmapItemId = useSelector(
 		(state: RootState) => state.global.activeRoadmapItemId
 	);
+
+	const isPublic = activeUser?.trips[activeTripIndex!].isPublic;
 
 	const dispatch = useDispatch();
 
@@ -126,7 +134,27 @@ export const DashboardRoadmap = () => {
 	};
 
 	const handleLock = () => {
-		setIsPublic(!isPublic);
+		if (
+			activeUser !== null &&
+			activeTripIndex !== null &&
+			activeTripIndex >= 0
+		) {
+			const tripId: number = activeUser.trips[activeTripIndex].id!;
+			console.log(isPublic);
+			if (isPublic) {
+				unpublishTrip(tripId)
+					.then(() => {
+						dispatch(toggleTripVisibility(tripId));
+					})
+					.catch((error) => console.error("Failed to unpublish trip:", error));
+			} else {
+				publishTrip(tripId)
+					.then(() => {
+						dispatch(toggleTripVisibility(tripId));
+					})
+					.catch((error) => console.error("Failed to publish trip:", error));
+			}
+		}
 	};
 
 	const toggleEditingTitle = () => {
@@ -148,6 +176,30 @@ export const DashboardRoadmap = () => {
 					})
 					.catch((error) => console.error("Failed to update trip:", error));
 			}
+		}
+	};
+
+	const handleTripDownload = () => {
+		if (
+			activeUser !== null &&
+			activeTripIndex !== null &&
+			activeTripIndex >= 0
+		) {
+			const tripId = activeUser.trips[activeTripIndex].id!;
+
+			downloadTrip(tripId, i18n.language)
+				.then(({ data, fileName }) => {
+					const url = window.URL.createObjectURL(new Blob([data]));
+					const link = document.createElement("a");
+					link.href = url;
+					link.setAttribute("download", fileName);
+					document.body.appendChild(link);
+					link.click();
+
+					link.parentNode?.removeChild(link);
+					window.URL.revokeObjectURL(url);
+				})
+				.catch((error) => console.error("Failed to download trip:", error));
 		}
 	};
 
@@ -208,7 +260,11 @@ export const DashboardRoadmap = () => {
 								title={t("dashboard.left.lockIcons.public")}
 							/>
 						)}
-						<FiDownload size={20} title={t("dashboard.left.downloadIcon")} />
+						<FiDownload
+							size={20}
+							title={t("dashboard.left.downloadIcon")}
+							onClick={handleTripDownload}
+						/>
 					</div>
 				</div>
 				{roadmapItems.length ? (
