@@ -125,3 +125,27 @@ export async function downloadTrip(
 
 	return { data: blob, fileName };
 }
+
+export async function publishTrip(tripId: number) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/publish`, {
+    method: "PUT",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Starring trip failed: ${errorText}`);
+  }
+}
+
+export async function unpublishTrip(tripId: number) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/unpublish`, {
+    method: "PUT",
+    credentials: 'include'
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Starring trip failed: ${errorText}`);
+  }
+}
