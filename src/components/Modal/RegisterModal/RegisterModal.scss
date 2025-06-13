@@ -37,4 +37,9 @@
 			cursor: pointer;
 		}
 	}
+
+	.error-message {
+		color: var(--red);
+		font-weight: 500;
+	}
 }
