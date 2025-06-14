@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { loginUser } from "../../../services/userService";
 import { setActiveUser } from "../../../state/global/globalSlice";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface Props {
 	isOpen: boolean;
@@ -16,7 +17,7 @@ interface Props {
 
 const LoginModal = ({ isOpen, onClose, onSwitchToRegister }: Props) => {
 	const { t } = useTranslation();
-
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }: Props) => {
 				password: formData.password,
 			});
 
-			dispatch(setActiveUser(user))
+			dispatch(setActiveUser(user));
 
 			toast.success(t("loginModal.loginSuccess"));
 
@@ -56,6 +57,10 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }: Props) => {
 		} catch (err: any) {
 			setError(t("loginModal.loginFailed"));
 		}
+	};
+
+	const toggleShowPassword = () => {
+		setShowPassword(!showPassword);
 	};
 
 	return (
@@ -73,13 +78,18 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }: Props) => {
 				</label>
 				<label>
 					<Text content={t("loginModal.password")} />
-					<input
-						type="password"
-						name="password"
-						placeholder={t("loginModal.password")}
-						value={formData.password}
-						onChange={handleChange}
-					/>
+					<div className="form-password">
+						<input
+							type={showPassword ? "text" : "password"}
+							name="password"
+							placeholder={t("loginModal.password")}
+							value={formData.password}
+							onChange={handleChange}
+						/>
+						<div className="password-eye-icon" onClick={toggleShowPassword}>
+							{showPassword ? <FaEyeSlash size={22} /> : <FaEye size={22} />}
+						</div>
+					</div>
 				</label>
 
 				{error && <div className="error-message">{error}</div>}
