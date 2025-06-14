@@ -5,6 +5,7 @@ import "./RegisterModal.scss";
 import { useState } from "react";
 import { registerUser } from "../../../services/userService";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface Props {
 	isOpen: boolean;
@@ -14,7 +15,8 @@ interface Props {
 
 const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 	const { t } = useTranslation();
-
+	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -63,6 +65,14 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 		}
 	};
 
+	const toggleShowPassword = () => {
+		setShowPassword(!showPassword)
+	}
+
+	const toggleShowRepeatPassword = () => {
+		setShowRepeatPassword(!showRepeatPassword)
+	}
+
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title={t("registerModal.signUp")}>
 			<form className="register-form" onSubmit={handleSubmit}>
@@ -88,23 +98,37 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 				</label>
 				<label>
 					<Text content={t("registerModal.password")} />
-					<input
-						type="password"
-						name="password"
-						value={formData.password}
-						onChange={handleChange}
-						placeholder={t("registerModal.password")}
-					/>
+					<div className="form-password">
+						<input
+							type={showPassword ? "text" : "password"}
+							name="password"
+							value={formData.password}
+							onChange={handleChange}
+							placeholder={t("registerModal.password")}
+						/>
+						<div className="password-eye-icon" onClick={toggleShowPassword}>
+							{showPassword ? <FaEyeSlash size={22} /> : <FaEye size={22} />}
+						</div>
+					</div>
 				</label>
 				<label>
 					<Text content={t("registerModal.passwordRepeat")} />
-					<input
-						type="password"
-						name="passwordRepeat"
-						value={formData.passwordRepeat}
-						onChange={handleChange}
-						placeholder={t("registerModal.passwordRepeat")}
-					/>
+					<div className="form-password-repeat">
+						<input
+							type={showRepeatPassword ? "text" : "password"}
+							name="passwordRepeat"
+							value={formData.passwordRepeat}
+							onChange={handleChange}
+							placeholder={t("registerModal.passwordRepeat")}
+						/>
+						<div className="password-eye-icon" onClick={toggleShowRepeatPassword}>
+							{showRepeatPassword ? (
+								<FaEyeSlash size={22} />
+							) : (
+								<FaEye size={22} />
+							)}
+						</div>
+					</div>
 				</label>
 
 				{error && <div className="error-message">{error}</div>}
