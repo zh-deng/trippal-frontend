@@ -127,27 +127,27 @@ export async function downloadTrip(
 	return { data: blob, fileName };
 }
 
-export async function publishTrip(tripId: number) {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/publish`, {
+export async function togglePublishStatus(tripId: number) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/publish/toggle`, {
     method: "PUT",
     credentials: 'include'
   });
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Starring trip failed: ${errorText}`);
+    throw new Error(`Toggling publish status failed: ${errorText}`);
   }
 }
 
-export async function unpublishTrip(tripId: number) {
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/unpublish`, {
+export async function toggleStarStatus(tripId: number) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/star/toggle`, {
     method: "PUT",
     credentials: 'include'
   });
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Starring trip failed: ${errorText}`);
+    throw new Error(`Toggling star status failed: ${errorText}`);
   }
 }
 

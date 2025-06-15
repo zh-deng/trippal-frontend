@@ -31,9 +31,8 @@ import {
 import {
 	downloadTrip,
 	fetchRoadmapList,
-	publishTrip,
 	reorderRoadmap,
-	unpublishTrip,
+	togglePublishStatus,
 	updateTrip,
 } from "../../services/tripService";
 import {
@@ -149,7 +148,7 @@ export const DashboardRoadmap = () => {
 				reorderRoadmap(tripId, reorderRequest)
 					.then(() => {
 						setRoadmapItems(reorderedRoadmapItems);
-						dispatch(replaceRoadmapItems(reorderedRoadmapItems))
+						dispatch(replaceRoadmapItems(reorderedRoadmapItems));
 					})
 					.catch((error) => console.error("Failed reorder Roadmap:", error));
 			}
@@ -163,20 +162,14 @@ export const DashboardRoadmap = () => {
 			activeTripIndex >= 0
 		) {
 			const tripId: number = activeUser.trips[activeTripIndex].id!;
-			console.log(isPublic);
-			if (isPublic) {
-				unpublishTrip(tripId)
-					.then(() => {
-						dispatch(toggleTripVisibility(tripId));
-					})
-					.catch((error) => console.error("Failed to unpublish trip:", error));
-			} else {
-				publishTrip(tripId)
-					.then(() => {
-						dispatch(toggleTripVisibility(tripId));
-					})
-					.catch((error) => console.error("Failed to publish trip:", error));
-			}
+
+			togglePublishStatus(tripId)
+				.then(() => {
+					dispatch(toggleTripVisibility(tripId));
+				})
+				.catch((error) =>
+					console.error("Failed to toggle publish status:", error)
+				);
 		}
 	};
 

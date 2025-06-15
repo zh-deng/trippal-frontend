@@ -16,8 +16,11 @@ import {
 import { TripComment } from "../../dtos/tripComment.dto";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { starTrip, unstarTrip } from "../../services/starService";
-import { copyTrip, downloadTrip } from "../../services/tripService";
+import {
+	copyTrip,
+	downloadTrip,
+	toggleStarStatus,
+} from "../../services/tripService";
 import { addNewTrip } from "../../state/global/globalSlice";
 import { toast } from "react-toastify";
 
@@ -106,19 +109,11 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 			return;
 		}
 
-		if (trip.isStarredByCurrentUser) {
-			unstarTrip(trip.id)
-				.then(() => {
-					onToggleStar(trip.id);
-				})
-				.catch((error) => console.error("Failed to star trip:", error));
-		} else {
-			starTrip(trip.id)
-				.then(() => {
-					onToggleStar(trip.id);
-				})
-				.catch((error) => console.error("Failed to unstar trip:", error));
-		}
+		toggleStarStatus(trip.id)
+			.then(() => {
+				onToggleStar(trip.id);
+			})
+			.catch((error) => console.error("Failed to toggle star status:", error));
 	};
 
 	const handleSaveTrip = () => {
@@ -183,7 +178,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 				<div className={`view-actionbar-icons ${!loggedIn && "disabled"}`}>
 					<div className="view-actionbar-stars">
 						{trip.stars ?? 0}
-						{trip.isStarredByCurrentUser || !loggedIn ? (
+						{trip.starredByCurrentUser || !loggedIn ? (
 							<FaStar
 								className="icon"
 								size={22}

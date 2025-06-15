@@ -112,10 +112,11 @@ export const Community = () => {
 				if (trip.id !== tripId) {
 					return trip;
 				}
+
 				return {
 					...trip,
-					stars: trip.isStarredByCurrentUser ? trip.stars - 1 : trip.stars + 1,
-					isStarredByCurrentUser: !trip.isStarredByCurrentUser,
+					stars: trip.starredByCurrentUser ? trip.stars - 1 : trip.stars + 1,
+					starredByCurrentUser: !trip.starredByCurrentUser,
 				};
 			})
 		);
