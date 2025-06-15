@@ -32,6 +32,7 @@ import {
 	downloadTrip,
 	fetchRoadmapList,
 	publishTrip,
+	reorderRoadmap,
 	unpublishTrip,
 	updateTrip,
 } from "../../services/tripService";
@@ -39,6 +40,7 @@ import {
 	loadMapData,
 	resetMapData,
 } from "../../state/dashboard/dashboardSlice";
+import { RoadmapReorderRequest } from "../../dtos/roadmapReorderRequest.dto";
 
 export const DashboardRoadmap = () => {
 	const { t, i18n } = useTranslation();
@@ -125,11 +127,32 @@ export const DashboardRoadmap = () => {
 		const { active, over } = event;
 
 		if (over && active.id !== over.id) {
-			setRoadmapItems((items) => {
-				const oldIndex = items.findIndex((item) => item.id === active.id);
-				const newIndex = items.findIndex((item) => item.id === over.id);
-				return arrayMove(items, oldIndex, newIndex);
-			});
+			if (
+				activeUser !== null &&
+				activeTripIndex !== null &&
+				activeTripIndex >= 0
+			) {
+				const tripId = activeUser.trips[activeTripIndex].id!;
+
+				const reorderedRoadmapItems = arrayMove(
+					roadmapItems,
+					roadmapItems.findIndex((item) => item.id === active.id),
+					roadmapItems.findIndex((item) => item.id === over.id)
+				);
+
+				const reorderRequest: RoadmapReorderRequest = {
+					roadmapItemIds: reorderedRoadmapItems.map((roadmapItem) => {
+						return roadmapItem.id!;
+					}),
+				};
+
+				reorderRoadmap(tripId, reorderRequest)
+					.then(() => {
+						setRoadmapItems(reorderedRoadmapItems);
+						dispatch(replaceRoadmapItems(reorderedRoadmapItems))
+					})
+					.catch((error) => console.error("Failed reorder Roadmap:", error));
+			}
 		}
 	};
 
