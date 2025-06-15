@@ -1,3 +1,4 @@
+import { RoadmapReorderRequest } from "../dtos/roadmapReorderRequest.dto";
 import { RoadmapList } from "../types/Roadmap";
 import { DownloadPdfResponse, Trip } from "../types/Trip";
 
@@ -148,4 +149,23 @@ export async function unpublishTrip(tripId: number) {
     const errorText = await response.text();
     throw new Error(`Starring trip failed: ${errorText}`);
   }
+}
+
+export async function reorderRoadmap(tripId: number, reorderRequest: RoadmapReorderRequest) {
+	const response = await fetch(
+		`${import.meta.env.VITE_BACKEND_BASEURL}/api/trip/${tripId}/roadmap/reorder`,
+		{
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(reorderRequest),
+			credentials: "include",
+		}
+	);
+
+	if (!response.ok) {
+		const errorText = await response.text();
+		throw new Error(`Reordering roadmap failed: ${errorText}`);
+	}
 }
