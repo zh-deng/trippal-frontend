@@ -1,0 +1,37 @@
+.empty-trips-fallback {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& > * {
+		border: 1px solid;
+		background-color: var(--white);
+		padding: 4rem 6rem;
+		border-radius: 0.25rem;
+	}
+}
+
+.image-gallery-fallback {
+	height: 100%;
+	border: 1px solid var(--main-border-color);
+	border-radius: 0.25rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--light-blue);
+}
+
+.dashboard-fallback {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&-text {
+		border: 1px solid var(--main-border-color);
+		padding: 4rem 2rem;
+		border-radius: 0.25rem;
+		background-color: var(--white);
+	}
+}

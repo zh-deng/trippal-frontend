@@ -24,11 +24,18 @@ import {
 import { fetchImages, ImageData } from "../../services/imageService";
 import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../components/Text/Text";
+import { Text } from "../../components/universal/Text/Text";
 import { DashboardInput } from "../../components/DashboardInput/DashboardInput";
 import { MdDelete } from "react-icons/md";
 import { deleteRoadmapItemById } from "../../services/roadmapItemService";
-import { removeActiveRoadmapItem, setActiveRoadmapItemId } from "../../state/global/globalSlice";
+import {
+	removeActiveRoadmapItem,
+	setActiveRoadmapItemId,
+} from "../../state/global/globalSlice";
+import {
+	FallBackType,
+	FallbackWrapper,
+} from "../../components/universal/FallbackWrapper/FallbackWrapper";
 
 export const Dashboard = () => {
 	const { t } = useTranslation();
@@ -55,6 +62,9 @@ export const Dashboard = () => {
 	const currentAttraction = useSelector(
 		(state: RootState) => state.dashboard.currentAttraction
 	);
+
+	const tripsAvailable: boolean =
+		activeTripIndex !== null && activeTripIndex >= 0;
 
 	const dispatch = useDispatch();
 
@@ -91,9 +101,9 @@ export const Dashboard = () => {
 	}, [currentAttraction]);
 
 	useEffect(() => {
-		dispatch(setActiveRoadmapItemId(null))
-		dispatch(resetMapData())
-	}, [activeTripIndex])
+		dispatch(setActiveRoadmapItemId(null));
+		dispatch(resetMapData());
+	}, [activeTripIndex]);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -150,110 +160,95 @@ export const Dashboard = () => {
 		}
 	};
 
-	const ImageGalleryFallback = () => (
-		<div className="image-gallery-fallback">
-			<Text content={"dashboard.center.imageGallery.fallback"} />
-		</div>
-	);
-
-	const EmptyTripsFallback = () => (
-		<div className="empty-trips-fallback">
-			<Text content={"dashboard.emptyTripFallback"} />
-		</div>
-	);
-
-	if (activeUser === null) {
-		return (
-			<div className="dashboard-fallback">
-				<div className="dashboard-fallback-text">
-					<Text isBold content={"dashboard.fallback"} />
-				</div>
-			</div>
-		);
-	}
-
 	return (
-		<div className="dashboard">
-			{openDeleteModal && (
-				<div className="dashboard-delete-modal" ref={modalRef}>
-					<Text isBold content={"dashboard.deleteModal.text"} />
-					<div className="delete-modal-buttons">
-						<button onClick={deleteRoadmapItem}>
-							<Text isBold content={"dashboard.deleteModal.delete"} />
-						</button>
-						<button onClick={toggleDeleteModal}>
-							<Text isBold content={"dashboard.deleteModal.cancel"} />
-						</button>
-					</div>
-				</div>
-			)}
-			<div>
-				<DashboardTabMenu />
-			</div>
-			<div className="dashboard-main">
-				{activeTripIndex !== null && activeTripIndex >= 0 ? (
-					<>
-						<div className="dashboard-main-left">
-							<DashboardRoadmap />
+		<FallbackWrapper
+			fallbackType={FallBackType.EmptyTrips}
+			shouldRender={activeUser === null}
+		>
+			<div className="dashboard">
+				{openDeleteModal && (
+					<div className="dashboard-delete-modal" ref={modalRef}>
+						<Text isBold content={"dashboard.deleteModal.text"} />
+						<div className="delete-modal-buttons">
+							<button onClick={deleteRoadmapItem}>
+								<Text isBold content={"dashboard.deleteModal.delete"} />
+							</button>
+							<button onClick={toggleDeleteModal}>
+								<Text isBold content={"dashboard.deleteModal.cancel"} />
+							</button>
 						</div>
-						<div className="dashboard-main-center">
-							<div className="center-container">
-								<div className="center-container-breadcrumb">
-									{routeItemTitle ? (
-										<span>{routeItemTitle}</span>
-									) : (
-										<Text content="dashboard.center.routeTitleFallback" />
-									)}
-									{activeRoadmapItemId !== null && (
-										<div className="center-container-delete">
-											<MdDelete size={24} onClick={toggleDeleteModal} />
-										</div>
-									)}
-								</div>
-								<div className="center-dropdown-container">
-									<Dropdown
-										options={countries}
-										value={currentCountry}
-										defaultValue={t("dashboard.center.dropdown.country")}
-										onChange={handleChosenCountry}
-									/>
-									{currentCountry && (
+					</div>
+				)}
+				<div>
+					<DashboardTabMenu />
+				</div>
+				<div className="dashboard-main">
+					<FallbackWrapper
+						fallbackType={FallBackType.EmptyTrips}
+						shouldRender={tripsAvailable}
+					>
+						<>
+							<div className="dashboard-main-left">
+								<DashboardRoadmap />
+							</div>
+							<div className="dashboard-main-center">
+								<div className="center-container">
+									<div className="center-container-breadcrumb">
+										{routeItemTitle ? (
+											<span>{routeItemTitle}</span>
+										) : (
+											<Text content="dashboard.center.routeTitleFallback" />
+										)}
+										{activeRoadmapItemId !== null && (
+											<div className="center-container-delete">
+												<MdDelete size={24} onClick={toggleDeleteModal} />
+											</div>
+										)}
+									</div>
+									<div className="center-dropdown-container">
 										<Dropdown
-											options={cities}
-											value={currentCity}
-											defaultValue={t("dashboard.center.dropdown.city")}
-											onChange={handleChosenCity}
+											options={countries}
+											value={currentCountry}
+											defaultValue={t("dashboard.center.dropdown.country")}
+											onChange={handleChosenCountry}
 										/>
-									)}
-									{currentCity && (
-										<Dropdown
-											options={attractions}
-											value={currentAttraction}
-											defaultValue={t("dashboard.center.dropdown.attraction")}
-											onChange={handleChosenAttraction}
-										/>
-									)}
-								</div>
-								<div className="center-image-gallery">
-									{currentAttraction ? (
-										<ImageGallery images={images} />
-									) : (
-										<ImageGalleryFallback />
-									)}
-								</div>
-								<div className="center-controls">
-									<DashboardInput />
+										{currentCountry && (
+											<Dropdown
+												options={cities}
+												value={currentCity}
+												defaultValue={t("dashboard.center.dropdown.city")}
+												onChange={handleChosenCity}
+											/>
+										)}
+										{currentCity && (
+											<Dropdown
+												options={attractions}
+												value={currentAttraction}
+												defaultValue={t("dashboard.center.dropdown.attraction")}
+												onChange={handleChosenAttraction}
+											/>
+										)}
+									</div>
+									<div className="center-image-gallery">
+										<FallbackWrapper
+											fallbackType={FallBackType.ImageGallery}
+											shouldRender={currentAttraction !== null}
+										>
+											<ImageGallery images={images} />
+										</FallbackWrapper>
+									</div>
+									<div className="center-controls">
+										<DashboardInput />
+									</div>
 								</div>
 							</div>
-						</div>
-						<div className="dashboard-main-right">
-							<DashboardMap />
-						</div>
-					</>
-				) : (
-					<EmptyTripsFallback />
-				)}
+							<div className="dashboard-main-right">
+								<DashboardMap />
+							</div>
+						</>
+					</FallbackWrapper>
+				</div>
 			</div>
-		</div>
+		</FallbackWrapper>
 	);
 };
