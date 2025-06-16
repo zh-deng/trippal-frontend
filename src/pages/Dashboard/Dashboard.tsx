@@ -162,8 +162,8 @@ export const Dashboard = () => {
 
 	return (
 		<FallbackWrapper
-			fallbackType={FallBackType.EmptyTrips}
-			shouldRender={activeUser === null}
+			fallbackType={FallBackType.DashboardNoUser}
+			shouldRender={activeUser !== null}
 		>
 			<div className="dashboard">
 				{openDeleteModal && (
