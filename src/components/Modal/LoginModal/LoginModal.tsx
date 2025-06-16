@@ -1,6 +1,6 @@
 import { Modal } from "../../Modal/Modal";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../Text/Text";
+import { Text } from "../../universal/Text/Text";
 import "./LoginModal.scss";
 import { useDispatch } from "react-redux";
 import { useState } from "react";

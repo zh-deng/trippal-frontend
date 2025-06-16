@@ -14,7 +14,7 @@ import {
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { RoadMapItem } from "./RoadMapItem/RoadMapItem";
-import { Text } from "../Text/Text";
+import { Text } from "../universal/Text/Text";
 import { FiDownload } from "react-icons/fi";
 import { FaLock, FaLockOpen, FaCheck } from "react-icons/fa";
 import { useTranslation } from "react-i18next";

@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { fetchImages, ImageData } from "../../services/imageService";
 import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../components/Text/Text";
+import { Text } from "../../components/universal/Text/Text";
 import { DashboardInput } from "../../components/DashboardInput/DashboardInput";
 import {
 	updateDemoAttraction,
@@ -38,7 +38,9 @@ export const Demo = () => {
 	const demoAttraction = useSelector(
 		(state: RootState) => state.demo.demoAttraction
 	);
-	const demoRoadmapItems = useSelector((state: RootState) => state.demo.demoRoadmapItems);
+	const demoRoadmapItems = useSelector(
+		(state: RootState) => state.demo.demoRoadmapItems
+	);
 
 	const dispatch = useDispatch();
 
@@ -110,7 +112,7 @@ export const Demo = () => {
 			</div>
 			<div className="demo-main">
 				<div className="demo-main-left">
-					<DashboardRoadmap title="t2" roadmapItems={demoRoadmapItems} />
+					{/* <DashboardRoadmap title="t2" roadmapItems={demoRoadmapItems} /> */}
 				</div>
 				<div className="demo-main-center">
 					<div className="center-container">

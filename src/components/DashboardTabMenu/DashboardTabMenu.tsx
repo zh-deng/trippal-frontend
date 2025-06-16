@@ -1,7 +1,7 @@
 import "./DashboardTabMenu.scss";
 import { BsPlusLg } from "react-icons/bs";
 
-import { Text } from "../Text/Text";
+import { Text } from "../universal/Text/Text";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { Trip } from "../../types/Trip";

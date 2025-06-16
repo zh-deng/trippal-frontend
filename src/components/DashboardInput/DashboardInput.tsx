@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Text } from "../Text/Text";
+import { Text } from "../universal/Text/Text";
 import "./DashboardInput.scss";
 import { RxCross2 } from "react-icons/rx";
 import { useTranslation } from "react-i18next";

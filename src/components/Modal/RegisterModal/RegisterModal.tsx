@@ -1,6 +1,6 @@
 import { Modal } from "../../Modal/Modal";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../Text/Text";
+import { Text } from "../../universal/Text/Text";
 import "./RegisterModal.scss";
 import { useState } from "react";
 import { registerUser } from "../../../services/userService";
@@ -66,12 +66,12 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 	};
 
 	const toggleShowPassword = () => {
-		setShowPassword(!showPassword)
-	}
+		setShowPassword(!showPassword);
+	};
 
 	const toggleShowRepeatPassword = () => {
-		setShowRepeatPassword(!showRepeatPassword)
-	}
+		setShowRepeatPassword(!showRepeatPassword);
+	};
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title={t("registerModal.signUp")}>
@@ -121,7 +121,10 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }: Props) => {
 							onChange={handleChange}
 							placeholder={t("registerModal.passwordRepeat")}
 						/>
-						<div className="password-eye-icon" onClick={toggleShowRepeatPassword}>
+						<div
+							className="password-eye-icon"
+							onClick={toggleShowRepeatPassword}
+						>
 							{showRepeatPassword ? (
 								<FaEyeSlash size={22} />
 							) : (

@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Text } from "../Text/Text";
+import { Text } from "../universal/Text/Text";
 import { Comment, TripExtended } from "../../types/Trip";
 import "./ExpandedView.scss";
 import { motion } from "framer-motion";
