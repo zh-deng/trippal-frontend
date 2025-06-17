@@ -6,6 +6,9 @@ export enum FallBackType {
 	EmptyTrips,
 	ImageGallery,
 	DashboardNoUser,
+	EmptyRoadmap,
+	WysiwygNoUser,
+	EmptyComments,
 }
 
 type FallbackWrapperProps = {
@@ -42,6 +45,30 @@ export const FallbackWrapper: React.FC<FallbackWrapperProps> = ({
 					<div className="dashboard-fallback-text">
 						<Text isBold content={"dashboard.fallback"} />
 					</div>
+				</div>
+			);
+			break;
+		case FallBackType.EmptyRoadmap:
+			fallback = (
+				<div className="roadmap-fallback">
+					<Text content={"dashboard.left.emptyFallback"} />
+				</div>
+			);
+			break;
+		case FallBackType.WysiwygNoUser:
+			fallback = (
+				<div className="wysiwyg-fallback">
+					<Text
+						content={"community.expandedView.comments.wysiwygFallback"}
+						isBold
+					/>
+				</div>
+			);
+			break;
+		case FallBackType.EmptyComments:
+			fallback = (
+				<div className="comments-fallback">
+					<Text content={"community.expandedView.comments.fallback"} />
 				</div>
 			);
 	}

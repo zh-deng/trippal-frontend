@@ -117,21 +117,4 @@
 			}
 		}
 	}
-
-	.comments-fallback {
-		font-weight: bold;
-		border: 1px solid var(--main-border-color);
-		border-radius: 0.25rem;
-		padding: 5rem 0;
-		text-align: center;
-		background-color: var(--white);
-	}
-
-	.wysiwyg-fallback {
-		border: 1px solid var(--main-border-color);
-		border-radius: 0.25rem;
-		background-color: var(--white);
-		padding: 2rem 0.5rem;
-		text-align: center;
-	}
 }

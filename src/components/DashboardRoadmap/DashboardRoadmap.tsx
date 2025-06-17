@@ -40,6 +40,10 @@ import {
 	resetMapData,
 } from "../../state/dashboard/dashboardSlice";
 import { RoadmapReorderRequest } from "../../dtos/roadmapReorderRequest.dto";
+import {
+	FallBackType,
+	FallbackWrapper,
+} from "../shared/FallbackWrapper/FallbackWrapper";
 
 export const DashboardRoadmap = () => {
 	const { t, i18n } = useTranslation();
@@ -223,12 +227,6 @@ export const DashboardRoadmap = () => {
 		dispatch(setActiveRoadmapItemId(null));
 	};
 
-	const RoadmapEmptyFallback = () => (
-		<div className="roadmap-fallback">
-			<Text content={"dashboard.left.emptyFallback"} />
-		</div>
-	);
-
 	return (
 		<div className="dashboard-roadmap">
 			<div className="roadmap-container">
@@ -283,7 +281,10 @@ export const DashboardRoadmap = () => {
 						/>
 					</div>
 				</div>
-				{roadmapItems.length ? (
+				<FallbackWrapper
+					fallbackType={FallBackType.EmptyRoadmap}
+					shouldRender={roadmapItems.length > 0}
+				>
 					<>
 						<div className="roadmap-content">
 							<DndContext
@@ -310,9 +311,7 @@ export const DashboardRoadmap = () => {
 							<Text content="dashboard.left.cta" isBold />
 						</div>
 					</>
-				) : (
-					<RoadmapEmptyFallback />
-				)}
+				</FallbackWrapper>
 			</div>
 		</div>
 	);

@@ -23,6 +23,10 @@ import {
 } from "../../services/tripService";
 import { addNewTrip } from "../../state/global/globalSlice";
 import { toast } from "react-toastify";
+import {
+	FallBackType,
+	FallbackWrapper,
+} from "../shared/FallbackWrapper/FallbackWrapper";
 
 type ExpandedViewProps = {
 	trip: TripExtended;
@@ -149,22 +153,6 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 			.catch((error) => console.error("Failed to download trip:", error));
 	};
 
-	const CommentsFallback = () => (
-		<div className="comments-fallback">
-			<Text content={"community.expandedView.comments.fallback"} />
-		</div>
-	);
-
-	// if user is not logged in
-	const WysiwygFallback = () => (
-		<div className="wysiwyg-fallback">
-			<Text
-				content={"community.expandedView.comments.wysiwygFallback"}
-				isBold
-			/>
-		</div>
-	);
-
 	return (
 		<motion.div
 			ref={modalRef}
@@ -228,22 +216,28 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 						<span>{` (${comments.length})`}</span>
 					</div>
 					<div className="content-comments-container">
-						{comments.length > 0 ? (
-							comments.map((comment) => {
-								return (
-									<CommentItem
-										comment={comment}
-										key={comment.id}
-										onDelete={deleteComment}
-										userId={loggedIn ? activeUser.id : -1}
-									/>
-								);
-							})
-						) : (
-							<CommentsFallback />
-						)}
+						<FallbackWrapper
+							fallbackType={FallBackType.EmptyComments}
+							shouldRender={comments.length > 0}
+						>
+							<>
+								{comments.map((comment) => {
+									return (
+										<CommentItem
+											comment={comment}
+											key={comment.id}
+											onDelete={deleteComment}
+											userId={loggedIn ? activeUser.id : -1}
+										/>
+									);
+								})}
+							</>
+						</FallbackWrapper>
 					</div>
-					{loggedIn ? (
+					<FallbackWrapper
+						fallbackType={FallBackType.WysiwygNoUser}
+						shouldRender={loggedIn}
+					>
 						<form onSubmit={handleCommentSubmission}>
 							<div className="content-comments-wysiwyg">
 								<textarea
@@ -260,9 +254,7 @@ export const ExpandedView: React.FC<ExpandedViewProps> = ({
 								</button>
 							</div>
 						</form>
-					) : (
-						<WysiwygFallback />
-					)}
+					</FallbackWrapper>
 				</div>
 			</div>
 		</motion.div>
