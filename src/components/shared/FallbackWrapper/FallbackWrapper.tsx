@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import "./FallbackWrapper.scss";
-import { Text } from "../Text/Text";
+import { Text } from "../../shared/Text/Text";
 
 export enum FallBackType {
 	EmptyTrips,

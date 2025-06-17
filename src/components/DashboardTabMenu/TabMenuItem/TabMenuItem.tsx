@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Trip } from "../../../types/Trip";
 import "./TabMenuItem.scss";
 import { SlOptionsVertical } from "react-icons/sl";
-import { Text } from "../../universal/Text/Text";
+import { Text } from "../../shared/Text/Text";
 import { useTranslation } from "react-i18next";
 
 type TabMenuItemProps = {

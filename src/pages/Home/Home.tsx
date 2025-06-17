@@ -1,5 +1,5 @@
 import "./Home.scss";
-import { Text } from "../../components/universal/Text/Text";
+import { Text } from "../../components/shared/Text/Text";
 
 export const Home = () => {
 	return (

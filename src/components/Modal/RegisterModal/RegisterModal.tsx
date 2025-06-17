@@ -1,6 +1,6 @@
 import { Modal } from "../../Modal/Modal";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../universal/Text/Text";
+import { Text } from "../../shared/Text/Text";
 import "./RegisterModal.scss";
 import { useState } from "react";
 import { registerUser } from "../../../services/userService";

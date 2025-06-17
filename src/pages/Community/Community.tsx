@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Text } from "../../components/universal/Text/Text";
+import { Text } from "../../components/shared/Text/Text";
 import "./Community.scss";
 import { fetchCommunityTrips } from "../../services/communityService";
 import { Comment, TripExtended } from "../../types/Trip";

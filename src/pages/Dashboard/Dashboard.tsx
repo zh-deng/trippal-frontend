@@ -24,7 +24,7 @@ import {
 import { fetchImages, ImageData } from "../../services/imageService";
 import { ImageGallery } from "../../components/ImageGallery/ImageGallery";
 import { useTranslation } from "react-i18next";
-import { Text } from "../../components/universal/Text/Text";
+import { Text } from "../../components/shared/Text/Text";
 import { DashboardInput } from "../../components/DashboardInput/DashboardInput";
 import { MdDelete } from "react-icons/md";
 import { deleteRoadmapItemById } from "../../services/roadmapItemService";

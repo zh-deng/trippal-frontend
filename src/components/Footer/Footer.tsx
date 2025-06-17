@@ -1,4 +1,4 @@
-import { Text } from "../universal/Text/Text";
+import { Text } from "../shared/Text/Text";
 import "./Footer.scss";
 
 export const Footer = () => {
