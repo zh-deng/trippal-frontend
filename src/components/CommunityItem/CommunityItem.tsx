@@ -27,15 +27,12 @@ export const CommunityItem: React.FC<CommunityItemProps> = ({
 				<IoOpenOutline size={22} />
 			</div>
 			<div className="community-item-data">
-				{roadmapItems.map((roadmapItem, index) => {
-					return index < 6 ? (
-						<div className="data-item" key={roadmapItem.id}>
-							<span>{roadmapItem.title}</span>
-						</div>
-					) : (
-						<></>
-					);
-				})}
+				{/* Only show first 6 items as preview */}
+				{roadmapItems.slice(0, 6).map((roadmapItem) => (
+					<div className="data-item" key={roadmapItem.id}>
+						<span>{roadmapItem.title}</span>
+					</div>
+				))}
 			</div>
 			<div className="community-item-metadata">
 				<div className="metadata-stars">
@@ -43,7 +40,7 @@ export const CommunityItem: React.FC<CommunityItemProps> = ({
 					<FaStar />
 				</div>
 				<div className="metadata-comments">
-					{trip.comments.length ?? 0}
+					{trip.comments.length}
 					<FaCommentAlt />
 				</div>
 			</div>
