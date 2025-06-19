@@ -263,9 +263,7 @@ export const DashboardInput = () => {
 					<ul className="upload-container">
 						{formData.files.map((file, index) => (
 							<li
-								className={`upload-item ${
-									index % 2 === 0 ? "odd-color" : "even-color"
-								}`}
+								className="upload-item"
 								key={index}
 							>
 								<button type="button" onClick={() => handleRemoveUpload(index)}>

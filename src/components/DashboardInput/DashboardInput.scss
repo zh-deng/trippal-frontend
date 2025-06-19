@@ -113,11 +113,11 @@
 					}
 				}
 
-				.odd-color {
+				.upload-item:nth-child(odd) {
 					background-color: #99d8e6;
 				}
 
-				.even-color {
+				.upload-item:nth-child(even) {
 					background-color: #7fc4d3;
 				}
 			}
