@@ -35,7 +35,7 @@ import {
 import {
 	FallBackType,
 	FallbackWrapper,
-} from "../../components/universal/FallbackWrapper/FallbackWrapper";
+} from "../../components/shared/FallbackWrapper/FallbackWrapper";
 
 export const Dashboard = () => {
 	const { t } = useTranslation();
